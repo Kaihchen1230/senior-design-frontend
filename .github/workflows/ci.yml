@@ -1,0 +1,33 @@
+# GitHub Actions docs
+# https://help.github.com/en/articles/about-github-actions
+# https://help.github.com/en/articles/workflow-syntax-for-github-actions
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  build:
+
+    # Machine environment:
+    # https://help.github.com/en/articles/software-in-virtual-environments-for-github-actions#ubuntu-1804-lts
+    # We specify the Node.js version manually below, and use versioned Chrome from Puppeteer.
+    runs-on: ubuntu-18.04
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Use Node.js 12.14
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12.14
+    - name: Install dependencies
+      run: npm install
+#     - name: Lint
+#       run: npm run lint
+    - name: Install CLi
+      run: npm link @angular/cli
+    - name: Build
+      run: npm run build -- --prod
+    - name: Unit Test
+      run: ng test --browsers ChromeHeadless
+#     - name: E2E
+#       run: npm run e2e
