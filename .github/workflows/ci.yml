@@ -23,6 +23,8 @@ jobs:
       run: npm install
 #     - name: Lint
 #       run: npm run lint
+    - name: Install CLi
+      run: npm link @angular/cli
     - name: Build
       run: npm run build -- --prod
     - name: Test
