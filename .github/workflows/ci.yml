@@ -28,6 +28,6 @@ jobs:
     - name: Build
       run: npm run build -- --prod
     - name: Unit Test
-      run: ng test --browsers ChromeHeadless --watch=false
+      run: ng test --browsers ChromeHeadless
 #     - name: E2E
 #       run: npm run e2e
