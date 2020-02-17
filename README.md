@@ -28,5 +28,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## Deploy on Github page:
 install github-page-cli: <code>npm install -g angular-cli-ghpages</code>
-<code>ng build --prod --base-href "https://Kaihchen1230.github.io/majestic-llama/index.html" </code>
-<code>ngh --dir dist/majestic-llama</code>
+<br>
+<code>ng build --prod --base-href "https://Kaihchen1230.github.io/senior-design-frontend/index.html" </code>
+<br>
+<code>ngh --dir dist/senior-design-frontend</code>
