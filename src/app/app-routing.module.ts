@@ -4,7 +4,8 @@ import { NgModule } from '@angular/core';
 import { SearchResultComponent } from './search-result/search-result.component';
 
 const appRoutes: Routes = [
-    { path: '/home', component: HomeComponent },
+    { path: 'home', component: HomeComponent },
+    { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: 'search-result', component: SearchResultComponent }
 
 ];
