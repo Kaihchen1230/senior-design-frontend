@@ -1,20 +1,72 @@
-<form>
-  <div class="form-group row">
+<div>
+  <form>
+    <div class="form-group row">
+      <div class="col-sm-10" style="margin: 2% auto 0 auto">
+        <div class="input-group mb-2" style="border-radius: 150px; border: 1px solid black;">
 
-    <div class="col-sm-10">
-      <div class="search-bar">
           <input
-            type="text"
-            class="form-control form-control-lg"
-            placeholder="Search For Open Source Projects"
-            value="{{term}}"
-          >
+              type="text"
+              class="form-control"
+              placeholder="Search For Open Source Projects"
+              value="{{term}}"
+              style="border-radius: 150px; border: none; box-shadow: none;"
+            >
+            <button type="submit" class="btn search-button">
+              <div class="input-group-prepend" >
+                <fa-icon [icon]="searchIcon"></fa-icon>
+              </div>
+            </button>
+        </div>
       </div>
-
+      <div>
+      </div>
     </div>
-  </div>
-  <div style="margin: 0 auto">
-    <button type="submit" class="btn btn-primary search-button">Search</button>
-  </div>
+  </form>
 
-</form>
+  <div class="row" style="margin: 0 10vw;">
+    <div class="col-xs-12 col-sm-4">
+      <div class="list-group">
+        <a
+          class="list-group-item"
+          *ngFor="let language of languages"
+          style="width: 50%;"
+        >
+        {{language}}&nbsp;&nbsp;&nbsp;
+
+        <fa-icon
+
+          [icon]="randomNumIsEven() ? incresing : decresing"
+
+        >
+        </fa-icon>
+
+
+
+        </a>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-8">
+      <div class="list-group">
+        <div
+          class="list-group-item"
+          style="border-left: none; border-right: none;"
+          *ngFor="let searchResult of searchResults">
+        <h5>{{searchResult.repoName}}</h5>
+        <p>{{searchResult.discription}}</p>
+        <div class="row">
+          <div class="col-sm-3">
+            <span><fa-icon [icon]="starIcon"></fa-icon>: {{searchResult.star}}</span>
+          </div>
+          <div class="col-sm-4">
+            <span>Last Update: {{searchResult.lastUpdate}}</span>
+          </div>
+          <div class="col-sm-3">
+            <span>Language: {{searchResult.language}}</span>
+          </div>
+        </div>
+
+        </div>
+      </div>
+    </div>
+</div>
+
