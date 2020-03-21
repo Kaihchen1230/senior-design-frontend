@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RepoInfoComponent implements OnInit {
 
+
   constructor() { }
 
   ngOnInit() {
