@@ -1,0 +1,34 @@
+<div style="margin-bottom: 10vh;">
+  <h3>Similar Repo</h3>
+  <div class="row">
+    <div class="col-sm-3" *ngFor="let similarRepo of similarRepos">
+      <div class="card" style="cursor: pointer;">
+        <div class="card-body">
+          <h5 class="card-title">{{ similarRepo['title'] }}</h5>
+          <p class="card-text"
+          [ngbTooltip]="similarRepo['description'].slice(0,200)"
+          placement="right-top"
+          >
+            {{ similarRepo['description'].slice(0,50) }}
+            <!-- <span
+            ngbTooltip="Bootstrap Tooltip on Bottom"
+            [placement]="samilarRepo['description']">
+
+            </span> -->
+          </p>
+          <div class="row">
+            <div class="col-sm-1">
+              <fa-icon [icon]="similarRepo['logo']"></fa-icon>
+            </div>
+            <div class="col-sm-5">
+              <span>
+                <fa-icon [icon]="star" style="color: yellow"></fa-icon>: {{ similarRepo['starCount'] }}
+              </span>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+<div>
+  <h1>Owner Information</h1>
+  <div class="row" style="margin-left: 0.5vw;">
+    <div class="col-sm-4">
+      <div class="card" style="width: 18rem; border: none; margin-top: 5vh;">
+        <img class="card-img-top" [src]="owner['links']['avatar']['href'] "alt="Github image">
+        <div class="card-body" style="padding: 1.35rem 1.35rem 1.35rem 0;">
+          <h5 class="card-title">{{owner['nickname']}}</h5>
+          <a [href]="owner['links']['html']['href']" target="_blank" class="btn btn-primary">Go To Owner Profile Page</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
