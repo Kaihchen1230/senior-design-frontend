@@ -11,14 +11,15 @@ const appRoutes: Routes = [
     { path: '', component: HomeComponent },
     // { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: 'search-result', component: SearchResultComponent },
-    { path: 'detail-page', component: DetailPageComponent,
-      children: [
+    { path: 'detail-page', component: DetailPageComponent }
+    // { path: 'detail-page', component: DetailPageComponent,
+    //   children: [
 
-        { path: 'repo-info', component: RepoInfoComponent },
-        { path: 'owner-info', component: OwnerInfoComponent },
-        { path: 'trending-info', component: TrendingInfoComponent },
-        { path: '', redirectTo: 'repo-info', pathMatch: 'full' }
-    ]}
+    //     { path: 'repo-info', component: RepoInfoComponent },
+    //     { path: 'owner-info', component: OwnerInfoComponent },
+    //     { path: 'trending-info', component: TrendingInfoComponent },
+    //     { path: '', redirectTo: 'repo-info', pathMatch: 'full' }
+    // ]}
 
 ];
 

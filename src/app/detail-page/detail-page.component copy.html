@@ -36,24 +36,50 @@
       </div>
     </div>
     <div class="col-sm-8">
-      <div class="row">
-        <div class="col-sm-6">
-          <app-owner-info></app-owner-info>
-        </div>
-        <div class="col-sm-6">
-          <app-repo-info></app-repo-info>
-        </div>
-      </div>
-      <hr>
-      <div class="row">
-        <app-trending-info></app-trending-info>
-      </div>
+      <ul class="nav nav-tabs nav-fill">
+        <li class="nav-item">
+          <a
+            [className]="firstEnter ? 'active nav-link' : 'nav-link'"
+            data-toggle="tab"
+            [routerLink]="['repo-info']"
+            routerLinkActive="active"
+            role="tab"
+            aria-controls="home"
+            aria-selected="true"
+            (click)="firstEnter=false"
+          >Repo Information</a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            data-toggle="tab"
+            routerLink="trending-info"
+            routerLinkActive="active"
+            role="tab"
+            aria-controls="profile"
+            aria-selected="false"
+            (click)="firstEnter=false"
+            >Trending Information</a>
+        </li>
+
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            data-toggle="tab"
+            [routerLink]="['owner-info']"
+            routerLinkActive="active"
+            role="tab"
+            aria-controls="profile"
+            aria-selected="false"
+            (click)="firstEnter=false"
+            >Owner Information</a>
+        </li>
+      </ul>
+    <div class="tab-content" id="myTabContent">
+      <router-outlet></router-outlet>
     </div>
   </div>
 
-  <div class="row" style="margin: 0 8vw">
-    <app-samilar-repo></app-samilar-repo>
-  </div>
 </div>
 
 

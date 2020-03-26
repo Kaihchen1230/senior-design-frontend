@@ -12,7 +12,8 @@ export class HomeComponent implements OnInit {
 
   searchKeyWord: string = '';
   searchIcon = faSearch;
-  constructor(private searchService: SearchService, private router: Router) { }
+  constructor(private searchService: SearchService,
+              private router: Router) { }
 
   ngOnInit() {
   }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SearchService } from '../shared/search.service';
 import { faSearch, faStar, faCaretUp, faCaretDown } from '@fortawesome/free-solid-svg-icons';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search-result',
@@ -52,20 +53,22 @@ export class SearchResultComponent implements OnInit {
       platform: 'bitbucket'
     }
   ]
-  constructor(private searchService: SearchService) { }
+  constructor(private searchService: SearchService,
+    private router: Router) { }
 
   ngOnInit() {
     this.term = this.searchService.searchTerm;
-    console.log('this is search result page: ', this.searchService.searchTerm)
+    console.log('this is search result page: ', this.searchService.searchTerm);
   }
 
   randomNumIsEven(){
-    let num: number =  Math.floor(Math.random() * 100);
-
-    console.log('this is num: ', num)
-
+    const num: number =  Math.floor(Math.random() * 100);
+    console.log('this is num: ', num);
     return num % 2 === 0;
+  }
 
+  goToDetailPage() {
+    this.router.navigate(['/detail-page']);
   }
 
 }

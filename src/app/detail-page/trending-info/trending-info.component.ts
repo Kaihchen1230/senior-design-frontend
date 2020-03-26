@@ -17,7 +17,7 @@ export class TrendingInfoComponent implements OnInit {
     this.chart = new Chart('canvas', {
       type: 'line',
       data: {
-        labels: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'],
+        labels: ['2019-09-20', '2019-09-21', '2019-09-22', '2019-09-23', '2019-09-24', '2019-09-25', '2019-09-26'],
         datasets: [
           {
             label: 'My first dataset',
