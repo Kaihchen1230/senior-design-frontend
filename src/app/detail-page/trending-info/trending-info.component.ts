@@ -10,20 +10,23 @@ import { Chart } from 'chart.js';
 export class TrendingInfoComponent implements OnInit {
 
   @Input() commits: [];
+  commitCount: {[ date: string ]: number };
   chart = [];
 
   constructor() { }
 
   ngOnInit() {
 
+    this.countCommits();
+
     this.chart = new Chart('canvas', {
       type: 'line',
       data: {
-        labels: ['2019-09-20', '2019-09-21', '2019-09-22', '2019-09-23', '2019-09-24', '2019-09-25', '2019-09-26'],
+        labels: Object.keys(this.commitCount),
         datasets: [
           {
             label: 'My first dataset',
-            data: [1,3,5,10,56,65,35,543,543,543],
+            data: Object.values(this.commitCount),
             backgroundColor: 'red',
             borderColor: 'red',
             fill: false
@@ -58,6 +61,47 @@ export class TrendingInfoComponent implements OnInit {
         }
       }
     });
+  }
+
+  countCommits() {
+
+    const result = {};
+    this.commits.forEach(commit => {
+
+      const mmddyyyy = new Date(commit);
+      let month = (mmddyyyy.getMonth() + 1).toString();
+      let date = mmddyyyy.getDate().toString();
+      const year = mmddyyyy.getFullYear().toString();
+
+      // tslint:disable-next-line: radix
+      if (parseInt(month) < 10) {
+        month = '0' + month;
+      }
+
+      // tslint:disable-next-line: radix
+      if (parseInt(date) < 10) {
+        date = '0' + date;
+      }
+      const commitDate = year + '-' + month + '-' + date;
+
+      if (result.hasOwnProperty(commitDate)) {
+        result[commitDate] += 1;
+      } else {
+        result[commitDate] = 0;
+      }
+    });
+
+    console.log('result: ', result);
+
+    const sortedResult = {};
+
+    Object.keys(result).sort().forEach(key => {
+      sortedResult[key] = result[key];
+    });
+
+    console.log('this is sorted result: ', sortedResult);
+    this.commitCount = sortedResult;
+    console.log('commitCOunt: ', this.commitCount['2019-10-14']);
   }
 
 

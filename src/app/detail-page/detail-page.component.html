@@ -1,6 +1,6 @@
 <div>
   <app-search-bar></app-search-bar>
-  <p *ngIf="isFetching">loading</p>
+
   <div class="row" style="margin: 0 8vw" *ngIf="!isFetching">
     <div class="col-sm-4">
       <div class="card" style="width: 18rem; border: none">
@@ -29,8 +29,13 @@
     </div>
   </div>
 
-  <div class="row" style="margin: 0 8vw">
+  <div class="row" style="margin: 0 8vw" *ngIf="!isFetching">
     <app-samilar-repo></app-samilar-repo>
+  </div>
+  <div class="d-flex justify-content-center" *ngIf="isFetching" >
+    <div class="spinner-border" role="status" style="width: 5rem; height: 5rem;">
+      <span class="sr-only">Loading...</span>
+    </div>
   </div>
 </div>
 

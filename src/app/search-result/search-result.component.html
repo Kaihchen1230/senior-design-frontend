@@ -1,6 +1,6 @@
 <div>
   <app-search-bar></app-search-bar>
-  <div class="row" style="margin: 0 10vw;">
+  <div class="row" style="margin: 0 10vw;" *ngIf="!isFetching">
     <div class="col-xs-12 col-sm-4">
       <div class="list-group">
         <a
@@ -17,7 +17,7 @@
         </a>
       </div>
     </div>
-    <div class="col-xs-12 col-sm-8">
+    <div class="col-xs-12 col-sm-8" *ngIf="!isFetching">
       <div class="list-group">
         <div
           class="list-group-item"
@@ -39,9 +39,14 @@
             <span>Platform: {{searchResult.platform}}</span>
           </div>
         </div>
-
         </div>
       </div>
     </div>
+</div>
+<div class="d-flex justify-content-center" *ngIf="isFetching" >
+  <div class="spinner-border" role="status" style="width: 5rem; height: 5rem;">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
 </div>
 

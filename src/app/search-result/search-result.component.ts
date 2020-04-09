@@ -28,6 +28,7 @@ export class SearchResultComponent implements OnInit {
     'C',
     'R',
   ];
+  isFetching = false;
   searchResults: Repo[] = [];
 
   constructor(private searchService: SearchService,
@@ -36,10 +37,13 @@ export class SearchResultComponent implements OnInit {
 
   ngOnInit() {
     // const searchTerm = this.searchService.searchTerm;
+    this.isFetching = true;
     const searchTerm = localStorage.getItem('searchTerm');
     this.requestRepoService.fetchRepos(searchTerm).subscribe(responses => {
       this.searchResults = [...responses];
       console.log(this.searchResults);
+      localStorage.setItem('searchResults', JSON.stringify(this.searchResults));
+      this.isFetching = false;
     });
 
   }

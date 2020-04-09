@@ -3,9 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { SearchResultComponent } from './search-result/search-result.component';
 import { DetailPageComponent } from './detail-page/detail-page.component';
-import { RepoInfoComponent } from './detail-page/repo-info/repo-info.component';
-import { OwnerInfoComponent } from './detail-page/owner-info/owner-info.component';
-import { TrendingInfoComponent } from './detail-page/trending-info/trending-info.component';
 
 const appRoutes: Routes = [
     { path: '', component: HomeComponent },

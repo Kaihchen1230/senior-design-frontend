@@ -8,12 +8,13 @@ import { SearchService } from '../shared/search.service';
 })
 export class SearchBarComponent implements OnInit {
   searchIcon = faSearch;
-  term = '';
+  searchTerm = '';
 
   constructor(private searchService: SearchService) { }
 
   ngOnInit() {
-    this.term = this.searchService.searchTerm;
+    // this.term = this.searchService.searchTerm;
+    this.searchTerm = localStorage.getItem('searchTerm');
   }
 
 }
