@@ -59,7 +59,7 @@ export class SearchResultComponent implements OnInit {
     this.searchService.repoName = repoName;
     localStorage.setItem('repoName', repoName);
     localStorage.setItem('platform', platform);
-    this.router.navigate(['/detail-page']);
+    // this.router.navigate(['/detail-page']);
   }
 
 }

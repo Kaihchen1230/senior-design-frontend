@@ -45,8 +45,9 @@ export class RequestRepoService {
       }));
   }
 
-  fetchRepo() {
-    const repoName = localStorage.getItem('repoName');
+  fetchRepo(repoName: string) {
+    console.log('this is localhost: ', repoName);
+    // const repoName = localStorage.getItem('repoName');
     const platform = localStorage.getItem('platform');
     const detailURL = this.url + 'detail?';
     let searchParams = new HttpParams();
@@ -59,7 +60,7 @@ export class RequestRepoService {
       .pipe(map(response => {
         let repoAvatarURL = '';
         let imgAlt = '';
-        console.log('this is response in service: ', response);
+        // console.log('this is response in service: ', response);
         if (localStorage.getItem('platform') === 'github') {
           repoAvatarURL = 'https://cdn1.iconfinder.com/data/icons/capsocial/500/github-512.png';
           imgAlt = 'GitHub logo image';

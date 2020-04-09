@@ -23,7 +23,8 @@
           class="list-group-item"
           style="border-left: none; border-right: none;"
           *ngFor="let searchResult of searchResults">
-        <h5 (click)="goToDetailPage(searchResult.repoName, searchResult.platform)" style="cursor: pointer;">{{searchResult.repoName}}</h5>
+          <h5 style="cursor: pointer;">
+          <a [routerLink]="['/detail-page', searchResult.repoName]">{{searchResult.repoName}}</a></h5>
         <p>{{searchResult.description}}</p>
         <div class="row">
           <div class="col-sm-3">
