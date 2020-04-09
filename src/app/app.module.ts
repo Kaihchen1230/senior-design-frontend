@@ -18,6 +18,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { RequestRepoService } from './shared/request-repo.service';
 import { SimilarRepoComponent } from './detail-page/detail-content/similar-repos/similar-repo/similar-repo.component';
 import { DetailContentComponent } from './detail-page/detail-content/detail-content.component';
+import { SearchResultContentComponent } from './search-result/search-result-content/search-result-content.component';
+import { RefreshComponent } from './refresh/refresh.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { DetailContentComponent } from './detail-page/detail-content/detail-cont
     SimilarReposComponent,
     SimilarRepoComponent,
     SearchBarComponent,
-    DetailContentComponent
+    DetailContentComponent,
+    SearchResultContentComponent,
+    RefreshComponent
   ],
   imports: [
     BrowserModule,

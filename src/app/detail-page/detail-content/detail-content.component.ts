@@ -29,10 +29,11 @@ export class DetailContentComponent implements OnInit {
 
   ngOnInit() {
     // const id = this.route.snapshot.params['repo-name'];
+    console.log('huhuh');
     this.route.params
       .subscribe(
         (params: Params) => {
-          console.log('this is params: ', params['repo-name']);
+          // console.log('this is params: ', params['repo-name']);
           const repoName = params['repo-name'];
           this.isFetching = true;
           this.requestRepoService.fetchRepo(repoName).subscribe(response => {

@@ -46,7 +46,7 @@ export class RequestRepoService {
   }
 
   fetchRepo(repoName: string) {
-    console.log('this is localhost: ', repoName);
+    // console.log('this is repoName: ', repoName);
     // const repoName = localStorage.getItem('repoName');
     const platform = localStorage.getItem('platform');
     const detailURL = this.url + 'detail?';

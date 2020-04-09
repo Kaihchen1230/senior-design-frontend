@@ -14,30 +14,30 @@ import { OwnerInfo } from '../shared/owner-info.model';
 })
 export class DetailPageComponent implements OnInit {
 
-  term: string = '';
-  searchIcon = faSearch;
-  firstEnter = true;
+  // term: string = '';
+  // searchIcon = faSearch;
+  // firstEnter = true;
 
-  isFetching = false;
-  repoInfo: SingleRepo;
-  ownerInfo: OwnerInfo;
-  commits: [];
+  // isFetching = false;
+  // repoInfo: SingleRepo;
+  // ownerInfo: OwnerInfo;
+  // commits: [];
 
-  constructor(private searchService: SearchService,
-              private requestRepoService: RequestRepoService) { }
+  // constructor(private searchService: SearchService,
+  //             private requestRepoService: RequestRepoService) { }
 
   ngOnInit() {
-    this.term = this.searchService.searchTerm;
-    this.isFetching = true;
-    this.requestRepoService.fetchRepo().subscribe(response => {
-      // console.log('this is response: ', response);
+  //   this.term = this.searchService.searchTerm;
+  //   this.isFetching = true;
+  //   this.requestRepoService.fetchRepo().subscribe(response => {
+  //     // console.log('this is response: ', response);
 
-      this.repoInfo = {... response};
-      this.ownerInfo = new OwnerInfo(response.ownerAvatarUrl, response.ownerName, response.ownerURL);
-      this.commits = response.commits;
-      // console.log('this is repo Info: ', this.repoInfo);
-      this.isFetching = false;
-    });
+  //     this.repoInfo = {... response};
+  //     this.ownerInfo = new OwnerInfo(response.ownerAvatarUrl, response.ownerName, response.ownerURL);
+  //     this.commits = response.commits;
+  //     // console.log('this is repo Info: ', this.repoInfo);
+  //     this.isFetching = false;
+  //   });
 
   }
 

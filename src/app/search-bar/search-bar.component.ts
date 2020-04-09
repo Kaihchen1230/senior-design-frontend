@@ -2,7 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { faSearch, faStar, faCaretUp, faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import { SearchService } from '../shared/search.service';
 import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-search-bar',
   templateUrl: './search-bar.component.html',
@@ -14,7 +15,9 @@ export class SearchBarComponent implements OnInit {
   @ViewChild('f', {static: false}) searchForm: NgForm;
 
   constructor(private searchService: SearchService,
-              private router: Router) { }
+              private router: Router,
+              private route: ActivatedRoute,
+              private location: Location) { }
 
   ngOnInit() {}
 
@@ -25,8 +28,18 @@ export class SearchBarComponent implements OnInit {
       // console.log('this is searchForm: ', this.searchForm);
       localStorage.setItem('searchTerm', searchTerm);
       console.log('searchTerm: ', searchTerm);
+      console.log('route: ', this.route);
 
-      this.router.navigate(['/search-result']);
+      if (this.route.snapshot.url[0].path === 'search-result') {
+        console.log('here')
+        this.router.navigateByUrl("/refresh", { skipLocationChange: true }).then(() => {
+          console.log(decodeURI(this.location.path()));
+          this.router.navigate([decodeURI(this.location.path())]);
+        });
+      } else {
+        this.router.navigate(['/search-result']);
+      }
+
     } else {
       alert('search term cannot be empty!');
     }

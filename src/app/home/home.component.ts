@@ -22,10 +22,11 @@ export class HomeComponent implements OnInit {
   submitSearchTerm() {
     const searchTerm = this.searchForm.value.searchTerm;
     if (searchTerm) {
-      // console.log('this is searchForm: ', this.searchForm);
+      console.log('this is searchForm: ', searchTerm);
       this.searchService.changeSearchTerm(searchTerm);
       this.searchService.saveSearchTerm(searchTerm);
 
+      // this.router.navigate(['/search-result'], { queryParams: { 'search-term': searchTerm } });
       this.router.navigate(['/search-result']);
     } else {
       alert('search term cannot be empty!');

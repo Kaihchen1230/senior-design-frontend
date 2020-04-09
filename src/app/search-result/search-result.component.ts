@@ -12,7 +12,7 @@ import { Repo } from '../shared/repo.model';
 })
 export class SearchResultComponent implements OnInit {
 
-  term = '';
+  searchTerm = '';
   searchIcon = faSearch;
   starIcon = faStar;
   incresing = faCaretUp;
@@ -30,6 +30,7 @@ export class SearchResultComponent implements OnInit {
   ];
   isFetching = false;
   searchResults: Repo[] = [];
+  noRepo = false;
 
   constructor(private searchService: SearchService,
               private requestRepoService: RequestRepoService,
@@ -37,14 +38,20 @@ export class SearchResultComponent implements OnInit {
 
   ngOnInit() {
     // const searchTerm = this.searchService.searchTerm;
+    console.log('init');
+
     this.isFetching = true;
-    const searchTerm = localStorage.getItem('searchTerm');
-    this.requestRepoService.fetchRepos(searchTerm).subscribe(responses => {
+    this.searchTerm = localStorage.getItem('searchTerm');
+    this.requestRepoService.fetchRepos(this.searchTerm).subscribe(responses => {
       this.searchResults = [...responses];
       console.log(this.searchResults);
       localStorage.setItem('searchResults', JSON.stringify(this.searchResults));
       this.isFetching = false;
     });
+
+    if (this.searchResults.length === 0) {
+      this.noRepo = true;
+    }
 
   }
 
@@ -60,6 +67,11 @@ export class SearchResultComponent implements OnInit {
     localStorage.setItem('repoName', repoName);
     localStorage.setItem('platform', platform);
     // this.router.navigate(['/detail-page']);
+  }
+
+  onHandleError() {
+    this.noRepo = false;
+    this.router.navigate(['/']);
   }
 
 }

@@ -19,18 +19,56 @@ export class TrendingInfoComponent implements OnInit {
 
     this.countCommits();
 
+    const historyCommitCount = [];
+    const preditCommitCount = [];
+    const preditTime = Object.values(this.commitCount).length - 3;
+    Object.values(this.commitCount).forEach((commitCount, index) => {
+
+      if (index > preditTime) {
+        historyCommitCount.push(NaN);
+        preditCommitCount.push(commitCount);
+      } else if (index === preditTime){
+        historyCommitCount.push(commitCount);
+        preditCommitCount.push(commitCount);
+      } else {
+        historyCommitCount.push(commitCount);
+        preditCommitCount.push(NaN);
+      }
+    });
+
+    const date = [];
+    Object.keys(this.commitCount).forEach((commitDate, index) => {
+      if (index > preditTime) {
+        date.push('2020-05-01');
+      } else {
+        date.push(commitDate);
+      }
+    });
+
+
+
     this.chart = new Chart('canvas', {
       type: 'line',
       data: {
-        labels: Object.keys(this.commitCount),
+        labels: date,
         datasets: [
           {
             label: 'My first dataset',
-            data: Object.values(this.commitCount),
-            backgroundColor: 'red',
+            data: historyCommitCount,
+            // pointBackgroundColor: [ "Blue", "Yellow", "Green", "Purple", "Orange"],
+            backgroundColor: 'rgba(0, 0, 0, 0)',
             borderColor: 'red',
-            fill: false
-          }
+            fill: false,
+            cubicInterpolationMode: 'monotone'
+         },
+         {
+          label: 'My first dataset',
+          data: preditCommitCount,
+          // pointBackgroundColor: [ "Blue", "Yellow", "Green", "Purple", "Orange"],
+          backgroundColor: 'rgba(0, 0, 0, 0)',
+          borderColor: 'blue',
+          fill: false
+        }
         ]
       },
       options: {
@@ -61,6 +99,10 @@ export class TrendingInfoComponent implements OnInit {
         }
       }
     });
+
+    // console.log(this.chart.data.datasets[0].backgroundColor);
+    // this.chart.data.datasets[0].data = 'black';
+    // this.chart.update();
   }
 
   countCommits() {
