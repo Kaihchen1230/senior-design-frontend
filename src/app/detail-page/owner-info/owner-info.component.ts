@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { OwnerInfo } from 'src/app/shared/owner-info.model';
 
 @Component({
   selector: 'app-owner-info',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OwnerInfoComponent implements OnInit {
 
+  @Input() ownerInfo: OwnerInfo;
   owner = {
     display_name: 'John Mulligan',
     uuid: '{c8614bfa-831a-49eb-866b-4bdd87c8c2c2}',
@@ -30,6 +32,7 @@ export class OwnerInfoComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    // console.log('this is ownerInfo: ', this.ownerInfo);
   }
 
 }

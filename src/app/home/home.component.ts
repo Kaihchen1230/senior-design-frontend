@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { SearchService } from '../shared/search.service';
 import { Router } from '@angular/router';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { NgForm } from '@angular/forms';
+import { RequestRepoService } from '../shared/request-repo.service';
 
 @Component({
   selector: 'app-home',
@@ -10,22 +12,22 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 })
 export class HomeComponent implements OnInit {
 
-  searchKeyWord: string = '';
+  @ViewChild('f', {static: false}) searchForm: NgForm;
   searchIcon = faSearch;
   constructor(private searchService: SearchService,
               private router: Router) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
-  submitSearchTerm(){
-
-    if(this.searchKeyWord){
-      console.log('this is the searchKeyWord: ', this.searchKeyWord);
-      this.searchService.changeSearchTerm(this.searchKeyWord);
+  submitSearchTerm() {
+    const searchTerm = this.searchForm.value.searchTerm;
+    if (searchTerm) {
+      // console.log('this is searchForm: ', this.searchForm);
+      this.searchService.changeSearchTerm(searchTerm);
+      this.searchService.saveSearchTerm(searchTerm);
 
       this.router.navigate(['/search-result']);
-    }else{
+    } else {
       alert('search term cannot be empty!');
     }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Chart } from 'chart.js';
 
 
@@ -9,11 +9,13 @@ import { Chart } from 'chart.js';
 })
 export class TrendingInfoComponent implements OnInit {
 
+  @Input() commits: [];
   chart = [];
 
   constructor() { }
 
   ngOnInit() {
+
     this.chart = new Chart('canvas', {
       type: 'line',
       data: {

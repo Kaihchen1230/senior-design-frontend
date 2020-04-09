@@ -1,28 +1,5 @@
 <div>
-  <form>
-    <div class="form-group row">
-      <div class="col-sm-10" style="margin: 2% auto 0 auto">
-        <div class="input-group mb-2" style="border-radius: 150px; border: 1px solid black;">
-
-          <input
-              type="text"
-              class="form-control"
-              placeholder="Search For Open Source Projects"
-              value="{{term}}"
-              style="border-radius: 150px; border: none; box-shadow: none;"
-            >
-            <button type="submit" class="btn search-button">
-              <div class="input-group-prepend" >
-                <fa-icon [icon]="searchIcon"></fa-icon>
-              </div>
-            </button>
-        </div>
-      </div>
-      <div>
-      </div>
-    </div>
-  </form>
-
+  <app-search-bar></app-search-bar>
   <div class="row" style="margin: 0 10vw;">
     <div class="col-xs-12 col-sm-4">
       <div class="list-group">
@@ -46,14 +23,14 @@
           class="list-group-item"
           style="border-left: none; border-right: none;"
           *ngFor="let searchResult of searchResults">
-        <h5 (click)="goToDetailPage()" style="cursor: pointer;">{{searchResult.repoName}}</h5>
-        <p>{{searchResult.discription}}</p>
+        <h5 (click)="goToDetailPage(searchResult.repoName, searchResult.platform)" style="cursor: pointer;">{{searchResult.repoName}}</h5>
+        <p>{{searchResult.description}}</p>
         <div class="row">
           <div class="col-sm-3">
-            <span><fa-icon [icon]="starIcon" style="color: yellow;"></fa-icon>: {{searchResult.star}}</span>
+            <span><fa-icon [icon]="starIcon" style="color: yellow;"></fa-icon>: {{searchResult.starCount}}</span>
           </div>
           <div class="col-sm-3">
-            <span>Last Update: {{searchResult.lastUpdate}}</span>
+            <span>Last Update: {{searchResult.lastUpdated}}</span>
           </div>
           <div class="col-sm-3">
             <span>Language: {{searchResult.language}}</span>

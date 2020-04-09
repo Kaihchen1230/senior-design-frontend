@@ -1,5 +1,5 @@
-import { HomeComponent } from "./home/home.component";
-import { Routes, RouterModule } from "@angular/router";
+import { HomeComponent } from './home/home.component';
+import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { SearchResultComponent } from './search-result/search-result.component';
 import { DetailPageComponent } from './detail-page/detail-page.component';
