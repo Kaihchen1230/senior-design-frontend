@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { SearchService } from '../shared/search.service';
 import { faSearch, faStar, faCaretUp, faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
+import { RequestRepoService } from '../shared/request-repo.service';
+import { Repo } from '../shared/repo.model';
 
 @Component({
   selector: 'app-search-result',
@@ -10,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class SearchResultComponent implements OnInit {
 
-  term = '';
+  searchTerm = '';
   searchIcon = faSearch;
   starIcon = faStar;
   incresing = faCaretUp;
@@ -25,50 +27,51 @@ export class SearchResultComponent implements OnInit {
     'C#',
     'C',
     'R',
-
   ];
-  searchResults = [
-    {
-      repoName: 'react',
-      discription: 'Mollit eiusmod sunt fugiat dolor non. Proident aute anim magna pariatur anim. Dolor aliquip magna ipsum enim laborum. Id sit irure enim incididunt non aliquip est voluptate voluptate nulla aute. Lorem proident consectetur adipisicing velit ad. Eiusmod officia voluptate minim amet ex culpa voluptate Lorem deserunt est mollit irure. Incididunt amet nulla consectetur culpa elit minim cupidatat ex commodo irure ullamco exercitation qui.',
-      star: 12,
-      lastUpdate: '2/1/2020',
-      language: 'jax',
-      platform: 'github'
-    },
-    {
-      repoName: 'angular',
-      discription: 'Mollit eiusmod sunt fugiat dolor non. Proident aute anim magna pariatur anim. Dolor aliquip magna ipsum enim laborum. Id sit irure enim incididunt non aliquip est voluptate voluptate nulla aute. Lorem proident consectetur adipisicing velit ad. Eiusmod officia voluptate minim amet ex culpa voluptate Lorem deserunt est mollit irure. Incididunt amet nulla consectetur culpa elit minim cupidatat ex commodo irure ullamco exercitation qui.',
-      star: 10,
-      lastUpdate: '2/2/2020',
-      language: 'js',
-      platform: 'gitlab'
-    },
-    {
-      repoName: 'vue',
-      discription: 'Mollit eiusmod sunt fugiat dolor non. Proident aute anim magna pariatur anim. Dolor aliquip magna ipsum enim laborum. Id sit irure enim incididunt non aliquip est voluptate voluptate nulla aute. Lorem proident consectetur adipisicing velit ad. Eiusmod officia voluptate minim amet ex culpa voluptate Lorem deserunt est mollit irure. Incididunt amet nulla consectetur culpa elit minim cupidatat ex commodo irure ullamco exercitation qui.',
-      star: 15,
-      lastUpdate: '2/4/2020',
-      language: 'javascript',
-      platform: 'bitbucket'
-    }
-  ]
+  isFetching = false;
+  searchResults: Repo[] = [];
+  noRepo = false;
+
   constructor(private searchService: SearchService,
-    private router: Router) { }
+              private requestRepoService: RequestRepoService,
+              private router: Router) { }
 
   ngOnInit() {
-    this.term = this.searchService.searchTerm;
-    console.log('this is search result page: ', this.searchService.searchTerm);
+    // const searchTerm = this.searchService.searchTerm;
+    console.log('init');
+
+    this.isFetching = true;
+    this.searchTerm = localStorage.getItem('searchTerm');
+    this.requestRepoService.fetchRepos(this.searchTerm).subscribe(responses => {
+      this.searchResults = [...responses];
+      console.log(this.searchResults);
+      localStorage.setItem('searchResults', JSON.stringify(this.searchResults));
+      this.isFetching = false;
+    });
+
+    if (this.searchResults.length === 0) {
+      this.noRepo = true;
+    }
+
   }
 
   randomNumIsEven(){
     const num: number =  Math.floor(Math.random() * 100);
-    console.log('this is num: ', num);
+    // console.log('this is num: ', num);
     return num % 2 === 0;
   }
 
-  goToDetailPage() {
-    this.router.navigate(['/detail-page']);
+  goToDetailPage(repoName: string, platform: string) {
+
+    this.searchService.repoName = repoName;
+    localStorage.setItem('repoName', repoName);
+    localStorage.setItem('platform', platform);
+    // this.router.navigate(['/detail-page']);
+  }
+
+  onHandleError() {
+    this.noRepo = false;
+    this.router.navigate(['/']);
   }
 
 }

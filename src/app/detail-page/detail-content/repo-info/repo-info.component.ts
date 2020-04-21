@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { SingleRepo } from 'src/app/shared/single-repo.model';
+
 
 @Component({
   selector: 'app-repo-info',
@@ -7,10 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RepoInfoComponent implements OnInit {
 
+  @Input() repoInfo: SingleRepo;
 
   constructor() { }
 
   ngOnInit() {
+    // console.log('this is repoInfo: ', this.repoInfo);
   }
 
 }

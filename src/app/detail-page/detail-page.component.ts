@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import * as d3 from 'd3';
 import { SearchService } from '../shared/search.service';
 import { faSearch, faStar, faCaretUp, faCaretDown } from '@fortawesome/free-solid-svg-icons';
+import { RequestRepoService } from '../shared/request-repo.service';
+import { Repo } from '../shared/repo.model';
+import { SingleRepo } from '../shared/single-repo.model';
+import { OwnerInfo } from '../shared/owner-info.model';
 
 @Component({
   selector: 'app-detail-page',
@@ -10,35 +14,31 @@ import { faSearch, faStar, faCaretUp, faCaretDown } from '@fortawesome/free-soli
 })
 export class DetailPageComponent implements OnInit {
 
-  term: string = '';
-  searchIcon = faSearch;
-  firstEnter = true;
+  // term: string = '';
+  // searchIcon = faSearch;
+  // firstEnter = true;
 
-  exampleRepo = {
-    repoName: 'react',
-    discription: 'Mollit eiusmod sunt fugiat dolor non. Proident aute anim magna pariatur anim. Dolor aliquip magna ipsum enim laborum. Id sit irure enim incididunt non aliquip est voluptate voluptate nulla aute. Lorem proident consectetur adipisicing velit ad. Eiusmod officia voluptate minim amet ex culpa voluptate Lorem deserunt est mollit irure. Incididunt amet nulla consectetur culpa elit minim cupidatat ex commodo irure ullamco exercitation qui.',
-    star: 12,
-    lastUpdate: '2/1/2020',
-    language: 'jax',
-    platform: 'github'
-  }
+  // isFetching = false;
+  // repoInfo: SingleRepo;
+  // ownerInfo: OwnerInfo;
+  // commits: [];
 
-  constructor(private searchService: SearchService) { }
+  // constructor(private searchService: SearchService,
+  //             private requestRepoService: RequestRepoService) { }
 
   ngOnInit() {
+  //   this.term = this.searchService.searchTerm;
+  //   this.isFetching = true;
+  //   this.requestRepoService.fetchRepo().subscribe(response => {
+  //     // console.log('this is response: ', response);
 
-    this.term = this.searchService.searchTerm;
+  //     this.repoInfo = {... response};
+  //     this.ownerInfo = new OwnerInfo(response.ownerAvatarUrl, response.ownerName, response.ownerURL);
+  //     this.commits = response.commits;
+  //     // console.log('this is repo Info: ', this.repoInfo);
+  //     this.isFetching = false;
+  //   });
 
-    let canvas = d3.select('.container')
-                    .append('svg')
-                    .attr('width', 500)
-                    .attr('height', 500);
-
-    let circle = canvas.append('circle')
-                       .attr('cx', 250)
-                       .attr('cy',250)
-                       .attr('r', 50)
-                       .attr('fill', 'red')
   }
 
 }

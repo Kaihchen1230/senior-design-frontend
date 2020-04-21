@@ -1,25 +1,26 @@
-import { HomeComponent } from "./home/home.component";
-import { Routes, RouterModule } from "@angular/router";
+import { HomeComponent } from './home/home.component';
+import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { SearchResultComponent } from './search-result/search-result.component';
 import { DetailPageComponent } from './detail-page/detail-page.component';
-import { RepoInfoComponent } from './detail-page/repo-info/repo-info.component';
-import { OwnerInfoComponent } from './detail-page/owner-info/owner-info.component';
-import { TrendingInfoComponent } from './detail-page/trending-info/trending-info.component';
+import { DetailContentComponent } from './detail-page/detail-content/detail-content.component';
+import { SearchResultContentComponent } from './search-result/search-result-content/search-result-content.component';
+import { RefreshComponent } from './refresh/refresh.component';
 
 const appRoutes: Routes = [
     { path: '', component: HomeComponent },
     // { path: '', redirectTo: '/home', pathMatch: 'full' },
-    { path: 'search-result', component: SearchResultComponent },
-    { path: 'detail-page', component: DetailPageComponent }
-    // { path: 'detail-page', component: DetailPageComponent,
-    //   children: [
+    { path: 'search-result', component: SearchResultComponent, children: [
+      { path: 'search-result/:search-term', component: SearchResultContentComponent }
+    ]},
+    {
+      path:"refresh",
+      component:RefreshComponent
+    },
+    { path: 'detail-page', component: DetailPageComponent, children: [
+      { path: ':repo-name', component: DetailContentComponent }
+    ]}
 
-    //     { path: 'repo-info', component: RepoInfoComponent },
-    //     { path: 'owner-info', component: OwnerInfoComponent },
-    //     { path: 'trending-info', component: TrendingInfoComponent },
-    //     { path: '', redirectTo: 'repo-info', pathMatch: 'full' }
-    // ]}
 
 ];
 
@@ -31,4 +32,4 @@ const appRoutes: Routes = [
   exports: [RouterModule]
 })
 
-export class AppRoutingModule{}
+export class AppRoutingModule {}
