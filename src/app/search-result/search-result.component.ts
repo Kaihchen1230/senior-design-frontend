@@ -48,7 +48,7 @@ export class SearchResultComponent implements OnInit {
       localStorage.setItem('searchResults', JSON.stringify(this.searchResults));
       this.isFetching = false;
     });
-
+    console.log(this.searchResults);
     if (this.searchResults.length === 0) {
       this.noRepo = true;
     }
