@@ -31,6 +31,7 @@ export class SearchResultComponent implements OnInit {
   isFetching = false;
   searchResults: Repo[] = [];
   noRepo = false;
+  error = null;
 
   constructor(private searchService: SearchService,
               private requestRepoService: RequestRepoService,
@@ -46,7 +47,14 @@ export class SearchResultComponent implements OnInit {
       this.searchResults = [...responses];
       console.log(this.searchResults);
       localStorage.setItem('searchResults', JSON.stringify(this.searchResults));
+
+      if (responses.length === 0) {
+        this.error = 'No Repos related to the keyword: ';
+      }
+
       this.isFetching = false;
+    }, error => {
+      console.log('this is error message: ', error);
     });
     console.log(this.searchResults);
     if (this.searchResults.length === 0) {

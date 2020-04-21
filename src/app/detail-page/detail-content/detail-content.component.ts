@@ -29,7 +29,7 @@ export class DetailContentComponent implements OnInit {
 
   ngOnInit() {
     // const id = this.route.snapshot.params['repo-name'];
-    console.log('huhuh');
+    // console.log('huhuh');
     this.route.params
       .subscribe(
         (params: Params) => {

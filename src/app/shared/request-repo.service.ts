@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
 import { SearchService } from './search.service';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { map, tap } from 'rxjs/operators';
+import { Subject, throwError } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 import { Repo } from './repo.model';
 import { SingleRepo } from './single-repo.model';
 
 @Injectable()
 export class RequestRepoService {
+
+  error = new Subject<string>();
 
   url = 'https://search-engine-test1.herokuapp.com/api/v1/';
 
@@ -42,6 +45,8 @@ export class RequestRepoService {
 
         });
         return repoResults;
+      }), catchError(errorRes => {
+        return throwError(errorRes);
       }));
   }
 
