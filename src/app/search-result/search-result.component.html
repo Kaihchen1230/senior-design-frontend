@@ -24,7 +24,7 @@
         style="border-left: none; border-right: none;"
         *ngFor="let searchResult of searchResults">
         <h5 style="cursor: pointer;">
-        <a [routerLink]="['/detail-page', searchResult.repoName]">{{searchResult.repoName}}</a></h5>
+        <a [routerLink]="['/detail-page', searchResult.platform, searchResult.repoName]">{{searchResult.repoName}}</a></h5>
       <p>{{searchResult.description}}</p>
       <div class="row">
         <div class="col-sm-3">

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SearchService } from '../shared/search.service';
 import { faSearch, faStar, faCaretUp, faCaretDown } from '@fortawesome/free-solid-svg-icons';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { RequestRepoService } from '../shared/request-repo.service';
 import { Repo } from '../shared/repo.model';
 
@@ -35,32 +35,42 @@ export class SearchResultComponent implements OnInit {
 
   constructor(private searchService: SearchService,
               private requestRepoService: RequestRepoService,
+              private route: ActivatedRoute,
               private router: Router) { }
 
   ngOnInit() {
     // const searchTerm = this.searchService.searchTerm;
-    console.log('init');
 
-    this.isFetching = true;
+
     this.searchTerm = localStorage.getItem('searchTerm');
-    this.requestRepoService.fetchRepos(this.searchTerm).subscribe(responses => {
-      this.searchResults = [...responses];
-      console.log(this.searchResults);
-      localStorage.setItem('searchResults', JSON.stringify(this.searchResults));
+    console.log('is fetching');
+    this.route.params
+      .subscribe(
+        (params: Params) => {
+          this.isFetching = true;
+          this.error = null;
+          const searchTerm = params['search-term'];
+          this.searchTerm = searchTerm;
+          console.log('this is search term from params: ', searchTerm);
 
-      if (responses.length === 0) {
-        this.error = 'No Repos related to the keyword: ';
-      }
+          this.requestRepoService.fetchRepos(searchTerm).subscribe(responses => {
+            this.searchResults = [...responses];
+            console.log(this.searchResults);
+            localStorage.setItem('searchResults', JSON.stringify(this.searchResults));
 
-      this.isFetching = false;
-    }, error => {
-      console.log('this is error message: ', error);
-    });
-    console.log(this.searchResults);
-    if (this.searchResults.length === 0) {
-      this.noRepo = true;
-    }
+            if (responses.length === 0) {
+              this.error = 'No Repos related to the keyword: ';
+            }
 
+            this.isFetching = false;
+          }, error => {
+            console.log('this is error message: ', error);
+          });
+          console.log(this.searchResults);
+          if (this.searchResults.length === 0) {
+            this.noRepo = true;
+          }
+      });
   }
 
   randomNumIsEven(){
@@ -72,8 +82,8 @@ export class SearchResultComponent implements OnInit {
   goToDetailPage(repoName: string, platform: string) {
 
     this.searchService.repoName = repoName;
-    localStorage.setItem('repoName', repoName);
-    localStorage.setItem('platform', platform);
+    // localStorage.setItem('repoName', repoName);
+    // localStorage.setItem('platform', platform);
     // this.router.navigate(['/detail-page']);
   }
 

@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit {
       this.searchService.saveSearchTerm(searchTerm);
 
       // this.router.navigate(['/search-result'], { queryParams: { 'search-term': searchTerm } });
-      this.router.navigate(['/search-result']);
+      this.router.navigate(['/search-result', searchTerm]);
     } else {
       alert('search term cannot be empty!');
     }

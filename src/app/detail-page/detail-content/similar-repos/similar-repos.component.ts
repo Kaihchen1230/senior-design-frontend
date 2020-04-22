@@ -15,11 +15,11 @@ export class SimilarReposComponent implements OnInit {
     const repoName = localStorage.getItem('repoName');
     this.similarRepos = JSON.parse(localStorage.getItem('searchResults'));
 
-    this.similarRepos.forEach((repo, index) => {
-      if (repo.repoName === repoName) {
-        this.similarRepos.splice(index, 1);
-      }
-    });
+    // this.similarRepos.forEach((repo, index) => {
+    //   if (repo.repoName === repoName) {
+    //     this.similarRepos.splice(index, 1);
+    //   }
+    // });
     console.log('this is similarRepos: ', this.similarRepos);
   }
 

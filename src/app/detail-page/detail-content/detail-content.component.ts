@@ -35,8 +35,10 @@ export class DetailContentComponent implements OnInit {
         (params: Params) => {
           // console.log('this is params: ', params['repo-name']);
           const repoName = params['repo-name'];
+          const platform = params.platform;
+          console.log('this is repoName: ', repoName, 'and this is platform: ', platform);
           this.isFetching = true;
-          this.requestRepoService.fetchRepo(repoName).subscribe(response => {
+          this.requestRepoService.fetchRepo(platform, repoName).subscribe(response => {
             // console.log('this is response: ', response);
 
             this.repoInfo = {... response};
