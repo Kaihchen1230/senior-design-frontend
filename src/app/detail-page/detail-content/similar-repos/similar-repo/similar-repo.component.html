@@ -8,7 +8,7 @@
       <div class="card-body">
 
         <h5 class="card-title">
-          <a [routerLink]="['/detail-page', similarRepo.repoName]">{{ similarRepo.repoName }}</a>
+          <a [routerLink]="['/detail-page', platform, similarRepo.repoName]">{{ similarRepo.repoName }}</a>
           </h5>
         <p class="card-text"
         [ngbTooltip]="similarRepo.description"

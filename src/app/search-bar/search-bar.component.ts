@@ -22,25 +22,20 @@ export class SearchBarComponent implements OnInit {
   ngOnInit() {}
 
   submitSearchTerm() {
-    const searchTerm = this.searchForm.value.searchTerm;
-
-    if (searchTerm) {
+    const currentSearchTerm = this.searchForm.value.searchTerm;
+    // console.log('this.searchForm: ', this.searchForm);
+    if (currentSearchTerm) {
       // console.log('this is searchForm: ', this.searchForm);
-      localStorage.setItem('searchTerm', searchTerm);
-      console.log('searchTerm: ', searchTerm);
-      console.log('route: ', this.route);
+      localStorage.setItem('searchTerm', currentSearchTerm);
+      // console.log('searchTerm: ', searchTerm);
+      // console.log('route: ', this.route);
 
-      if (this.route.snapshot.url[0].path === 'search-result') {
-        console.log('here')
-        this.router.navigateByUrl("/refresh", { skipLocationChange: true }).then(() => {
-          console.log(decodeURI(this.location.path()));
-          this.router.navigate([decodeURI(this.location.path())]);
-        });
-      } else {
-        this.router.navigate(['/search-result']);
-      }
+      this.router.navigate(['/search-result', currentSearchTerm]);
 
     } else {
+      this.searchForm.form.patchValue({
+        searchTerm: currentSearchTerm
+      });
       alert('search term cannot be empty!');
     }
   }

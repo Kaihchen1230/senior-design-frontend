@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { faGithub, faGitlab, faBitbucket } from '@fortawesome/free-brands-svg-icons';
 import { RequestRepoService } from 'src/app/shared/request-repo.service';
@@ -14,12 +14,18 @@ export class SimilarRepoComponent implements OnInit {
   github = faGithub;
   gitlab = faGitlab;
   bitbucket = faBitbucket;
-
+  platform = '';
   @Input() similarRepos: [];
 
   constructor(private router: Router, private route: ActivatedRoute) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.route.params
+      .subscribe((params: Params) => {
+        this.platform = params.platform;
+        console.log('this is params: ', params);
+      });
+  }
 
   ClickSimilarRepo(repoName: string) {
     console.log('click');

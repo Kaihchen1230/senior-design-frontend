@@ -1,6 +1,6 @@
 <div>
   <app-search-bar></app-search-bar>
-  <div class="row" style="margin: 0 10vw;" *ngIf="!isFetching">
+  <div class="row" style="margin: 0 10vw;" *ngIf="!isFetching && !error">
   <div class="col-xs-12 col-sm-4">
     <div class="list-group">
       <a
@@ -17,14 +17,14 @@
       </a>
     </div>
   </div>
-  <div class="col-xs-12 col-sm-8" *ngIf="!isFetching">
+  <div class="col-xs-12 col-sm-8" *ngIf="!isFetching && searchResults.length > 1">
     <div class="list-group">
       <div
         class="list-group-item"
         style="border-left: none; border-right: none;"
         *ngFor="let searchResult of searchResults">
         <h5 style="cursor: pointer;">
-        <a [routerLink]="['/detail-page', searchResult.repoName]">{{searchResult.repoName}}</a></h5>
+        <a [routerLink]="['/detail-page', searchResult.platform, searchResult.repoName]">{{searchResult.repoName}}</a></h5>
       <p>{{searchResult.description}}</p>
       <div class="row">
         <div class="col-sm-3">
@@ -44,16 +44,16 @@
     </div>
   </div>
 </div>
-<div class="d-flex justify-content-center" *ngIf="isFetching" >
+<div class="d-flex justify-content-center" *ngIf="isFetching && !error" >
 <div class="spinner-border" role="status" style="width: 5rem; height: 5rem;">
   <span class="sr-only">Loading...</span>
 </div>
 </div>
-<!-- <div class="alert alert-danger" *ngIf="noRepo" style="width: 83vw; margin:0 auto">
+<div class="alert alert-danger" *ngIf="error" style="width: 83vw; margin:0 auto">
   <h1>An Error Occurred!</h1>
-  <p>No Repo Related to <strong>{{ searchTerm }}</strong></p>
+  <p>{{ error }} <strong>{{ searchTerm }}</strong></p>
   <button class="btn btn-danger" (click)="onHandleError()">OKAY!</button>
-</div> -->
+</div>
 
 </div>
 
