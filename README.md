@@ -1,3 +1,7 @@
+# <a href="https://open-source-searching-platform.web.app"> deploy link</a>
+
+<hr>
+
 # SeniorDesignFrontend
 <hr>
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.21.
