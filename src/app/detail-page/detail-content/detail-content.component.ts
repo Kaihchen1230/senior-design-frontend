@@ -24,6 +24,7 @@ export class DetailContentComponent implements OnInit {
   ownerInfo: OwnerInfo;
   commits: [];
 
+
   constructor(private searchService: SearchService,
               private requestRepoService: RequestRepoService,
               private route: ActivatedRoute,
@@ -53,12 +54,7 @@ export class DetailContentComponent implements OnInit {
           }, (error) => {
             // console.log('this is error message: ', error);
             this.error = error.error.message;
-            this.router.events
-    .pipe(filter((evt: any) => evt instanceof RoutesRecognized), pairwise())
-    .subscribe((events: RoutesRecognized[]) => {
-      console.log('previous url', events[0].urlAfterRedirects);
-      console.log('current url', events[1].urlAfterRedirects);
-    });
+
           });
         }
       );
@@ -73,7 +69,7 @@ export class DetailContentComponent implements OnInit {
     // const previousNavigation = lastSuccessfulNavigation.previousNavigation;
     // this.router.navigateByUrl(previousNavigation);
     console.log('this is route: ', this.location);
-    this.location.back()
+    this.location.back();
     // console.log('this is router: ', this.router.events);
 
 

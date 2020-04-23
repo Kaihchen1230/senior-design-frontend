@@ -1,17 +1,8 @@
-<div class="container">
-  <div  style="float: left">
-    <button class="btn paddle left-paddle" (click)="scrollLeft()"> < </button>
-  </div>
-  <div #widgetsContent class="middle">
+<div class="row">
+  <div class="col-sm-3" *ngFor="let similarRepo of similarRepos; let i = index;">
     <div
-      class="info-widget"
-      *ngFor="let similarRepo of similarRepos; let i = index;"
-      [ngClass]="{'no-margin-left': index === 0, 'no-margin-right': index === similarRepos.length - 1, 'info-widget': index === index}"
-    >
-      <div
       class="card"
-      style="cursor: pointer; height: 142px;"
-
+      style="cursor: pointer;"
 
       (click)="ClickSimilarRepo(similarRepo.repoName)">
       <div class="card-body">
@@ -21,12 +12,9 @@
           </h5>
         <p class="card-text"
         [ngbTooltip]="similarRepo.description"
-        placement="bottom-left"
-        style="z-index: 1000"
+        placement="right-top"
         >
-        <span *ngIf="similarRepo.description">
-          {{ similarRepo.description.slice(0,54) }} ...
-        </span>
+          {{ similarRepo.description.slice(0,54) }} <span *ngIf="similarRepo.description.length > 54">...</span>
         </p>
         <div class="row">
           <div class="col-sm-1">
@@ -43,11 +31,6 @@
         </div>
       </div>
     </div>
-    </div>
+  </div>
 
-  </div>
-  <div class="">
-    <button class="btn paddle right-paddle" (click)="scrollRight()">></button>
-  </div>
 </div>
-
