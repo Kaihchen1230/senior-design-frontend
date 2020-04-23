@@ -33,7 +33,7 @@ export class RequestRepoService {
         // console.log('in fetchRepos map: ', response, ' and this is the type: ', typeof(response));
         const result = [];
         // tslint:disable-next-line: forin
-        for (const res in response){
+        for (const res in response) {
           result.push(response[res]);
         }
 
@@ -122,6 +122,9 @@ export class RequestRepoService {
 
         // console.log('this is repo in srevice: ', repo);
         return repo;
+      }),  catchError(errorRes => {
+
+        return throwError(errorRes);
       }));
   }
 }
