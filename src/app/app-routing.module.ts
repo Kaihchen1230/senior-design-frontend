@@ -22,7 +22,7 @@ const appRoutes: Routes = [
       { path: ':platform/:repo-name', component: DetailContentComponent }
     ]},
     { path: 'not-found', component: PageNotFoundComponent },
-    { path: '**', redirectTo: '/not-found' }
+    { path: '**', pathMatch: 'full', redirectTo: '/not-found' }
 ];
 
 

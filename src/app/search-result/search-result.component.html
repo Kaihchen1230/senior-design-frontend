@@ -2,18 +2,20 @@
   <app-search-bar></app-search-bar>
   <div class="row" style="margin: 0 10vw;" *ngIf="!isFetching && !error">
   <div class="col-xs-12 col-sm-4">
-    <div class="list-group">
-      <a
+    <div class="list-group" *ngIf="languages">
+       <!-- <p>{{ languages }}</p> -->
+       <a
         class="list-group-item"
-        *ngFor="let language of languages"
-        style="width: 50%;"
-      >
-      {{language}}&nbsp;&nbsp;&nbsp;
 
-      <fa-icon
+        *ngFor="let language of languages | keyvalue"
+        style="width: 50%; text-align: left;"
+      >
+      <!-- {{language}}&nbsp;&nbsp;&nbsp; -->
+      {{language.key}} : {{language.value}}
+      <!-- <fa-icon
         [icon]="randomNumIsEven() ? incresing : decresing"
       >
-      </fa-icon>
+      </fa-icon> -->
       </a>
     </div>
   </div>

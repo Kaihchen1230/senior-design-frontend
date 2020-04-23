@@ -17,8 +17,7 @@ export class SearchResultComponent implements OnInit {
   starIcon = faStar;
   incresing = faCaretUp;
   decresing = faCaretDown;
-
-  languages = [
+  languagess = [
     'C++',
     'Java',
     'Python',
@@ -28,6 +27,7 @@ export class SearchResultComponent implements OnInit {
     'C',
     'R',
   ];
+  languages = {};
   isFetching = false;
   searchResults: Repo[] = [];
   noRepo = false;
@@ -55,12 +55,43 @@ export class SearchResultComponent implements OnInit {
 
           this.requestRepoService.fetchRepos(searchTerm).subscribe(responses => {
             this.searchResults = [...responses];
-            console.log(this.searchResults);
+            console.log('this is searchResults: ', this.searchResults);
             localStorage.setItem('searchResults', JSON.stringify(this.searchResults));
 
             if (responses.length === 0) {
               this.error = 'No Repos related to the keyword: ';
             }
+
+            // const languages = {};
+            this.searchResults.forEach((searchResult: any) => {
+
+              let language = searchResult.language;
+              // console.log('this is language: ', language);
+              if (!language) {
+                language = 'Unknow';
+              }
+              // const tmpLanguage = language.toLowerCase();
+              language = language.toLowerCase();
+
+              if (language === 'javascript') {
+                language = 'JavaScript';
+              } else {
+                language = language.charAt(0).toUpperCase() + language.slice(1);
+              }
+
+              if (this.languages.hasOwnProperty(language)) {
+                // console.log('tmpLanguage in if : ', tmpLanguage);
+                this.languages[language] += 1;
+              } else {
+                // console.log('tmpLanguage in else: ', tmpLanguage);
+                this.languages[language] = 1;
+              }
+            });
+
+            // this.languages = {... languages};
+            // console.log(' Object.keys(languages): ',  Object.keys(languages));
+
+            // console.log('this.languages: ', this.languages);
 
             this.isFetching = false;
           }, error => {

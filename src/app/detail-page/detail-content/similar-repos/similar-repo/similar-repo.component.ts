@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { faGithub, faGitlab, faBitbucket } from '@fortawesome/free-brands-svg-icons';
@@ -16,7 +16,7 @@ export class SimilarRepoComponent implements OnInit {
   bitbucket = faBitbucket;
   platform = '';
   @Input() similarRepos: [];
-
+  @ViewChild('widgetsContent', { static: false })  widgetsContent: ElementRef<any>;
   constructor(private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -24,6 +24,7 @@ export class SimilarRepoComponent implements OnInit {
       .subscribe((params: Params) => {
         this.platform = params.platform;
         console.log('this is params: ', params);
+        console.log('similarRepos: ', this.similarRepos);
       });
   }
 
@@ -32,6 +33,14 @@ export class SimilarRepoComponent implements OnInit {
     localStorage.setItem('repoName', repoName);
     console.log('this is localhost: ', localStorage);
     // this.router.navigate(['detail-page']);
+  }
+
+  scrollRight() {
+    this.widgetsContent.nativeElement.scrollTo({ left: (this.widgetsContent.nativeElement.scrollLeft + 150), behavior: 'smooth' });
+  }
+
+  scrollLeft() {
+    this.widgetsContent.nativeElement.scrollTo({ left: (this.widgetsContent.nativeElement.scrollLeft - 150), behavior: 'smooth' });
   }
 
 }
