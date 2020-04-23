@@ -17,44 +17,42 @@ export class TrendingInfoComponent implements OnInit {
 
   ngOnInit() {
 
-    this.countCommits();
+    // this.countCommits();
+    // console.log('this is commitCount: ', this.commits);
 
-    const historyCommitCount = [];
-    const preditCommitCount = [];
-    const preditTime = Object.values(this.commitCount).length - 3;
-    Object.values(this.commitCount).forEach((commitCount, index) => {
+    let endOfWeeks = [];
+    const historicalCommitCounts = [];
+    const predictCommitCounts = [];
+    const predictPeriod = this.commits.length - 6;
+    this.commits.forEach((commit: any, index) => {
+      // console.log('this is commit; ', commit);
+      const endOfWeek = commit.endOfWeek;
+      const commitCount = commit.numCommits;
 
-      if (index > preditTime) {
-        historyCommitCount.push(NaN);
-        preditCommitCount.push(commitCount);
-      } else if (index === preditTime){
-        historyCommitCount.push(commitCount);
-        preditCommitCount.push(commitCount);
+      if (index > predictPeriod) {
+        historicalCommitCounts.push(NaN);
+        predictCommitCounts.push(commitCount);
       } else {
-        historyCommitCount.push(commitCount);
-        preditCommitCount.push(NaN);
+        historicalCommitCounts.push(commitCount);
+        predictCommitCounts.push(NaN);
       }
+      endOfWeeks.push(endOfWeek);
+
     });
 
-    const date = [];
-    Object.keys(this.commitCount).forEach((commitDate, index) => {
-      if (index > preditTime) {
-        date.push('2020-05-01');
-      } else {
-        date.push(commitDate);
-      }
-    });
-
-
+    console.log('this is historicalCommitCounts: ', historicalCommitCounts);
+    console.log('this is predictCommitCounts: ', predictCommitCounts);
+    console.log('this is endOfWeeks: ', endOfWeeks);
+    endOfWeeks = endOfWeeks.reverse();
 
     this.chart = new Chart('canvas', {
       type: 'line',
       data: {
-        labels: date,
+        labels: endOfWeeks,
         datasets: [
           {
-            label: 'My first dataset',
-            data: historyCommitCount,
+            // label: 'My first dataset',
+            data: historicalCommitCounts,
             // pointBackgroundColor: [ "Blue", "Yellow", "Green", "Purple", "Orange"],
             backgroundColor: 'rgba(0, 0, 0, 0)',
             borderColor: 'red',
@@ -62,8 +60,8 @@ export class TrendingInfoComponent implements OnInit {
             cubicInterpolationMode: 'monotone'
          },
          {
-          label: 'My first dataset',
-          data: preditCommitCount,
+          // label: 'My first dataset',
+          data: predictCommitCounts,
           // pointBackgroundColor: [ "Blue", "Yellow", "Green", "Purple", "Orange"],
           backgroundColor: 'rgba(0, 0, 0, 0)',
           borderColor: 'blue',
@@ -78,7 +76,7 @@ export class TrendingInfoComponent implements OnInit {
             display: true,
             scaleLabel: {
               display: true,
-              labelString: 'Date'
+              labelString: 'Date of Each Week'
             },
           }],
           yAxes: [ {
@@ -91,11 +89,21 @@ export class TrendingInfoComponent implements OnInit {
         },
         title: {
           display: true,
-          text: 'Commit History',
+          text: 'Historical Commit Counts Predict Future Commit Counts',
           position: 'top'
         },
         legend: {
           display: false
+        },
+        tooltips: {
+          mode: 'single',
+          callbacks: {
+              label: (tooltipItems, data) => {
+                // console.log('this is data: ', data);
+
+                return 'The week of ' + tooltipItems.xLabel + ': ' + tooltipItems.yLabel;
+              }
+          }
         }
       }
     });
@@ -133,7 +141,7 @@ export class TrendingInfoComponent implements OnInit {
       }
     });
 
-    console.log('result: ', result);
+    // console.log('result: ', result);
 
     const sortedResult = {};
 
