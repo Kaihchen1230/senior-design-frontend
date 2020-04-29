@@ -12,6 +12,7 @@ import { RequestRepoService } from '../shared/request-repo.service';
 })
 export class HomeComponent implements OnInit {
 
+  logoImagePath: any = 'assets/logo.png';
   @ViewChild('f', {static: false}) searchForm: NgForm;
   searchIcon = faSearch;
   constructor(private searchService: SearchService,
