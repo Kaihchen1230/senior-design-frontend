@@ -43,7 +43,7 @@ export class DetailContentComponent implements OnInit {
           // console.log('this is repoName: ', repoName, 'and this is platform: ', platform);
           this.isFetching = true;
           this.requestRepoService.fetchRepo(platform, repoName).subscribe(response => {
-            // console.log('this is response: ', response);
+            console.log('this is response: ', response);
 
 
             this.repoInfo = {... response};

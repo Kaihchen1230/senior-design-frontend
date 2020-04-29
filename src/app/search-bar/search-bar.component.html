@@ -1,16 +1,20 @@
 <div>
   <form (ngSubmit)="submitSearchTerm()" #f="ngForm">
-    <div class="form-group row">
-      <div class="col-sm-10" style="margin: 2% auto 0 auto">
-        <div class="input-group mb-2" style="border-radius: 150px; border: 1px solid black;">
+    <div class="form-group row justify-content-center" >
+      <div class="col-sm-1 col-md-1 col-lg-1">
+        <a routerLink="/">
+          <img src="{{logoImagePath}}" alt="logo image">
+        </a>
+
+      </div>
+      <div class="col-sm-8 col-md-8 col-lg-8" style="margin-top:2%">
+        <div class="input-group">
           <input
               type="text"
               class="form-control"
               placeholder="Search For Open Source Projects"
-
               [ngModel]="searchTerm"
               name="searchTerm"
-              style="border-radius: 150px; border: none; box-shadow: none;"
             >
             <button type="submit" class="btn search-button">
               <div class="input-group-prepend" >
