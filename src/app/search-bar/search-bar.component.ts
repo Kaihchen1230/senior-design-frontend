@@ -10,6 +10,7 @@ import { Location } from '@angular/common';
   styleUrls: ['./search-bar.component.css']
 })
 export class SearchBarComponent implements OnInit {
+  logoImagePath: any = 'assets/logo.png';
   searchIcon = faSearch;
   searchTerm = '';
   @ViewChild('f', {static: false}) searchForm: NgForm;

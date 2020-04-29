@@ -1,0 +1,23 @@
+img {
+  width: 80px;
+  height: 80px;
+}
+
+input {
+  border-radius: 150px;
+  border: none;
+  box-shadow: none;
+  /* height: 10vh; */
+  /* font-size: 1.4em; */
+}
+
+.col-sm-1 {
+  margin-top: 7px;
+  padding-left: 30px;
+}
+div.input-group{
+  border-radius: 150px;
+  border: 1px solid black;
+}
+
+
