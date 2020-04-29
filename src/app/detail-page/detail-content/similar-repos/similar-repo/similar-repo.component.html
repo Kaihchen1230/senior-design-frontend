@@ -6,7 +6,6 @@
     <div
       class="info-widget"
       *ngFor="let similarRepo of similarRepos; let i = index;"
-      [ngClass]="{'no-margin-left': index === 0, 'no-margin-right': index === similarRepos.length - 1, 'info-widget': index === index}"
     >
       <div
       class="card"

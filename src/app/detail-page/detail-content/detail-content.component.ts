@@ -44,7 +44,7 @@ export class DetailContentComponent implements OnInit {
           this.isFetching = true;
           this.requestRepoService.fetchRepo(platform, repoName).subscribe(response => {
             // console.log('this is response: ', response);
-            this.error = null;
+
 
             this.repoInfo = {... response};
             this.ownerInfo = new OwnerInfo(response.ownerAvatarUrl, response.ownerName, response.ownerURL);
@@ -52,12 +52,13 @@ export class DetailContentComponent implements OnInit {
             // console.log('this is repo Info: ', this.repoInfo);
             this.isFetching = false;
           }, (error) => {
-            // console.log('this is error message: ', error);
+            console.log('this is error message: ', error);
             this.error = error.error.message;
-
+            this.isFetching = false;
           });
         }
       );
+
 
 
 
