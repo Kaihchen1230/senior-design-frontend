@@ -96,6 +96,7 @@ export class SearchResultComponent implements OnInit {
             this.isFetching = false;
           }, error => {
             console.log('this is error message: ', error);
+
           });
           console.log(this.searchResults);
           if (this.searchResults.length === 0) {

@@ -10,8 +10,8 @@ import { SingleRepo } from './single-repo.model';
 export class RequestRepoService {
 
   error = new Subject<string>();
-
-  url = 'https://search-engine-test1.herokuapp.com/api/v1/';
+  // https://search-engine-api.herokuapp.com
+  url = 'https://search-engine-api.herokuapp.com/api/v1/';
 
   constructor(private searchService: SearchService,
               private http: HttpClient) {}
@@ -68,6 +68,7 @@ export class RequestRepoService {
         // });
         return repoResults;
       }), catchError(errorRes => {
+        console.log('this is errorRes in fetchRepos service : ', errorRes);
         return throwError(errorRes);
       }));
   }
@@ -123,8 +124,8 @@ export class RequestRepoService {
         // console.log('this is repo in srevice: ', repo);
         return repo;
       }),  catchError(errorRes => {
-
-        return throwError(errorRes);
+            console.log('this is errorRes in fetchRepo service : ', errorRes);
+            return throwError(errorRes);
       }));
   }
 }
