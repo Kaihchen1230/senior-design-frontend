@@ -1,6 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Chart } from 'chart.js';
 
+interface Commit {
+  endOfWeek: string;
+  numCommits: number;
+}
 
 @Component({
   selector: 'app-trending-info',
@@ -19,96 +23,133 @@ export class TrendingInfoComponent implements OnInit {
 
     // this.countCommits();
     // console.log('this is commitCount: ', this.commits);
+    if (this.commits) {
+      let endOfWeeks = [];
+      let historicalCommitCounts = [];
+      let predictCommitCounts = [];
+      let gaps = [];
+      this.commits.forEach((commit: Commit, index) => {
+        const endOfWeek = commit.endOfWeek;
+        const commitCount = commit.numCommits;
 
-    let endOfWeeks = [];
-    const historicalCommitCounts = [];
-    const predictCommitCounts = [];
-    const predictPeriod = this.commits.length - 6;
-    this.commits.forEach((commit: any, index) => {
-      // console.log('this is commit; ', commit);
-      const endOfWeek = commit.endOfWeek;
-      const commitCount = commit.numCommits;
+        if (index === 4) {
+          gaps.push(commitCount);
+          historicalCommitCounts.push(NaN);
+          predictCommitCounts.push(commitCount);
+        } else if (index === 5) {
+          gaps.push(commitCount);
+          historicalCommitCounts.push(commitCount);
+          predictCommitCounts.push(NaN);
+        } else if (index < 5) {
+          historicalCommitCounts.push(NaN);
+          predictCommitCounts.push(commitCount);
+          gaps.push(NaN);
+        } else {
+          historicalCommitCounts.push(commitCount);
+          predictCommitCounts.push(NaN);
+          gaps.push(NaN);
+        }
+        endOfWeeks.push(endOfWeek);
 
-      if (index > predictPeriod) {
-        historicalCommitCounts.push(NaN);
-        predictCommitCounts.push(commitCount);
-      } else {
-        historicalCommitCounts.push(commitCount);
-        predictCommitCounts.push(NaN);
-      }
-      endOfWeeks.push(endOfWeek);
+      });
 
-    });
-
-    console.log('this is historicalCommitCounts: ', historicalCommitCounts);
-    console.log('this is predictCommitCounts: ', predictCommitCounts);
-    console.log('this is endOfWeeks: ', endOfWeeks);
-    endOfWeeks = endOfWeeks.reverse();
-
-    this.chart = new Chart('canvas', {
-      type: 'line',
-      data: {
-        labels: endOfWeeks,
-        datasets: [
+      // console.log('this is historicalCommitCounts: ', historicalCommitCounts);
+      // console.log('this is predictCommitCounts: ', predictCommitCounts);
+      // console.log('this is endOfWeeks before: ', endOfWeeks);
+      // console.log('this is endOfWeeks at  the end', endOfWeeks);
+      endOfWeeks = endOfWeeks.reverse();
+      historicalCommitCounts = historicalCommitCounts.reverse();
+      predictCommitCounts = predictCommitCounts.reverse();
+      gaps = gaps.reverse();
+      // console.log('this is historicalCommitCounts at the end: ', historicalCommitCounts);
+      // console.log('this is predictCommitCounts at the end: ', predictCommitCounts);
+      this.chart = new Chart('canvas', {
+        type: 'line',
+        data: {
+          labels: endOfWeeks,
+          datasets: [
+            {
+              // label: 'My first dataset',
+              data: historicalCommitCounts,
+              // pointBackgroundColor: [ "Blue", "Yellow", "Green", "Purple", "Orange"],
+              backgroundColor: 'rgba(0, 0, 0, 0)',
+              borderColor: 'red',
+              fill: false,
+              cubicInterpolationMode: 'monotone'
+          },
+          {
+            data: gaps,
+            backgroundColor: (context) => {
+              const index = context.dataIndex;
+              return index === 11 ? 'red' : index === 12 ? 'blue' : 'white';
+            },
+            borderColor: (context) => {
+              const index = context.dataIndex;
+              return index === 11 ? 'red' : index === 12 ? 'blue' : 'black';
+            },
+            borderWidth: 2,
+            borderDash: [2, 2],
+            fill: false,
+            cubicInterpolationMode: 'monotone',
+            // pointBackgroundColor:
+          },
           {
             // label: 'My first dataset',
-            data: historicalCommitCounts,
+            data: predictCommitCounts,
             // pointBackgroundColor: [ "Blue", "Yellow", "Green", "Purple", "Orange"],
             backgroundColor: 'rgba(0, 0, 0, 0)',
-            borderColor: 'red',
-            fill: false,
-            cubicInterpolationMode: 'monotone'
-         },
-         {
-          // label: 'My first dataset',
-          data: predictCommitCounts,
-          // pointBackgroundColor: [ "Blue", "Yellow", "Green", "Purple", "Orange"],
-          backgroundColor: 'rgba(0, 0, 0, 0)',
-          borderColor: 'blue',
-          fill: false
-        }
-        ]
-      },
-      options: {
-        responsive: true,
-        scales: {
-          xAxes: [{
-            display: true,
-            scaleLabel: {
+            borderColor: 'blue',
+            fill: false
+          }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            xAxes: [{
               display: true,
-              labelString: 'Date of Each Week'
-            },
-          }],
-          yAxes: [ {
-            display: true,
-            scaleLabel: {
+              scaleLabel: {
+                display: true,
+                labelString: 'Date of Each Week'
+              },
+            }],
+            yAxes: [{
               display: true,
-              labelString: 'Commit Count'
-            }
-          }],
-        },
-        title: {
-          display: true,
-          text: 'Historical Commit Counts Predict Future Commit Counts',
-          position: 'top'
-        },
-        legend: {
-          display: false
-        },
-        tooltips: {
-          mode: 'single',
-          callbacks: {
-              label: (tooltipItems, data) => {
-                // console.log('this is data: ', data);
-
-                return 'The week of ' + tooltipItems.xLabel + ': ' + tooltipItems.yLabel;
+              scaleLabel: {
+                display: true,
+                labelString: 'Commit Count'
+              },
+              ticks: {
+                suggestedMin: 0
               }
+            }],
+          },
+          title: {
+            display: true,
+            text: 'Historical Commit Counts Predict Future Commit Counts',
+            position: 'top'
+          },
+          legend: {
+            display: false
+          },
+          tooltips: {
+            mode: 'single',
+            callbacks: {
+                label: (tooltipItems, data) => {
+                  // console.log('this is data: ', data);
+
+                  return 'The week of ' + tooltipItems.xLabel + ': ' + tooltipItems.yLabel;
+                }
+            }
           }
         }
-      }
-    });
+      });
+    }
 
-    // console.log(this.chart.data.datasets[0].backgroundColor);
+
+
+    // console.log(this.chart);
     // this.chart.data.datasets[0].data = 'black';
     // this.chart.update();
   }

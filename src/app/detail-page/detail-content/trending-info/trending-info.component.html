@@ -1,4 +1,12 @@
 <div>
-  <h1>Predict Commit Count</h1>
-  <canvas id="canvas" style="width: 500px; height: 200px;"></canvas>
+  <div *ngIf="!commits">
+    <div class="alert alert-danger">
+      There is no commit histories to predict .....
+    </div>
+  </div>
+  <div>
+    <h1 *ngIf="commits">Predict Commit Count</h1>
+    <canvas id="canvas" ></canvas>
+  </div>
 </div>
+

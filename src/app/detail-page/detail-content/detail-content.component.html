@@ -36,7 +36,7 @@
       <span class="sr-only">Loading...</span>
     </div>
   </div>
-  <div class="alert alert-danger" *ngIf="error && !isFetching" style="width: 83vw; margin:0 auto">
+  <div class="alert alert-danger" *ngIf="error" style="width: 83vw; margin:0 auto">
     <h1>An Error Occurred!</h1>
     <p>{{ error }}</p>
     <button class="btn btn-danger" (click)="onHandleError()">OKAY!</button>
