@@ -36,11 +36,11 @@ export class SimilarRepoComponent implements OnInit {
   }
 
   scrollRight() {
-    this.widgetsContent.nativeElement.scrollTo({ left: (this.widgetsContent.nativeElement.scrollLeft + 150), behavior: 'smooth' });
+    this.widgetsContent.nativeElement.scrollTo({ left: (this.widgetsContent.nativeElement.scrollLeft + 430), behavior: 'smooth' });
   }
 
   scrollLeft() {
-    this.widgetsContent.nativeElement.scrollTo({ left: (this.widgetsContent.nativeElement.scrollLeft - 150), behavior: 'smooth' });
+    this.widgetsContent.nativeElement.scrollTo({ left: (this.widgetsContent.nativeElement.scrollLeft - 430), behavior: 'smooth' });
   }
 
 }

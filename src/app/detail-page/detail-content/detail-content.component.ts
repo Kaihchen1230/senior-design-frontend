@@ -53,7 +53,12 @@ export class DetailContentComponent implements OnInit {
             this.isFetching = false;
           }, (error) => {
             console.log('this is error message: ', error);
-            this.error = error.error.message;
+
+            if (error.error.message) {
+              this.error = error.error.message;
+            } else {
+              this.error = 'Unknown Error Occured....';
+            }
             this.isFetching = false;
           });
         }
