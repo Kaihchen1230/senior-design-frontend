@@ -17,10 +17,10 @@
            <div
               class="list-group-item search-result"
               *ngFor="let searchResult of searchResults">
-              <span class = "search-result__link">
+              <span>
                  <a [routerLink]="['/detail-page', searchResult.platform, searchResult.repoName]">{{searchResult.repoName}}</a>
               </span>
-              <p>{{searchResult.description}}</p>
+              <p>{{searchResult.description | RepoDesciptionPipe}}</p>
               <div class="row">
                  <div class="col-sm-3">
                     <span>

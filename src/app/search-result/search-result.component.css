@@ -10,18 +10,6 @@
   border-left: none; border-right: none;
 }
 
-.search-result__link a{
-  /* cursor: pointer; */
-  color:red;
-  color:inherit;
-}
-
-.search-result__link:hover{
-  /* text-decoration: underline;
-  color: darkolivegreen; */
-  color:red
-}
-
 .search-result__star-icon{
   color: yellow;
 }
