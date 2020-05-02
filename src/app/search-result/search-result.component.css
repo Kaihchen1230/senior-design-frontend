@@ -1,4 +1,36 @@
-h5:hover{
-  text-decoration: underline;
-  color: darkolivegreen;
+.search-body{
+  margin: 0 10vw;
+}
+
+.language-filter{
+  width: 50%; text-align: left;
+}
+
+.search-result{
+  border-left: none; border-right: none;
+}
+
+.search-result__link a{
+  /* cursor: pointer; */
+  color:red;
+  color:inherit;
+}
+
+.search-result__link:hover{
+  /* text-decoration: underline;
+  color: darkolivegreen; */
+  color:red
+}
+
+.search-result__star-icon{
+  color: yellow;
+}
+
+.spinner{
+  width: 5rem; height: 5rem;
+}
+
+.error-message{
+  width: 83vw; 
+  margin:0 auto;
 }
