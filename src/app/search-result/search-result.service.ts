@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Repo } from '../shared/repo.model';
+import { Repo } from '../shared/models/repo.model';
 
 @Injectable({ providedIn: 'root' })
 export class SearchResultService {

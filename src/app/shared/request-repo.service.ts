@@ -1,23 +1,23 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { throwError } from 'rxjs';
-import { map, catchError, tap} from 'rxjs/operators';
-import { Repo } from './repo.model';
-import { SingleRepo } from './single-repo.model';
+import { map, tap, catchError } from 'rxjs/operators';
+import { Repo } from './models/repo.model';
+import { SingleRepo } from './models/single-repo.model';
 import {SearchResultService} from '../search-result/search-result.service';
+import {environment} from '../../environments/environment';
 
 @Injectable()
 export class RequestRepoService {
-  // https://search-engine-api.herokuapp.com
-  url = 'http://localhost:8080/api/v1/';
+  BACKEND_API = environment.LOCAL_API;
 
   constructor(private http: HttpClient, private searchResultService: SearchResultService ) {}
 
   fetchRepos(searchTerm: string) {
-
     let searchParams = new HttpParams();
     searchParams = searchParams.append('searchKey', searchTerm);
-    const searchURL = this.url + 'search?';
+    const searchURL = this.BACKEND_API + 'search?';
+
     return this.http
       .get<any[]>(
         searchURL,
@@ -58,7 +58,7 @@ export class RequestRepoService {
   }
 
   fetchRepo(platform: string, repoName: string) {
-    const detailURL = this.url + 'detail?';
+    const detailURL = this.BACKEND_API + 'detail?';
     let searchParams = new HttpParams();
     searchParams = searchParams.append('platform', platform);
     searchParams = searchParams.append('full_name', repoName);
@@ -97,9 +97,11 @@ export class RequestRepoService {
           12. profile_url
           13. commits
         */
-
-        // tslint:disable-next-line: max-line-length
-        const repo = new SingleRepo(repoAvatarURL, imgAlt, responseData[2], responseData[8], responseData[7], responseData[1], responseData[11], responseData[10], responseData[12], responseData[5], responseData[6], responseData[4], responseData[9], responseData[3], responseData[13]);
+        const repo = new SingleRepo(
+          repoAvatarURL, imgAlt, responseData[2], responseData[8], responseData[7],
+          responseData[1], responseData[11], responseData[10], responseData[12],
+          responseData[5], responseData[6], responseData[4], responseData[9],
+          responseData[3], responseData[13]);
         return repo;
       }),  catchError(errorRes => {
             console.log('this is errorRes in fetchRepo service : ', errorRes);

@@ -19,7 +19,7 @@ import { SimilarRepoComponent } from './detail-page/detail-content/similar-repos
 import { DetailContentComponent } from './detail-page/detail-content/detail-content.component';
 import { RefreshComponent } from './refresh/refresh.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { RepoDesciptionPipe } from './search-result/repo-description.pipe';
+import { RepoDesciptionPipe } from './shared/pipes/repo-description.pipe';
 
 @NgModule({
   declarations: [

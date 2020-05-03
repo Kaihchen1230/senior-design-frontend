@@ -3,7 +3,7 @@ import { faSearch, faStar} from '@fortawesome/free-solid-svg-icons';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { RequestRepoService } from '../shared/request-repo.service';
 import {SearchResultService} from '../search-result/search-result.service';
-import { Repo } from '../shared/repo.model';
+import { Repo } from '../shared/models/repo.model';
 
 @Component({
   selector: 'app-search-result',

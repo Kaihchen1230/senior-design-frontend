@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { SingleRepo } from 'src/app/shared/single-repo.model';
-import { OwnerInfo } from 'src/app/shared/owner-info.model';
+import { SingleRepo } from 'src/app/shared/models/single-repo.model';
+import { OwnerInfo } from 'src/app/shared/models/owner-info.model';
 import { RequestRepoService } from 'src/app/shared/request-repo.service';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { ActivatedRoute, Router, Params, NavigationEnd, RoutesRecognized } from '@angular/router';

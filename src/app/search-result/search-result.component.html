@@ -20,7 +20,7 @@
               <span>
                  <a [routerLink]="['/detail-page', searchResult.platform, searchResult.repoName]">{{searchResult.repoName}}</a>
               </span>
-              <p>{{searchResult.description | RepoDesciptionPipe}}</p>
+              <p>{{searchResult.description | RepoDesciptionPipe:200}}</p>
               <div class="row">
                  <div class="col-sm-3">
                     <span>

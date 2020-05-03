@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  BACKEND_API: 'https://search-engine-api.herokuapp.com/api/v1/',
+  LOCAL_API: 'http://localhost:8080/api/v1/'
 };
 
 /*
