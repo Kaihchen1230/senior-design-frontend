@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import * as d3 from 'd3';
-import { SearchService } from '../shared/search.service';
 import { faSearch, faStar, faCaretUp, faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import { RequestRepoService } from '../shared/request-repo.service';
 import { Repo } from '../shared/repo.model';

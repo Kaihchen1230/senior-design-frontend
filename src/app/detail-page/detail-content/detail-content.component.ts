@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SingleRepo } from 'src/app/shared/single-repo.model';
 import { OwnerInfo } from 'src/app/shared/owner-info.model';
-import { SearchService } from 'src/app/shared/search.service';
 import { RequestRepoService } from 'src/app/shared/request-repo.service';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { ActivatedRoute, Router, Params, NavigationEnd, RoutesRecognized } from '@angular/router';
@@ -14,7 +13,7 @@ import { Location } from '@angular/common';
 })
 export class DetailContentComponent implements OnInit {
 
-  term: string = '';
+  term = '';
   searchIcon = faSearch;
   firstEnter = true;
   error = null;
@@ -25,8 +24,7 @@ export class DetailContentComponent implements OnInit {
   commits: [];
 
 
-  constructor(private searchService: SearchService,
-              private requestRepoService: RequestRepoService,
+  constructor(private requestRepoService: RequestRepoService,
               private route: ActivatedRoute,
               private router: Router,
               private location: Location) { }

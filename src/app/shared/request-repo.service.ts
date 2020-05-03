@@ -1,20 +1,16 @@
 import { Injectable } from '@angular/core';
-import { SearchService } from './search.service';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Subject, throwError } from 'rxjs';
+import { throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { Repo } from './repo.model';
 import { SingleRepo } from './single-repo.model';
 
 @Injectable()
 export class RequestRepoService {
-
-  error = new Subject<string>();
   // https://search-engine-api.herokuapp.com
   url = 'http://localhost:8080/api/v1/';
 
-  constructor(private searchService: SearchService,
-              private http: HttpClient) {}
+  constructor(private http: HttpClient) {}
 
   fetchRepos(searchTerm: string) {
 
@@ -31,12 +27,13 @@ export class RequestRepoService {
         console.log('this is result: ', repos);
         return repos.map(repo => {
           const newDate = repo.updated_at.replace(new RegExp('-', 'g'), '/');
+          const newLanguage = this.converLanguage(repo.language);
           return new Repo(
             repo.full_name,
             repo.description,
             repo.star_count,
             newDate,
-            repo.language,
+            newLanguage,
             repo.platform
           ); }
         );
@@ -44,6 +41,16 @@ export class RequestRepoService {
         console.log('this is errorRes in fetchRepos service : ', errorRes);
         return throwError(errorRes);
       }));
+  }
+
+  converLanguage(language: string) {
+    if (!language) {
+      return 'Unknown';
+    } else {
+      let newLanguage = language.toLocaleLowerCase();
+      newLanguage = newLanguage.charAt(0).toUpperCase() + newLanguage.slice(1);
+      return newLanguage;
+    }
   }
 
   fetchRepo(platform: string, repoName: string) {
