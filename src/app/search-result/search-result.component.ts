@@ -14,9 +14,10 @@ import { Repo } from '../shared/models/repo.model';
 export class SearchResultComponent implements OnInit {
   searchIcon = faSearch;
   starIcon = faStar;
-  isFetching = false;
   searchResults: Repo[] = [];
+  selectedLanguage = null;
   errorMsg = null;
+  isFetching = false;
 
   constructor(private requestRepoService: RequestRepoService,
               private searchResultService: SearchResultService,
@@ -42,6 +43,11 @@ export class SearchResultComponent implements OnInit {
           });
           console.log(this.searchResults);
       });
+  }
+
+  languageSelected(selectedLanguage: string) {
+    // console.log("click", selectedLanguage);
+    this.selectedLanguage = selectedLanguage;
   }
 
   onHandleError() {

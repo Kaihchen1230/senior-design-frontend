@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {SearchResultService} from '../../search-result/search-result.service';
 import { Repo } from '../../shared/models/repo.model';
 @Component({
@@ -11,10 +11,16 @@ export class LanguageFilterComponent implements OnInit {
   languageCounter = {};
   constructor(private searchResultService: SearchResultService) { }
 
+  @Output() languageSelected: EventEmitter<string> = new EventEmitter();
+
   ngOnInit() {
     this.searchResults = this.searchResultService.getSearchResult();
     this.countLanguage();
     console.log('language', this.languageCounter);
+  }
+
+  onLanguageClick(selectedLanguage: string) {
+    this.languageSelected.emit(selectedLanguage);
   }
 
   countLanguage() {

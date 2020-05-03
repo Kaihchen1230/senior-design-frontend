@@ -3,6 +3,7 @@
        <a
           class="list-group-item "
           *ngFor="let language of languageCounter | keyvalue"
+          (click) = "onLanguageClick(language.key)"
           >
        {{language.key}} : {{language.value}}
        </a>
