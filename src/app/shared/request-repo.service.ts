@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { throwError } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
+import { map, catchError, tap} from 'rxjs/operators';
 import { Repo } from './repo.model';
 import { SingleRepo } from './single-repo.model';
+import {SearchResultService} from '../search-result/search-result.service';
 
 @Injectable()
 export class RequestRepoService {
   // https://search-engine-api.herokuapp.com
   url = 'http://localhost:8080/api/v1/';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private searchResultService: SearchResultService ) {}
 
   fetchRepos(searchTerm: string) {
 
@@ -37,8 +38,11 @@ export class RequestRepoService {
             repo.platform
           ); }
         );
-      }), catchError(errorRes => {
-        console.log('this is errorRes in fetchRepos service : ', errorRes);
+      }),
+      tap(repos => {
+        this.searchResultService.setSearchResult(repos);
+      }),
+      catchError(errorRes => {
         return throwError(errorRes);
       }));
   }
