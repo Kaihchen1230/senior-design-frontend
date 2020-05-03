@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, AfterViewInit } from '@angular/core';
 import { Chart } from 'chart.js';
 
 interface Commit {
@@ -22,7 +22,7 @@ export class TrendingInfoComponent implements OnInit {
   ngOnInit() {
 
     // this.countCommits();
-    // console.log('this is commitCount: ', this.commits);
+    console.log('this is commitCount: ', this.commits);
     if (this.commits) {
       let endOfWeeks = [];
       let historicalCommitCounts = [];
@@ -53,23 +53,18 @@ export class TrendingInfoComponent implements OnInit {
 
       });
 
-      // console.log('this is historicalCommitCounts: ', historicalCommitCounts);
-      // console.log('this is predictCommitCounts: ', predictCommitCounts);
-      // console.log('this is endOfWeeks before: ', endOfWeeks);
-      // console.log('this is endOfWeeks at  the end', endOfWeeks);
       endOfWeeks = endOfWeeks.reverse();
       historicalCommitCounts = historicalCommitCounts.reverse();
       predictCommitCounts = predictCommitCounts.reverse();
       gaps = gaps.reverse();
-      // console.log('this is historicalCommitCounts at the end: ', historicalCommitCounts);
-      // console.log('this is predictCommitCounts at the end: ', predictCommitCounts);
       this.chart = new Chart('canvas', {
         type: 'line',
         data: {
           labels: endOfWeeks,
           datasets: [
             {
-              // label: 'My first dataset',
+              label: 'Historical Commit Counts By Weekly',
+
               data: historicalCommitCounts,
               // pointBackgroundColor: [ "Blue", "Yellow", "Green", "Purple", "Orange"],
               backgroundColor: 'rgba(0, 0, 0, 0)',
@@ -79,13 +74,42 @@ export class TrendingInfoComponent implements OnInit {
           },
           {
             data: gaps,
+            label: 'Gap',
             backgroundColor: (context) => {
+              let lastHistoricalIndex = 0;
+              let firstPredictIndex = 0;
+              const dataSet = context.dataset.data;
+
+              dataSet.forEach((commitCount, index) => {
+                if (commitCount >= 0) {
+                  if (lastHistoricalIndex) {
+                    firstPredictIndex = index;
+                  } else {
+                    lastHistoricalIndex = index;
+                  }
+                }
+              });
               const index = context.dataIndex;
-              return index === 11 ? 'red' : index === 12 ? 'blue' : 'white';
+              return index ===  firstPredictIndex ? 'blue' : index === lastHistoricalIndex ? 'red' : 'black';
             },
             borderColor: (context) => {
+              let lastHistoricalIndex = NaN;
+              let firstPredictIndex = NaN;
+              const dataSet = context.dataset.data;
+
+              dataSet.forEach((commitCount: any, index: number) => {
+                if (commitCount >= 0) {
+                  if (lastHistoricalIndex) {
+                  firstPredictIndex = index;
+                  } else {
+                    lastHistoricalIndex = index;
+                  }
+                }
+
+              });
+
               const index = context.dataIndex;
-              return index === 11 ? 'red' : index === 12 ? 'blue' : 'black';
+              return index ===  firstPredictIndex ? 'blue' : index === lastHistoricalIndex ? 'red' : 'black';
             },
             borderWidth: 2,
             borderDash: [2, 2],
@@ -94,12 +118,13 @@ export class TrendingInfoComponent implements OnInit {
             // pointBackgroundColor:
           },
           {
-            // label: 'My first dataset',
+            label: 'Predicted Future 5 weeks Commit Counts',
             data: predictCommitCounts,
             // pointBackgroundColor: [ "Blue", "Yellow", "Green", "Purple", "Orange"],
             backgroundColor: 'rgba(0, 0, 0, 0)',
             borderColor: 'blue',
-            fill: false
+            fill: false,
+            cubicInterpolationMode: 'monotone'
           }
           ]
         },
@@ -125,33 +150,26 @@ export class TrendingInfoComponent implements OnInit {
               }
             }],
           },
-          title: {
-            display: true,
-            text: 'Historical Commit Counts Predict Future Commit Counts',
-            position: 'top'
-          },
           legend: {
-            display: false
+            labels: {
+              filter: (item, chart) => {
+                return !item.text.includes('Gap');
+              }
+            }
           },
           tooltips: {
             mode: 'single',
             callbacks: {
-                label: (tooltipItems, data) => {
-                  // console.log('this is data: ', data);
-
+                label: (tooltipItems) => {
                   return 'The week of ' + tooltipItems.xLabel + ': ' + tooltipItems.yLabel;
                 }
             }
           }
         }
       });
+
     }
 
-
-
-    // console.log(this.chart);
-    // this.chart.data.datasets[0].data = 'black';
-    // this.chart.update();
   }
 
   countCommits() {

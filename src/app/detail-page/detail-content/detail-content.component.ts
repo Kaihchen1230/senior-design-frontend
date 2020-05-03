@@ -14,11 +14,11 @@ import { Location } from '@angular/common';
 })
 export class DetailContentComponent implements OnInit {
 
-  term: string = '';
+  term = '';
   searchIcon = faSearch;
   firstEnter = true;
   error = null;
-
+  repoName = '';
   isFetching = false;
   repoInfo: SingleRepo;
   ownerInfo: OwnerInfo;
@@ -37,23 +37,15 @@ export class DetailContentComponent implements OnInit {
     this.route.params
       .subscribe(
         (params: Params) => {
-          // console.log('this is params: ', params['repo-name']);
-          const repoName = params['repo-name'];
+          this.repoName = params['repo-name'];
           const platform = params.platform;
-          // console.log('this is repoName: ', repoName, 'and this is platform: ', platform);
           this.isFetching = true;
-          this.requestRepoService.fetchRepo(platform, repoName).subscribe(response => {
-            console.log('this is response: ', response);
-
-
+          this.requestRepoService.fetchRepo(platform, this.repoName).subscribe(response => {
             this.repoInfo = {... response};
             this.ownerInfo = new OwnerInfo(response.ownerAvatarUrl, response.ownerName, response.ownerURL);
             this.commits = response.commits;
-            // console.log('this is repo Info: ', this.repoInfo);
             this.isFetching = false;
           }, (error) => {
-            console.log('this is error message: ', error);
-
             if (error.error.message) {
               this.error = error.error.message;
             } else {
@@ -70,15 +62,7 @@ export class DetailContentComponent implements OnInit {
   }
 
   onHandleError() {
-    console.log('handle error clicked');
-    // const lastSuccessfulNavigation = this.router.getLastSuccessfulNavigation();
-    // const previousNavigation = lastSuccessfulNavigation.previousNavigation;
-    // this.router.navigateByUrl(previousNavigation);
-    console.log('this is route: ', this.location);
     this.location.back();
-    // console.log('this is router: ', this.router.events);
-
-
   }
 
 }
