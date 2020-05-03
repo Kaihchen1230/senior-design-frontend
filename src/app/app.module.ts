@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { SearchResultComponent } from './search-result/search-result.component';
 import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './app-routing.module';
-import { SearchService } from './shared/search.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DetailPageComponent } from './detail-page/detail-page.component';
 import { RepoInfoComponent } from './detail-page/detail-content/repo-info/repo-info.component';
@@ -20,7 +19,7 @@ import { SimilarRepoComponent } from './detail-page/detail-content/similar-repos
 import { DetailContentComponent } from './detail-page/detail-content/detail-content.component';
 import { RefreshComponent } from './refresh/refresh.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { RepoDesciptionPipe } from './search-result/repo-description.pipe';
+import { RepoDesciptionPipe } from './shared/pipes/repo-description.pipe';
 
 @NgModule({
   declarations: [
@@ -47,7 +46,7 @@ import { RepoDesciptionPipe } from './search-result/repo-description.pipe';
     NgbModule,
     HttpClientModule
   ],
-  providers: [SearchService, RequestRepoService],
+  providers: [RequestRepoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

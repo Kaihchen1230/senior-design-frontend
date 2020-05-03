@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import * as d3 from 'd3';
-import { SearchService } from '../shared/search.service';
 import { faSearch, faStar, faCaretUp, faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import { RequestRepoService } from '../shared/request-repo.service';
-import { Repo } from '../shared/repo.model';
-import { SingleRepo } from '../shared/single-repo.model';
-import { OwnerInfo } from '../shared/owner-info.model';
+import { Repo } from '../shared/models/repo.model';
+import { SingleRepo } from '../shared/models/single-repo.model';
+import { OwnerInfo } from '../shared/models/owner-info.model';
 
 @Component({
   selector: 'app-detail-page',

@@ -1,26 +1,23 @@
 import { Injectable } from '@angular/core';
-import { SearchService } from './search.service';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Subject, throwError } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
-import { Repo } from './repo.model';
-import { SingleRepo } from './single-repo.model';
+import { throwError } from 'rxjs';
+import { map, tap, catchError } from 'rxjs/operators';
+import { Repo } from './models/repo.model';
+import { SingleRepo } from './models/single-repo.model';
+import {SearchResultService} from '../search-result/search-result.service';
+import {environment} from '../../environments/environment';
 
 @Injectable()
 export class RequestRepoService {
+  BACKEND_API = environment.LOCAL_API;
 
-  error = new Subject<string>();
-  // https://search-engine-api.herokuapp.com
-  url = 'http://localhost:8080/api/v1/';
-
-  constructor(private searchService: SearchService,
-              private http: HttpClient) {}
+  constructor(private http: HttpClient, private searchResultService: SearchResultService ) {}
 
   fetchRepos(searchTerm: string) {
-
     let searchParams = new HttpParams();
     searchParams = searchParams.append('searchKey', searchTerm);
-    const searchURL = this.url + 'search?';
+    const searchURL = this.BACKEND_API + 'search?';
+
     return this.http
       .get<any[]>(
         searchURL,
@@ -31,23 +28,37 @@ export class RequestRepoService {
         console.log('this is result: ', repos);
         return repos.map(repo => {
           const newDate = repo.updated_at.replace(new RegExp('-', 'g'), '/');
+          const newLanguage = this.converLanguage(repo.language);
           return new Repo(
             repo.full_name,
             repo.description,
             repo.star_count,
             newDate,
-            repo.language,
+            newLanguage,
             repo.platform
           ); }
         );
-      }), catchError(errorRes => {
-        console.log('this is errorRes in fetchRepos service : ', errorRes);
+      }),
+      tap(repos => {
+        this.searchResultService.setSearchResult(repos);
+      }),
+      catchError(errorRes => {
         return throwError(errorRes);
       }));
   }
 
+  converLanguage(language: string) {
+    if (!language) {
+      return 'Unknown';
+    } else {
+      let newLanguage = language.toLocaleLowerCase();
+      newLanguage = newLanguage.charAt(0).toUpperCase() + newLanguage.slice(1);
+      return newLanguage;
+    }
+  }
+
   fetchRepo(platform: string, repoName: string) {
-    const detailURL = this.url + 'detail?';
+    const detailURL = this.BACKEND_API + 'detail?';
     let searchParams = new HttpParams();
     searchParams = searchParams.append('platform', platform);
     searchParams = searchParams.append('full_name', repoName);
@@ -86,9 +97,11 @@ export class RequestRepoService {
           12. profile_url
           13. commits
         */
-
-        // tslint:disable-next-line: max-line-length
-        const repo = new SingleRepo(repoAvatarURL, imgAlt, responseData[2], responseData[8], responseData[7], responseData[1], responseData[11], responseData[10], responseData[12], responseData[5], responseData[6], responseData[4], responseData[9], responseData[3], responseData[13]);
+        const repo = new SingleRepo(
+          repoAvatarURL, imgAlt, responseData[2], responseData[8], responseData[7],
+          responseData[1], responseData[11], responseData[10], responseData[12],
+          responseData[5], responseData[6], responseData[4], responseData[9],
+          responseData[3], responseData[13]);
         return repo;
       }),  catchError(errorRes => {
             console.log('this is errorRes in fetchRepo service : ', errorRes);

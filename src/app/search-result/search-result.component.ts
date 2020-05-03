@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { faSearch, faStar} from '@fortawesome/free-solid-svg-icons';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { RequestRepoService } from '../shared/request-repo.service';
-import { Repo } from '../shared/repo.model';
+import {SearchResultService} from '../search-result/search-result.service';
+import { Repo } from '../shared/models/repo.model';
 
 @Component({
   selector: 'app-search-result',
@@ -19,6 +20,7 @@ export class SearchResultComponent implements OnInit {
   errorMsg = null;
 
   constructor(private requestRepoService: RequestRepoService,
+              private searchResultService: SearchResultService,
               private route: ActivatedRoute,
               private router: Router) { }
 
@@ -29,12 +31,10 @@ export class SearchResultComponent implements OnInit {
           this.isFetching = true;
           const searchTerm = params['search-term'];
 
-          this.requestRepoService.fetchRepos(searchTerm).subscribe(responses => {
+          this.requestRepoService.fetchRepos(searchTerm).subscribe(_ => {
             this.isFetching = false;
-            this.searchResults = [...responses];
-            localStorage.setItem('searchResults', JSON.stringify(this.searchResults));
-
-            if (responses.length === 0) {
+            this.searchResults = this.searchResultService.getSearchResult();
+            if (this.searchResults.length === 0) {
               this.errorMsg = 'No Project Found: ';
             } else {
               this.countLanguage();
@@ -48,11 +48,7 @@ export class SearchResultComponent implements OnInit {
   }
   countLanguage() {
     this.searchResults.forEach((searchResult: Repo) => {
-      let language = searchResult.language;
-      if (!language) {
-        language = 'Unknow';
-      }
-
+      const language = searchResult.language;
       if (this.languageCounter.hasOwnProperty(language)) {
         this.languageCounter[language] += 1;
       } else {

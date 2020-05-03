@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { SingleRepo } from 'src/app/shared/single-repo.model';
+import { SingleRepo } from 'src/app/shared/models/single-repo.model';
 
 
 @Component({

@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { faSearch, faStar, faCaretUp, faCaretDown } from '@fortawesome/free-solid-svg-icons';
-import { SearchService } from '../shared/search.service';
+import { faSearch} from '@fortawesome/free-solid-svg-icons';
 import { NgForm } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
+
 @Component({
   selector: 'app-search-bar',
   templateUrl: './search-bar.component.html',
@@ -15,8 +15,7 @@ export class SearchBarComponent implements OnInit {
   searchTerm = '';
   @ViewChild('f', {static: false}) searchForm: NgForm;
 
-  constructor(private searchService: SearchService,
-              private router: Router,
+  constructor(private router: Router,
               private route: ActivatedRoute,
               private location: Location) { }
 
