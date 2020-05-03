@@ -38,16 +38,17 @@ export class SearchResultComponent implements OnInit {
               this.errorMsg = 'No Project Found: ';
             }
           }, error => {
-            console.log('Error Occur:', error);
             this.errorMsg = error.error.message;
           });
-          console.log(this.searchResults);
       });
   }
 
   languageSelected(selectedLanguage: string) {
-    // console.log("click", selectedLanguage);
-    this.selectedLanguage = selectedLanguage;
+    if (this.selectedLanguage === selectedLanguage) {
+      this.selectedLanguage = null;
+    } else {
+      this.selectedLanguage = selectedLanguage;
+    }
   }
 
   onHandleError() {

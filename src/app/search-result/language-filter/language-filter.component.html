@@ -1,11 +1,21 @@
 <div class="language-filter">
-    <div class="list-group">
+    <h2 class= "language-filter__title">      
+      Languages  
+    </h2>
+    <div class="list-group language-filter-items">
        <a
-          class="list-group-item "
+          class="list-group-item language-filter__item"
           *ngFor="let language of languageCounter | keyvalue"
           (click) = "onLanguageClick(language.key)"
+          [ngClass]="{'language-filter--selected' : selectedLanguage === language.key}"
           >
-       {{language.key}} : {{language.value}}
+        {{language.key}} : 
+        <span class = "language-filter__item__number" *ngIf="selectedLanguage !== language.key">
+            {{language.value}}
+        </span>     
+        <span class = "language-filter--selected__number" *ngIf="selectedLanguage === language.key">
+            X
+        </span>  
        </a>
     </div>
  </div>
