@@ -11,7 +11,7 @@ export class RequestRepoService {
 
   error = new Subject<string>();
   // https://search-engine-api.herokuapp.com
-  url = 'https://search-engine-api.herokuapp.com/api/v1/';
+  url = 'http://localhost:8080/api/v1/';
 
   constructor(private searchService: SearchService,
               private http: HttpClient) {}
@@ -22,51 +22,24 @@ export class RequestRepoService {
     searchParams = searchParams.append('searchKey', searchTerm);
     const searchURL = this.url + 'search?';
     return this.http
-      .get(
+      .get<any[]>(
         searchURL,
         {
           params: searchParams
         })
-      .pipe(map(response => {
-        const repoResults: Repo[] = [];
-
-        // console.log('in fetchRepos map: ', response, ' and this is the type: ', typeof(response));
-        const result = [];
-        // tslint:disable-next-line: forin
-        for (const res in response) {
-          result.push(response[res]);
-        }
-
-        console.log('this is result: ', result);
-
-        result.forEach(element => {
-          const date = element.updated_at.replace(new RegExp('-', 'g'), '/');
-
-          const repo = new Repo(
-            element.full_name,
-            element.description,
-            element.star_count,
-            date,
-            element.language,
-            element.platform
-          );
-          repoResults.push(repo);
-        })
-        // response.forEach(element => {
-        //   const date = element.updated_at.replace(new RegExp('-', 'g'), '/');
-
-        //   const repo = new Repo(
-        //     element.full_name,
-        //     element.description,
-        //     element.star_count,
-        //     date,
-        //     element.language,
-        //     element.platform
-        //   );
-        //   repoResults.push(repo);
-
-        // });
-        return repoResults;
+      .pipe(map(repos => {
+        console.log('this is result: ', repos);
+        return repos.map(repo => {
+          const newDate = repo.updated_at.replace(new RegExp('-', 'g'), '/');
+          return new Repo(
+            repo.full_name,
+            repo.description,
+            repo.star_count,
+            newDate,
+            repo.language,
+            repo.platform
+          ); }
+        );
       }), catchError(errorRes => {
         console.log('this is errorRes in fetchRepos service : ', errorRes);
         return throwError(errorRes);
@@ -74,9 +47,6 @@ export class RequestRepoService {
   }
 
   fetchRepo(platform: string, repoName: string) {
-    // console.log('this is repoName: ', repoName);
-    // const repoName = localStorage.getItem('repoName');
-    // const platform = localStorage.getItem('platform');
     const detailURL = this.url + 'detail?';
     let searchParams = new HttpParams();
     searchParams = searchParams.append('platform', platform);
@@ -88,7 +58,6 @@ export class RequestRepoService {
       .pipe(map(response => {
         let repoAvatarURL = '';
         let imgAlt = '';
-        // console.log('this is response in service: ', response);
         if ( platform === 'github') {
           repoAvatarURL = 'https://cdn1.iconfinder.com/data/icons/capsocial/500/github-512.png';
           imgAlt = 'GitHub logo image';
@@ -120,8 +89,6 @@ export class RequestRepoService {
 
         // tslint:disable-next-line: max-line-length
         const repo = new SingleRepo(repoAvatarURL, imgAlt, responseData[2], responseData[8], responseData[7], responseData[1], responseData[11], responseData[10], responseData[12], responseData[5], responseData[6], responseData[4], responseData[9], responseData[3], responseData[13]);
-
-        // console.log('this is repo in srevice: ', repo);
         return repo;
       }),  catchError(errorRes => {
             console.log('this is errorRes in fetchRepo service : ', errorRes);

@@ -36,9 +36,9 @@ export class SearchResultComponent implements OnInit {
 
             if (responses.length === 0) {
               this.errorMsg = 'No Project Found: ';
+            } else {
+              this.countLanguage();
             }
-            else
-              this.countLanguage();      
           }, error => {
             console.log('Error Occur:', error);
             this.errorMsg = error.error.message;
@@ -46,14 +46,13 @@ export class SearchResultComponent implements OnInit {
           console.log(this.searchResults);
       });
   }
-  
-  countLanguage(){
+  countLanguage() {
     this.searchResults.forEach((searchResult: Repo) => {
       let language = searchResult.language;
-      
-      if (!language) 
-        language = 'Unknow';  
-      
+      if (!language) {
+        language = 'Unknow';
+      }
+
       if (this.languageCounter.hasOwnProperty(language)) {
         this.languageCounter[language] += 1;
       } else {
@@ -61,7 +60,6 @@ export class SearchResultComponent implements OnInit {
       }
     });
   }
-
   onHandleError() {
     this.router.navigate(['/']);
   }
