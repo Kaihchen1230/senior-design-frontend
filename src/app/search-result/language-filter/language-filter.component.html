@@ -1,0 +1,10 @@
+<div class="language-filter">
+    <div class="list-group">
+       <a
+          class="list-group-item "
+          *ngFor="let language of languageCounter | keyvalue"
+          >
+       {{language.key}} : {{language.value}}
+       </a>
+    </div>
+ </div>

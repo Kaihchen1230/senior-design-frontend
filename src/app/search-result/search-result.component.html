@@ -1,17 +1,7 @@
 <div>
   <app-search-bar></app-search-bar>
   <div class="row search-body"  *ngIf="!isFetching && !error">
-     <div class="col-xs-12 col-sm-4">
-        <div class="list-group">
-           <a
-              class="list-group-item language-filter"
-              *ngFor="let language of languageCounter | keyvalue"
-              >
-           {{language.key}} : {{language.value}}
-           </a>
-        </div>
-     </div>
-
+     <app-language-filter class="col-xs-12 col-sm-4" ></app-language-filter>
      <div class="col-xs-12 col-sm-8" *ngIf="!isFetching && searchResults.length > 1">
         <div class="list-group">
            <div
