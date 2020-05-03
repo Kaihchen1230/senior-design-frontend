@@ -48,11 +48,7 @@ export class SearchResultComponent implements OnInit {
   }
   countLanguage() {
     this.searchResults.forEach((searchResult: Repo) => {
-      let language = searchResult.language;
-      if (!language) {
-        language = 'Unknow';
-      }
-
+      const language = searchResult.language;
       if (this.languageCounter.hasOwnProperty(language)) {
         this.languageCounter[language] += 1;
       } else {
