@@ -1,9 +1,19 @@
-:host {
-  margin: 0 auto;
+.graph-container {
+  max-width: 600px;
+  max-height: 300px;
+  min-height: 100px;
+  min-width: 300px;
 }
-canvas{
+.canvas{
   width: 100% !important;
-  max-width: 800px;
+  max-width: 600px;
   height: 100% !important;
-  max-height: 500px;
+  max-height: 300px;
+  min-height: 100px;
+  min-width: 300px;
+  /* /* margin: 0 auto; */
+}
+
+.none {
+  display: none;
 }

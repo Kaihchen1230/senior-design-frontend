@@ -9,7 +9,9 @@ import {environment} from '../../environments/environment';
 
 @Injectable()
 export class RequestRepoService {
-  BACKEND_API = environment.LOCAL_API;
+  // BACKEND_API = environment.LOCAL_API;
+  BACKEND_API = environment.BACKEND_API;
+
 
   constructor(private http: HttpClient, private searchResultService: SearchResultService ) {}
 
@@ -43,6 +45,7 @@ export class RequestRepoService {
         this.searchResultService.setSearchResult(repos);
       }),
       catchError(errorRes => {
+        console.log('this is error: ', errorRes);
         return throwError(errorRes);
       }));
   }
@@ -59,6 +62,7 @@ export class RequestRepoService {
 
   fetchRepo(platform: string, repoName: string) {
     const detailURL = this.BACKEND_API + 'detail?';
+    console.log('platform: ', platform);
     let searchParams = new HttpParams();
     searchParams = searchParams.append('platform', platform);
     searchParams = searchParams.append('full_name', repoName);

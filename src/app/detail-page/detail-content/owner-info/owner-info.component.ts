@@ -32,7 +32,12 @@ export class OwnerInfoComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    // console.log('this is ownerInfo: ', this.ownerInfo);
+    console.log('this is ownerInfo: ', this.ownerInfo);
+
+    if (!this.ownerInfo.ownerAvatarUrl) {
+      this.ownerInfo.ownerAvatarUrl = 'https://4mng2jkocx-flywheel.netdna-ssl.com/wp-content/uploads/2013/08/unknown-avatar.jpg';
+    }
+
   }
 
 }

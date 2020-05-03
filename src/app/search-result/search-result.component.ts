@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { faSearch, faStar} from '@fortawesome/free-solid-svg-icons';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { RequestRepoService } from '../shared/request-repo.service';
-import {SearchResultService} from '../search-result/search-result.service';
+import { SearchResultService } from '../search-result/search-result.service';
 import { Repo } from '../shared/models/repo.model';
 
 @Component({
@@ -38,12 +38,13 @@ export class SearchResultComponent implements OnInit {
               this.errorMsg = 'No Project Found: ';
             } else {
               this.countLanguage();
+              this.searchResultService.setSearchResult(this.searchResults);
             }
           }, error => {
-            console.log('Error Occur:', error);
-            this.errorMsg = error.error.message;
+            console.log('Error Occur:', error.message);
+            this.errorMsg = error.message;
           });
-          console.log(this.searchResults);
+          console.log('this is searchResults: ', this.searchResults);
       });
   }
   countLanguage() {

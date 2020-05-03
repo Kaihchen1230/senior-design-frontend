@@ -1,44 +1,52 @@
 <div>
-  <div class="row" style="margin: 0 8vw" *ngIf="!isFetching && !error">
-    <div class="col-sm-4">
-      <div class="card" style="width: 18rem; border: none">
-        <img class="card-img-top" [src]="repoInfo.repoAvatarURL" [alt]="repoInfo.imgAlt">
-        <div class="card-body">
-          <h5 class="card-title">{{repoInfo.repoName}}</h5>
-          <h6>{{ repoInfo.createdDate }}</h6>
-          <p class="card-text">{{repoInfo.description}}</p>
-          <a [href]="repoInfo.repoURL" target="_blank" class="btn btn-primary">Go To Repo Source</a>
-        </div>
-      </div>
-    </div>
-    <!-- <div class="col-sm-8"> -->
-      <!-- <div class="row"> -->
-        <div class="col-sm-4">
-          <app-owner-info [ownerInfo]="ownerInfo"></app-owner-info>
-        </div>
-        <div class="col-sm-4">
-          <app-repo-info [repoInfo]="repoInfo"></app-repo-info>
-        </div>
-      <!-- </div> -->
-
-    <!-- </div> -->
-  </div>
-  <hr>
-
-  <div class="row" style="margin: 0 8vw" *ngIf="!isFetching && !error">
-    <app-trending-info [commits]="commits"></app-trending-info>
-  </div>
-  <div class="row" style="margin: 0 8vw" *ngIf="!isFetching && !error">
-    <app-similar-repos></app-similar-repos>
-  </div>
-  <div class="d-flex justify-content-center" *ngIf="isFetching && !error" >
+  <div class="d-flex justify-content-center" *ngIf="isFetching && !errorMes" >
     <div class="spinner-border" role="status" style="width: 5rem; height: 5rem;">
       <span class="sr-only">Loading...</span>
     </div>
   </div>
-  <div class="alert alert-danger" *ngIf="error" style="width: 83vw; margin:0 auto">
+  <div class="alert alert-danger" *ngIf="errorMes" style="width: 83vw; margin:0 auto">
     <h1>An Error Occurred!</h1>
-    <p>{{ error }}</p>
+    <p>{{ errorMes }}</p>
     <button class="btn btn-danger" (click)="onHandleError()">OKAY!</button>
   </div>
-</div>
+  <div class="row" style="margin: 0 8vw; margin-bottom: 40px;" *ngIf="!isFetching && !errorMes">
+    <div class="col-sm-12 col-md-4">
+      <div class="card" style="max-width: 18rem;">
+        <img class="card-img-top" [src]="repoInfo.repoAvatarURL" [alt]="repoInfo.imgAlt" style="max-width: 200px; margin: 0 auto">
+        <div class="card-body">
+          <h5 class="card-title">{{repoInfo.repoName}}</h5>
+          <h6>Created Date: {{ repoInfo.createdDate }}</h6>
+          <p class="card-text">Description: {{repoInfo.description}}</p>
+          <a [href]="repoInfo.repoURL" target="_blank" class="btn btn-primary">Go To Repo Source</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-8">
+      <div class="row">
+        <div class="col-sm-12 col-md-5">
+          <app-owner-info [ownerInfo]="ownerInfo"></app-owner-info>
+        </div>
+        <div class="col-sm-12 col-md-5">
+          <app-repo-info [repoInfo]="repoInfo"></app-repo-info>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12 col-md-10">
+          <app-trending-info [commits]="commits"></app-trending-info>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr *ngIf="!isFetching && !errorMes">
+  <div class="row" style="margin: 0 8vw" *ngIf="!isFetching && !errorMes">
+
+    <app-similar-repos [repoName]="repoName"></app-similar-repos>
+  </div>
+
+  </div>
+
+
+
+

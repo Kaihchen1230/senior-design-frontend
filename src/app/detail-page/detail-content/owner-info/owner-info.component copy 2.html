@@ -1,0 +1,20 @@
+<div>
+  <div class="row justify-content-center">
+    <h1>Owner Information</h1>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-sm-12 col-md-3">
+      <div class="card" style="border: none;">
+        <img class="card-img-top" [src]="ownerInfo.ownerAvatarUrl"alt="Owner profile avatar" style="border-radius: 20%; max-width: 200px;">
+      </div>
+    </div>
+      <div class="col-sm-12 col-md-3" style="padding-top: 40px;">
+
+          <p>Owner Name: {{ ownerInfo.ownerName }}</p>
+          <p>
+            <a [href]="ownerInfo.ownerProfileURL" target="_blank" class="btn btn-primary">Go To Owner Profile Page</a>
+          </p>
+      </div>
+    </div>
+</div>
+

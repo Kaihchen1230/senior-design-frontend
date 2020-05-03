@@ -16,8 +16,8 @@ export class DetailContentComponent implements OnInit {
   term = '';
   searchIcon = faSearch;
   firstEnter = true;
-  error = null;
-
+  errorMes = null;
+  repoName = '';
   isFetching = false;
   repoInfo: SingleRepo;
   ownerInfo: OwnerInfo;
@@ -31,31 +31,24 @@ export class DetailContentComponent implements OnInit {
 
   ngOnInit() {
     // const id = this.route.snapshot.params['repo-name'];
-    // console.log('huhuh');
+    console.log('this.route: ', this.route);
     this.route.params
       .subscribe(
         (params: Params) => {
-          // console.log('this is params: ', params['repo-name']);
-          const repoName = params['repo-name'];
+          this.repoName = params['repo-name'];
           const platform = params.platform;
-          // console.log('this is repoName: ', repoName, 'and this is platform: ', platform);
+          console.log('this is repoName: ', this.repoName);
           this.isFetching = true;
-          this.requestRepoService.fetchRepo(platform, repoName).subscribe(response => {
-            console.log('this is response: ', response);
-
-
+          this.requestRepoService.fetchRepo(platform, this.repoName).subscribe(response => {
             this.repoInfo = {... response};
             this.ownerInfo = new OwnerInfo(response.ownerAvatarUrl, response.ownerName, response.ownerURL);
             this.commits = response.commits;
-            // console.log('this is repo Info: ', this.repoInfo);
             this.isFetching = false;
-          }, (error) => {
-            console.log('this is error message: ', error);
-
-            if (error.error.message) {
-              this.error = error.error.message;
+          }, (errorResp) => {
+            if (errorResp.error.message) {
+              this.errorMes = errorResp.error.message;
             } else {
-              this.error = 'Unknown Error Occured....';
+              this.errorMes = 'Unknown Error Occured....';
             }
             this.isFetching = false;
           });
@@ -68,15 +61,7 @@ export class DetailContentComponent implements OnInit {
   }
 
   onHandleError() {
-    console.log('handle error clicked');
-    // const lastSuccessfulNavigation = this.router.getLastSuccessfulNavigation();
-    // const previousNavigation = lastSuccessfulNavigation.previousNavigation;
-    // this.router.navigateByUrl(previousNavigation);
-    console.log('this is route: ', this.location);
     this.location.back();
-    // console.log('this is router: ', this.router.events);
-
-
   }
 
 }

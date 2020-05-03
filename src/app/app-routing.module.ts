@@ -18,9 +18,7 @@ const appRoutes: Routes = [
     //   component: RefreshComponent
     // },
     { path:  'search-result/:search-term', component: SearchResultComponent },
-    { path: 'detail-page', component: DetailPageComponent, children: [
-      { path: ':platform/:repo-name', component: DetailContentComponent }
-    ]},
+    { path: 'detail-page/:platform/:repo-name', component: DetailPageComponent },
     { path: 'not-found', component: PageNotFoundComponent },
     { path: '**', pathMatch: 'full', redirectTo: '/not-found' }
 ];

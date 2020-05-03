@@ -15,7 +15,6 @@ import {  SimilarReposComponent } from './detail-page/detail-content/similar-rep
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RequestRepoService } from './shared/request-repo.service';
-import { SimilarRepoComponent } from './detail-page/detail-content/similar-repos/similar-repo/similar-repo.component';
 import { DetailContentComponent } from './detail-page/detail-content/detail-content.component';
 import { RefreshComponent } from './refresh/refresh.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
@@ -31,7 +30,6 @@ import { RepoDesciptionPipe } from './shared/pipes/repo-description.pipe';
     OwnerInfoComponent,
     TrendingInfoComponent,
     SimilarReposComponent,
-    SimilarRepoComponent,
     SearchBarComponent,
     DetailContentComponent,
     RefreshComponent,
