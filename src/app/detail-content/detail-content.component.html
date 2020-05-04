@@ -1,4 +1,6 @@
 <div>
+  <app-search-bar></app-search-bar>
+
   <div class="d-flex justify-content-center" *ngIf="isFetching && !errorMes" >
     <div class="spinner-border" role="status" style="width: 5rem; height: 5rem;">
       <span class="sr-only">Loading...</span>
@@ -29,30 +31,18 @@
 
     <div class="col-sm-12 col-md-8">
       <div class="row">
-        <div class="col-sm-12 col-md-5">
-          <app-owner-info [ownerInfo]="ownerInfo"></app-owner-info>
-        </div>
-        <div class="col-sm-12 col-md-5 col-md-5--modified">
-          <app-repo-info [repoInfo]="repoInfo"></app-repo-info>
-        </div>
+          <app-owner-info class="col-sm-12 col-md-5" [ownerInfo]="ownerInfo"></app-owner-info>
+          <app-repo-info class="col-sm-12 col-md-5 col-md-5--modified" [repoInfo]="repoInfo"></app-repo-info>
       </div>
 
       <div class="row">
-        <div class="col-sm-12 col-md-12">
-          <app-trending-info [commits]="commits"></app-trending-info>
-
-        </div>
+          <app-trending-info class="col-sm-12 col-md-12" [commits]="commits"></app-trending-info>
       </div>
     </div>
   </div>
   <hr *ngIf="!isFetching && !errorMes">
-  <div class="row" style="margin: 0 8vw" *ngIf="!isFetching && !errorMes">
-
+  <div class="row row--modified" *ngIf="!isFetching && !errorMes">
     <app-similar-repos [repoName]="repoName"></app-similar-repos>
   </div>
 
-  </div>
-
-
-
-
+</div>

@@ -32,7 +32,10 @@
     text-decoration: none;
 }
 
-
 .col-md-5--modified {
     margin-left: 85px;
+}
+
+.row--modified {
+    margin: 0 8vw;
 }

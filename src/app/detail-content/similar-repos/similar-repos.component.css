@@ -27,6 +27,7 @@
   overflow: auto;
   white-space: nowrap;
 }
+
 .similar-repos__item {
   margin: 0 10px;
   border: 1px solid black;
@@ -45,4 +46,3 @@
 .fa-icon {
   color: rgb(88, 96, 105);
 }
-

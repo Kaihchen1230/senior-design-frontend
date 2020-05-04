@@ -21,7 +21,6 @@ export class TrendingInfoComponent implements OnInit {
 
   ngOnInit() {
 
-    // this.countCommits();
     console.log('this is commitCount: ', this.commits);
     if (this.commits) {
       let endOfWeeks = [];
@@ -66,7 +65,6 @@ export class TrendingInfoComponent implements OnInit {
               label: 'Historical Commit Counts By Weekly',
 
               data: historicalCommitCounts,
-              // pointBackgroundColor: [ "Blue", "Yellow", "Green", "Purple", "Orange"],
               backgroundColor: 'rgba(0, 0, 0, 0)',
               borderColor: 'red',
               fill: false,
@@ -115,12 +113,10 @@ export class TrendingInfoComponent implements OnInit {
             borderDash: [2, 2],
             fill: false,
             cubicInterpolationMode: 'monotone',
-            // pointBackgroundColor:
           },
           {
             label: 'Predicted Future 5 weeks Commit Counts',
             data: predictCommitCounts,
-            // pointBackgroundColor: [ "Blue", "Yellow", "Green", "Purple", "Orange"],
             backgroundColor: 'rgba(0, 0, 0, 0)',
             borderColor: 'blue',
             fill: false,
@@ -167,9 +163,7 @@ export class TrendingInfoComponent implements OnInit {
           }
         }
       });
-
     }
-
   }
 
   countCommits() {
@@ -212,7 +206,4 @@ export class TrendingInfoComponent implements OnInit {
     this.commitCount = sortedResult;
     console.log('commitCOunt: ', this.commitCount['2019-10-14']);
   }
-
-
-
 }

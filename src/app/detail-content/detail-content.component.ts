@@ -57,10 +57,6 @@ export class DetailContentComponent implements OnInit {
           });
         }
       );
-
-
-
-
   }
 
   onHandleError() {
