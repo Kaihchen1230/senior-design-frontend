@@ -15,7 +15,8 @@ export class SearchResultComponent implements OnInit {
   searchIcon = faSearch;
   starIcon = faStar;
   searchResults: Repo[] = [];
-  selectedLanguage = null;
+  languageSelected = null;
+  selectedPlatform = null;
   errorMsg = null;
   isFetching = false;
 
@@ -43,11 +44,19 @@ export class SearchResultComponent implements OnInit {
       });
   }
 
-  languageSelected(selectedLanguage: string) {
-    if (this.selectedLanguage === selectedLanguage) {
-      this.selectedLanguage = null;
+  platformSelected(selectedPlatform: string) {
+    if (this.selectedPlatform === selectedPlatform) {
+      this.selectedPlatform = null;
     } else {
-      this.selectedLanguage = selectedLanguage;
+      this.selectedPlatform = selectedPlatform;
+    }
+  }
+
+  selectLanguage(languageSelected: string) {
+    if (this.languageSelected === languageSelected) {
+      this.languageSelected = null;
+    } else {
+      this.languageSelected = languageSelected;
     }
   }
 

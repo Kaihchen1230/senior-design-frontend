@@ -1,0 +1,21 @@
+<div class="language-filter">
+    <h2 class= "language-filter__title">      
+      Platforms 
+    </h2>
+    <div class="list-group language-filter--set-margin">
+       <a
+          class="list-group-item language-filter__item"
+          *ngFor="let platform of platformCounter | keyvalue"
+          (click) = "onPlatformClick(platform.key)"
+          [ngClass]="{'language-filter__selected' : selectedLanguage === platform.key}"
+          >
+        {{platform.key}} : 
+        <span class = "language-filter__item__count" *ngIf="selectedPlatform !== platform.key">
+            {{platform.value}}
+        </span>     
+        <span class = "language-filter--selected__Cancel" *ngIf="selectedPlatform === platform.key">
+            X
+        </span>  
+       </a>
+    </div>
+ </div>

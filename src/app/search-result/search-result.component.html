@@ -1,18 +1,25 @@
 <div>
   <app-search-bar></app-search-bar>
   <div class="row search-body"  *ngIf="!isFetching && !error">
-     <app-language-filter 
-      class="col-xs-12 col-sm-3" 
-      (languageSelected)="languageSelected($event)" 
-      [selectedLanguage] = selectedLanguage
-     >
-     </app-language-filter>
+     <div class="col-xs-12 col-sm-3" >
+      <app-language-filter 
+         (selectLanguage)="selectLanguage($event)" 
+         [languageSelected] = languageSelected
+      >
+      </app-language-filter>
+
+      <app-platform-filter
+         (platformSelected)="platformSelected($event)" 
+         [selectedPlatform] = selectedPlatform
+      >  
+      </app-platform-filter>
+   </div>
 
      <div class="col-xs-12 col-sm-9" *ngIf="!isFetching && searchResults.length > 1">
         <div class="list-group">
            <div
               class="list-group-item search-result"
-              *ngFor="let searchResult of searchResults | LanguageFilterPipe:selectedLanguage">
+              *ngFor="let searchResult of searchResults | LanguageFilterPipe:languageSelected">
               <span>
                  <a [routerLink]="['/detail-page', searchResult.platform, searchResult.repoName]">{{searchResult.repoName}}</a>
               </span>

@@ -9,8 +9,8 @@ import { Repo } from '../../shared/models/repo.model';
 export class LanguageFilterComponent implements OnInit {
   searchResults: Repo[] = [];
   languageCounter = {};
-  @Output() languageSelected: EventEmitter<string> = new EventEmitter();
-  @Input() selectedLanguage: string;
+  @Output() selectLanguage: EventEmitter<string> = new EventEmitter();
+  @Input() languageSelected: string;
 
   constructor(private searchResultService: SearchResultService) { }
 
@@ -20,7 +20,7 @@ export class LanguageFilterComponent implements OnInit {
   }
 
   onLanguageClick(selectedLanguage: string) {
-    this.languageSelected.emit(selectedLanguage);
+    this.selectLanguage.emit(selectedLanguage);
   }
 
   countLanguage() {

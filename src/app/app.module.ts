@@ -22,6 +22,7 @@ import { LanguageFilterComponent } from './search-result/language-filter/languag
 import { LanguageFilterPipe } from './shared/pipes/language-filter.pipe';
 import { RepoDesciptionPipe } from './shared/pipes/repo-description.pipe';
 import { RequestRepoService } from './shared/request-repo.service';
+import { PlatformFilterComponent } from './search-result/platform-filter/platform-filter.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { RequestRepoService } from './shared/request-repo.service';
     PageNotFoundComponent,
     LanguageFilterComponent,
     RepoDesciptionPipe,
-    LanguageFilterPipe
+    LanguageFilterPipe,
+    PlatformFilterComponent
   ],
   imports: [
     BrowserModule,

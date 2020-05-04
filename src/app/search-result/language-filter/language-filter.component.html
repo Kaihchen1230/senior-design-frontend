@@ -7,13 +7,13 @@
           class="list-group-item language-filter__item"
           *ngFor="let language of languageCounter | keyvalue"
           (click) = "onLanguageClick(language.key)"
-          [ngClass]="{'language-filter__selected' : selectedLanguage === language.key}"
+          [ngClass]="{'language-filter__selected' : languageSelected === language.key}"
           >
         {{language.key}} : 
-        <span class = "language-filter__item__count" *ngIf="selectedLanguage !== language.key">
+        <span class = "language-filter__item__count" *ngIf="languageSelected !== language.key">
             {{language.value}}
         </span>     
-        <span class = "language-filter--selected__Cancel" *ngIf="selectedLanguage === language.key">
+        <span class = "language-filter--selected__Cancel" *ngIf="languageSelected === language.key">
             X
         </span>  
        </a>
