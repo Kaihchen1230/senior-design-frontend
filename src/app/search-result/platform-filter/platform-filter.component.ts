@@ -11,8 +11,8 @@ export class PlatformFilterComponent implements OnInit {
 
   searchResults: Repo[] = [];
   platformCounter = {};
-  @Output() platformSelected: EventEmitter<string> = new EventEmitter();
-  @Input() selectedPlatform: string;
+  @Output() selectPlatform: EventEmitter<string> = new EventEmitter();
+  @Input() platformSelected: string;
 
   constructor(private searchResultService: SearchResultService) { }
 
@@ -21,8 +21,8 @@ export class PlatformFilterComponent implements OnInit {
     this.countPlatform();
   }
 
-  onLanguageClick(selectedPlatform: string) {
-    this.platformSelected.emit(selectedPlatform);
+  onPlatformClick(platformSelected: string) {
+    this.selectPlatform.emit(platformSelected);
   }
 
   countPlatform() {

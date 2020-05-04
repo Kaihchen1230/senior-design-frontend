@@ -9,8 +9,8 @@
       </app-language-filter>
 
       <app-platform-filter
-         (platformSelected)="platformSelected($event)" 
-         [selectedPlatform] = selectedPlatform
+         (selectPlatform)="selectPlatform($event)" 
+         [platformSelected] = platformSelected
       >  
       </app-platform-filter>
    </div>
