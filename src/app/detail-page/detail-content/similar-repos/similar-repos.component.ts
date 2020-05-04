@@ -23,11 +23,14 @@ export class SimilarReposComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit() {
+    this.deleteCurrentRepoFromRepoList();
+  }
 
+  deleteCurrentRepoFromRepoList() {
     const similarRepos = JSON.parse(localStorage.getItem('searchResults'));
 
-    console.log('this is similarRepos before: ', similarRepos);
-
+    console.log('this is similarRepos: ', similarRepos);
+    console.log('this is repoName: ', this.repoName);
     similarRepos.forEach((repo: any, index) => {
       if (repo.repoName === this.repoName) {
         similarRepos.splice(index, 1);

@@ -21,11 +21,9 @@ export class DetailContentComponent implements OnInit {
   repoInfo: SingleRepo;
   ownerInfo: OwnerInfo;
   commits: [];
-
-
+  repoName = '';
   constructor(private requestRepoService: RequestRepoService,
               private route: ActivatedRoute,
-              private router: Router,
               private location: Location) { }
 
   ngOnInit() {
@@ -35,7 +33,7 @@ export class DetailContentComponent implements OnInit {
       .subscribe(
         (params: Params) => {
           const ownerNameAndRepoName = params['repo-name'];
-
+          this.repoName = ownerNameAndRepoName;
           const platform = params.platform;
           this.isFetching = true;
           this.requestRepoService.fetchRepo(platform, ownerNameAndRepoName).subscribe(response => {
