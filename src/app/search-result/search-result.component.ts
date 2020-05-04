@@ -14,10 +14,10 @@ import { Repo } from '../shared/models/repo.model';
 export class SearchResultComponent implements OnInit {
   searchIcon = faSearch;
   starIcon = faStar;
-  languageCounter = {};
-  isFetching = false;
   searchResults: Repo[] = [];
+  selectedLanguage = null;
   errorMsg = null;
+  isFetching = false;
 
   constructor(private requestRepoService: RequestRepoService,
               private searchResultService: SearchResultService,
@@ -36,26 +36,21 @@ export class SearchResultComponent implements OnInit {
             this.searchResults = this.searchResultService.getSearchResult();
             if (this.searchResults.length === 0) {
               this.errorMsg = 'No Project Found: ';
-            } else {
-              this.countLanguage();
             }
           }, error => {
-            console.log('Error Occur:', error);
             this.errorMsg = error.error.message;
           });
-          console.log(this.searchResults);
       });
   }
-  countLanguage() {
-    this.searchResults.forEach((searchResult: Repo) => {
-      const language = searchResult.language;
-      if (this.languageCounter.hasOwnProperty(language)) {
-        this.languageCounter[language] += 1;
-      } else {
-        this.languageCounter[language] = 1;
-      }
-    });
+
+  languageSelected(selectedLanguage: string) {
+    if (this.selectedLanguage === selectedLanguage) {
+      this.selectedLanguage = null;
+    } else {
+      this.selectedLanguage = selectedLanguage;
+    }
   }
+
   onHandleError() {
     this.router.navigate(['/']);
   }

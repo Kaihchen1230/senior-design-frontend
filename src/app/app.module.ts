@@ -14,12 +14,14 @@ import { TrendingInfoComponent } from './detail-page/detail-content/trending-inf
 import {  SimilarReposComponent } from './detail-page/detail-content/similar-repos/similar-repos.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { HttpClientModule } from '@angular/common/http';
-import { RequestRepoService } from './shared/request-repo.service';
 import { SimilarRepoComponent } from './detail-page/detail-content/similar-repos/similar-repo/similar-repo.component';
 import { DetailContentComponent } from './detail-page/detail-content/detail-content.component';
 import { RefreshComponent } from './refresh/refresh.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { LanguageFilterComponent } from './search-result/language-filter/language-filter.component';
+import { LanguageFilterPipe } from './shared/pipes/language-filter.pipe';
 import { RepoDesciptionPipe } from './shared/pipes/repo-description.pipe';
+import { RequestRepoService } from './shared/request-repo.service';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { RepoDesciptionPipe } from './shared/pipes/repo-description.pipe';
     DetailContentComponent,
     RefreshComponent,
     PageNotFoundComponent,
-    RepoDesciptionPipe
+    LanguageFilterComponent,
+    RepoDesciptionPipe,
+    LanguageFilterPipe
   ],
   imports: [
     BrowserModule,
