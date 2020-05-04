@@ -18,7 +18,10 @@ import { RequestRepoService } from './shared/request-repo.service';
 import { DetailContentComponent } from './detail-page/detail-content/detail-content.component';
 import { RefreshComponent } from './refresh/refresh.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { LanguageFilterComponent } from './search-result/language-filter/language-filter.component';
+import { LanguageFilterPipe } from './shared/pipes/language-filter.pipe';
 import { RepoDesciptionPipe } from './shared/pipes/repo-description.pipe';
+
 
 @NgModule({
   declarations: [
@@ -34,7 +37,9 @@ import { RepoDesciptionPipe } from './shared/pipes/repo-description.pipe';
     DetailContentComponent,
     RefreshComponent,
     PageNotFoundComponent,
-    RepoDesciptionPipe
+    LanguageFilterComponent,
+    RepoDesciptionPipe,
+    LanguageFilterPipe
   ],
   imports: [
     BrowserModule,

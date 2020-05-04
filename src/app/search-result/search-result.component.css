@@ -2,10 +2,6 @@
   margin: 0 10vw;
 }
 
-.language-filter{
-  width: 50%; text-align: left;
-}
-
 .search-result{
   border-left: none; border-right: none;
 }
