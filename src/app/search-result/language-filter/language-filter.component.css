@@ -6,7 +6,7 @@
   font-size: 20px;
   padding: 10px 0px 0px 20px;
 }
-.language-filter-items{
+.language-filter--set-margin{
   margin:15px;
 }
 .language-filter__item{
@@ -18,7 +18,7 @@
   background-color: #f6f8fa;
   color:#0366d6
 }
-.language-filter__item__number{
+.language-filter__item__count{
   color: #fff;
   background-color: #6a737d;
   float: right;
@@ -27,16 +27,13 @@
   font-weight: 600;
   line-height: 1;
 }
-.language-filter__item.language-filter--selected{
+.language-filter__selected,
+.language-filter__selected:hover{
   background-color: #0366d6;
   border-radius: 10px;
   color: #fff;
 }
-.language-filter__item.language-filter--selected:hover{
-  color: #fff;
-}
-.language-filter--selected__number{
-  color: #fff;
+.language-filter--selected__Cancel{
   float: right;
   font-weight: 600;
   padding-right: 5px;
