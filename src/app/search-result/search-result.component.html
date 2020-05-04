@@ -2,11 +2,12 @@
   <app-search-bar></app-search-bar>
   <div class="row search-body"  *ngIf="!isFetching && !error">
      <div class="col-xs-12 col-sm-3" >
-      <app-language-filter 
-         (selectLanguage)="selectLanguage($event)" 
-         [languageSelected] = languageSelected
+      <app-repo-filter 
+         (selectrepo)="selectLanguage($event)" 
+         [repoSelected] = languageSelected
+          filterClass= "language"
       >
-      </app-language-filter>
+      </app-repo-filter>
 
       <app-platform-filter
          (selectPlatform)="selectPlatform($event)" 

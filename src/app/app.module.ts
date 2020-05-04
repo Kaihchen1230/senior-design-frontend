@@ -11,14 +11,14 @@ import { DetailPageComponent } from './detail-page/detail-page.component';
 import { RepoInfoComponent } from './detail-page/detail-content/repo-info/repo-info.component';
 import { OwnerInfoComponent } from './detail-page/detail-content/owner-info/owner-info.component';
 import { TrendingInfoComponent } from './detail-page/detail-content/trending-info/trending-info.component';
-import {  SimilarReposComponent } from './detail-page/detail-content/similar-repos/similar-repos.component';
+import { SimilarReposComponent } from './detail-page/detail-content/similar-repos/similar-repos.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SimilarRepoComponent } from './detail-page/detail-content/similar-repos/similar-repo/similar-repo.component';
 import { DetailContentComponent } from './detail-page/detail-content/detail-content.component';
 import { RefreshComponent } from './refresh/refresh.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { LanguageFilterComponent } from './search-result/language-filter/language-filter.component';
+import { RepoFilterComponent } from './search-result/repo-filter/repo-filter.component';
 import { LanguageFilterPipe } from './shared/pipes/language-filter.pipe';
 import { PlatformFilterPipe } from './shared/pipes/platform-filter.pipe';
 import { RepoDesciptionPipe } from './shared/pipes/repo-description.pipe';
@@ -40,7 +40,7 @@ import { PlatformFilterComponent } from './search-result/platform-filter/platfor
     DetailContentComponent,
     RefreshComponent,
     PageNotFoundComponent,
-    LanguageFilterComponent,
+    RepoFilterComponent,
     RepoDesciptionPipe,
     LanguageFilterPipe,
     PlatformFilterPipe,
