@@ -23,7 +23,6 @@ import { LanguageFilterPipe } from './shared/pipes/language-filter.pipe';
 import { PlatformFilterPipe } from './shared/pipes/platform-filter.pipe';
 import { RepoDesciptionPipe } from './shared/pipes/repo-description.pipe';
 import { RequestRepoService } from './shared/request-repo.service';
-import { PlatformFilterComponent } from './search-result/platform-filter/platform-filter.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +43,6 @@ import { PlatformFilterComponent } from './search-result/platform-filter/platfor
     RepoDesciptionPipe,
     LanguageFilterPipe,
     PlatformFilterPipe,
-    PlatformFilterComponent
   ],
   imports: [
     BrowserModule,
