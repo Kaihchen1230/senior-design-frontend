@@ -3,17 +3,17 @@
   <div class="row search-body"  *ngIf="!isFetching && !error">
      <div class="col-xs-12 col-sm-3" >
       <app-repo-filter 
-         (selectrepo)="selectLanguage($event)" 
-         [repoSelected] = languageSelected
+         (selectKeyword)="selectLanguage($event)" 
+         [keywordSelected] = languageSelected
           filterClass= "language"
       >
       </app-repo-filter>
-
-      <app-platform-filter
-         (selectPlatform)="selectPlatform($event)" 
-         [platformSelected] = platformSelected
-      >  
-      </app-platform-filter>
+      <app-repo-filter 
+         (selectKeyword)="selectPlatform($event)" 
+         [keywordSelected] = platformSelected
+          filterClass= "platform"
+      >
+      </app-repo-filter>
    </div>
 
      <div class="col-xs-12 col-sm-9" *ngIf="!isFetching && searchResults.length > 1">

@@ -8,30 +8,30 @@ import { Repo } from '../../shared/models/repo.model';
 })
 export class RepoFilterComponent implements OnInit {
   searchResults: Repo[] = [];
-  repoCounter = {};
-  @Output() selectrepo: EventEmitter<string> = new EventEmitter();
-  @Input() repoSelected: string;
+  keywordCounter = {};
+  @Output() selectKeyword: EventEmitter<string> = new EventEmitter();
+  @Input() keywordSelected: string;
   @Input() filterClass: string;
 
   constructor(private searchResultService: SearchResultService) { }
 
   ngOnInit() {
     this.searchResults = this.searchResultService.getSearchResult();
-    this.countrepo();
+    this.countKeyword();
   }
 
   onrepoClick(selectedrepo: string) {
-    this.selectrepo.emit(selectedrepo);
+    this.selectKeyword.emit(selectedrepo);
   }
 
-  countrepo() {
-    console.log(this.filterClass)
+  countKeyword() {
+    console.log(this.filterClass);
     this.searchResults.forEach((searchResult: Repo) => {
       const repo = searchResult[this.filterClass];
-      if (this.repoCounter.hasOwnProperty(repo)) {
-        this.repoCounter[repo] += 1;
+      if (this.keywordCounter.hasOwnProperty(repo)) {
+        this.keywordCounter[repo] += 1;
       } else {
-        this.repoCounter[repo] = 1;
+        this.keywordCounter[repo] = 1;
       }
     });
   }
