@@ -17,7 +17,6 @@ export class DetailContentComponent implements OnInit {
   searchIcon = faSearch;
   firstEnter = true;
   errorMes = null;
-  repoName = '';
   isFetching = false;
   repoInfo: SingleRepo;
   ownerInfo: OwnerInfo;
@@ -35,12 +34,18 @@ export class DetailContentComponent implements OnInit {
     this.route.params
       .subscribe(
         (params: Params) => {
-          this.repoName = params['repo-name'];
+          const ownerNameAndRepoName = params['repo-name'];
+
           const platform = params.platform;
-          console.log('this is repoName: ', this.repoName);
           this.isFetching = true;
-          this.requestRepoService.fetchRepo(platform, this.repoName).subscribe(response => {
+          this.requestRepoService.fetchRepo(platform, ownerNameAndRepoName).subscribe(response => {
             this.repoInfo = {... response};
+    
+            const index = ownerNameAndRepoName.indexOf('/');
+            const repoName = ownerNameAndRepoName.slice(0,index);
+            this.repoInfo = {... this.repoInfo, repoName: repoName};
+            console.log('this is repoInfo: ', this.repoInfo);
+
             this.ownerInfo = new OwnerInfo(response.ownerAvatarUrl, response.ownerName, response.ownerURL);
             this.commits = response.commits;
             this.isFetching = false;

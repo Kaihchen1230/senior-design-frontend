@@ -1,0 +1,28 @@
+.block {
+    border: 1px solid rgba(0,0,0,.125);
+}
+
+.header {
+    text-align: center;
+    padding-top: 10px;
+}
+
+.card--center {
+    max-width: 18rem; 
+    border: none; 
+    margin: 0 auto;
+}
+
+.card-img-top--center {
+    border-radius: 20%; 
+    max-width: 200px; 
+    margin: 0 auto;
+}
+
+.card-body--center {
+    padding: 0; margin: 0 auto;
+}
+
+.card-body__text {
+    text-align: center;
+}

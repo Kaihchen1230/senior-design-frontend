@@ -1,10 +1,17 @@
-<div style="border: 1px solid rgba(0,0,0,.125);">
-  <h2 style="text-align: center;">Repo Information</h2>
-  <div style="margin: auto; width: 68%;">
-    <h6>Star Coun: {{ repoInfo.starCount }} <fa-icon [icon]="starIcon" style="color: yellow;"></fa-icon> </h6>
-    <h6>Fork Count: {{ repoInfo.forkCount }}</h6>
-    <h6>Size: {{ repoInfo.size }} KB</h6>
-    <h6>Last Updated: {{ repoInfo.lastUpdated }}</h6>
+<div class="repo-info-container">
+  <h2 class="repo-info__title">Repo Information</h2>
+  <div class="repo-info__block" >
+    <h6 class="repo-info__block__text">
+      Star Coun: {{ repoInfo.starCount }} 
+      <fa-icon [icon]="starIcon" class="fa-icon"></fa-icon>
+     </h6>
+    <h6 class="repo-info__block__text">
+      Fork Count: {{ repoInfo.forkCount }}
+      <fa-icon [icon]="forkIcon"></fa-icon>
+    </h6>
+    <h6 class="repo-info__block__text">Size: {{ repoInfo.size }} KB</h6>
+    <h6 class="repo-info__block__text">Last Updated: {{ repoInfo.lastUpdated }}</h6>
+    <h6 class="repo-info__block__text">Lanauge: {{ repoInfo.language }}</h6>
   </div>
 
 </div>

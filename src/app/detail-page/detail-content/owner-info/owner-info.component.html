@@ -1,13 +1,13 @@
-<div style="border: 1px solid rgba(0,0,0,.125);">
-  <h2 style="text-align: center;">Owner Information</h2>
-    <div class="card" style="max-width: 18rem; border: none; margin: 0 auto;">
-      <img class="card-img-top" [src]="ownerInfo.ownerAvatarUrl"alt="Owner profile avatar" style="border-radius: 20%; max-width: 200px; margin: 0 auto;">
-      <div class="card-body" style="padding: 0; margin: 0 auto;">
-        <p>Owner Name: {{ ownerInfo.ownerName }}</p>
-          <p>
-            <a [href]="ownerInfo.ownerProfileURL" target="_blank" class="btn btn-primary">Go To Owner Profile Page</a>
-          </p>
-      </div>
+<div class="block">
+  <h2 class="header" >Owner Information</h2>
+  <div class="card card--center">
+    <img class="card-img-top card-img-top--center" [src]="ownerInfo.ownerAvatarUrl" alt="Owner profile avatar">
+    <div class="card-body card-body--center">
+      <p class="card-body__text">Owner Name: {{ ownerInfo.ownerName }}</p>
+        <p class="card-body__text">
+          <a [href]="ownerInfo.ownerProfileURL" target="_blank" class="btn btn-primary">Go To Owner Profile Page</a>
+        </p>
     </div>
+  </div>
 </div>
 

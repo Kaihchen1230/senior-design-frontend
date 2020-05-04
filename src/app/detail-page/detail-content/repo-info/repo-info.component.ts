@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { SingleRepo } from 'src/app/shared/models/single-repo.model';
-import { faStar } from '@fortawesome/free-solid-svg-icons';
+import { faStar, faCodeBranch } from '@fortawesome/free-solid-svg-icons';
 
 
 @Component({
@@ -12,7 +12,7 @@ export class RepoInfoComponent implements OnInit {
 
   @Input() repoInfo: SingleRepo;
   starIcon = faStar;
-
+  forkIcon = faCodeBranch;
   constructor() { }
 
   ngOnInit() {

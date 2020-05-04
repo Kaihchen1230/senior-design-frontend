@@ -1,11 +1,22 @@
-div.col-sm-12 {
-  margin-top: 2vh;
+.repo-info-container {
+  border: 1px solid rgba(0,0,0,.125);
 }
 
-p {
-  padding-bottom: 20px;
+.repo-info__title {
+  text-align: center;
+  padding-top: 10px;
 }
 
-h6 {
+.repo-info__block {
+  margin: auto; 
+  width: 68%;
+}
+
+.repo-info__block__text{
   margin: 45px 0;
+
+}
+
+.fa-icon {
+  color: yellow;
 }

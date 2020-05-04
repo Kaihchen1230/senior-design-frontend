@@ -9,18 +9,21 @@
     <p>{{ errorMes }}</p>
     <button class="btn btn-danger" (click)="onHandleError()">OKAY!</button>
   </div>
-  <div class="row" style="margin: 0 8vw; margin-bottom: 40px;" *ngIf="!isFetching && !errorMes">
+
+  <div class="row row--modify-margin" *ngIf="!isFetching && !errorMes">
+
     <div class="col-sm-12 col-md-4">
-      <div class="card" style="max-width: 18rem;">
-        <img class="card-img-top" [src]="repoInfo.repoAvatarURL" [alt]="repoInfo.imgAlt" style="max-width: 200px; margin: 0 auto">
+      <div class="card card--modified">
+        <img class="card-img-top card-img-top--set-width" [src]="repoInfo.repoAvatarURL" [alt]="repoInfo.imgAlt" >
         <div class="card-body">
-          <h5 class="card-title">{{repoInfo.repoName}}</h5>
-          <h6>Created Date: {{ repoInfo.createdDate }}</h6>
-          <p class="card-text">Description: {{repoInfo.description}}</p>
+          <h5 class="card-title">Repo Name: {{repoInfo.repoName}}</h5>
+          <p class="card-text"><span class="card-text--bold">Created Date: </span>{{ repoInfo.createdDate }}</p>
+          <p class="card-text" *ngIf="repoInfo.description"><span class="card-text--bold">Description:</span>  {{repoInfo.description}}</p>
           <a [href]="repoInfo.repoURL" target="_blank" class="btn btn-primary">Go To Repo Source</a>
         </div>
       </div>
     </div>
+
     <div class="col-sm-12 col-md-8">
       <div class="row">
         <div class="col-sm-12 col-md-5">

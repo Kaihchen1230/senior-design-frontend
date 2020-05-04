@@ -1,0 +1,17 @@
+.row--modify-margin {
+    margin: 0 8vw; 
+    margin-bottom: 40px;
+}
+
+.card--modified {
+    max-width: 18rem;
+    padding-top: 20px;
+}
+
+.card-img-top--set-width {
+    max-width: 200px; 
+    margin: 0 auto
+}
+.card-text--bold {
+    font-weight: 550;
+}
