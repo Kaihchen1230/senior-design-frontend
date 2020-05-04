@@ -1,49 +1,48 @@
 :host {
   margin-bottom: 10vh;
 }
-.card-text:hover {
-  text-decoration: underline;
+
+.similar-repos__title {
+  padding-left: 10px; 
+  padding-bottom: 20px;
+} 
+
+.similar-repos_slider {
+  margin-bottom: 20px;
 }
-.middle {
+
+.similar-repos__left-controller {
+  float: left;
+}
+
+.similar-repos__controller {
+  border: 1px solid black;
+  border-radius: 0;
+  height: 144px;
+}
+
+.similar-repos__list {
   float: left;
   width: 90%;
   overflow: auto;
   white-space: nowrap;
 }
-.info-widget {
+.similar-repos__item {
   margin: 0 10px;
   border: 1px solid black;
   display: inline-block;
 
 }
-.no-margin-left{
-  margin-left: -5px;
-}
-.no-margin-right{
-  margin-right: -5px;
-}
-.paddles {
-}
-.paddle {
-	/* position: absolute;
-	top: 0;
-	bottom: 0;
-  width: 3em; */
 
-  border: 1px solid black;
-  border-radius: 0;
-  height: 144px;
+.card--modified {
+  cursor: pointer; 
+  height: 142px;
 }
-.left-paddle {
-  /* border-right: 0; */
-  /* height: 144px; */
-
-}
-.right-paddle {
-  /* border-left: 0; */
-  /* height: 142px; */
+.card-title:hover {
+  text-decoration: underline;
 }
 
-.container {
-  margin-bottom: 20px;
+.fa-icon {
+  color: rgb(88, 96, 105);
 }
+
