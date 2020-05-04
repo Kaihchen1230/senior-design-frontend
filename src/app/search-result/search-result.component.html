@@ -19,7 +19,7 @@
         <div class="list-group">
            <div
               class="list-group-item search-result"
-              *ngFor="let searchResult of searchResults | LanguageFilterPipe:languageSelected">
+              *ngFor="let searchResult of searchResults | LanguageFilterPipe:languageSelected | PlatformFilterPipe:platformSelected">
               <span>
                  <a [routerLink]="['/detail-page', searchResult.platform, searchResult.repoName]">{{searchResult.repoName}}</a>
               </span>

@@ -20,6 +20,7 @@ import { RefreshComponent } from './refresh/refresh.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { LanguageFilterComponent } from './search-result/language-filter/language-filter.component';
 import { LanguageFilterPipe } from './shared/pipes/language-filter.pipe';
+import { PlatformFilterPipe } from './shared/pipes/platform-filter.pipe';
 import { RepoDesciptionPipe } from './shared/pipes/repo-description.pipe';
 import { RequestRepoService } from './shared/request-repo.service';
 import { PlatformFilterComponent } from './search-result/platform-filter/platform-filter.component';
@@ -42,6 +43,7 @@ import { PlatformFilterComponent } from './search-result/platform-filter/platfor
     LanguageFilterComponent,
     RepoDesciptionPipe,
     LanguageFilterPipe,
+    PlatformFilterPipe,
     PlatformFilterComponent
   ],
   imports: [
