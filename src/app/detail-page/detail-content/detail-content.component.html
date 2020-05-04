@@ -12,14 +12,17 @@
 
   <div class="row row--modify-margin" *ngIf="!isFetching && !errorMes">
 
-    <div class="col-sm-12 col-md-4">
+    <div class="col-sm-12 col-md-4 overview-container">
       <div class="card card--modified">
         <img class="card-img-top card-img-top--set-width" [src]="repoInfo.repoAvatarURL" [alt]="repoInfo.imgAlt" >
-        <div class="card-body">
+        <div class="card-body card-body--modified">
           <h5 class="card-title">Repo Name: {{repoInfo.repoName}}</h5>
           <p class="card-text"><span class="card-text--bold">Created Date: </span>{{ repoInfo.createdDate }}</p>
           <p class="card-text" *ngIf="repoInfo.description"><span class="card-text--bold">Description:</span>  {{repoInfo.description}}</p>
-          <a [href]="repoInfo.repoURL" target="_blank" class="btn btn-primary">Go To Repo Source</a>
+          <button class="btn btn-primary">
+            <a [href]="repoInfo.repoURL" target="_blank" class="card-button--white">Go To Repo Source</a>
+          </button>
+          
         </div>
       </div>
     </div>
@@ -29,13 +32,13 @@
         <div class="col-sm-12 col-md-5">
           <app-owner-info [ownerInfo]="ownerInfo"></app-owner-info>
         </div>
-        <div class="col-sm-12 col-md-5">
+        <div class="col-sm-12 col-md-5 col-md-5--modified">
           <app-repo-info [repoInfo]="repoInfo"></app-repo-info>
         </div>
       </div>
 
       <div class="row">
-        <div class="col-sm-12 col-md-10">
+        <div class="col-sm-12 col-md-12">
           <app-trending-info [commits]="commits"></app-trending-info>
 
         </div>

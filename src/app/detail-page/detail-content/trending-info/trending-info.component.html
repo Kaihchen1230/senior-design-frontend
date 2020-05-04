@@ -1,15 +1,12 @@
-<div style="border: 1px solid rgba(0,0,0,.125); margin-top: 25px;">
-<!-- <div style="border: 1px solid rgba(0,0,0,.125); margin-top: 10vh; padding: 20px; margin-left: 1vw;"> -->
+<div class="predit-graph-container">
 
-  <div *ngIf="!commits" style="margin: 0 auto;
-  width: 50%;
-  text-align: center;">
-    <div class="alert alert-danger" style="margin-bottom: 20vh;">
+  <div class="no-predition-block" *ngIf="!commits">
+    <div class="alert alert-danger alert--margin">
       There is no commit history to predict .....
     </div>
   </div>
   <div>
-    <h1 *ngIf="commits" style="text-align: center;">Commit Prediction Graph</h1>
+    <h1 *ngIf="commits" class="predit-graph__title">Commit Prediction Graph</h1>
     <canvas
       id="canvas"
       [ngClass]="{

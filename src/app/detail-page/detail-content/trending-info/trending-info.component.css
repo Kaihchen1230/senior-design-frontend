@@ -1,9 +1,23 @@
-.graph-container {
-  max-width: 600px;
-  max-height: 300px;
-  min-height: 100px;
-  min-width: 300px;
+.predit-graph-container {
+  border: 1px solid rgba(0,0,0,.125); 
+  margin-top: 25px; 
+  max-width: 718px;
 }
+
+.no-predition-block {
+  margin: 0 auto;
+  width: 50%;
+  text-align: center;
+}
+
+.alert--margin {
+  margin-bottom: 20vh
+}
+
+.predit-graph__title {
+  text-align: center;
+}
+
 .canvas{
   width: 100% !important;
   max-width: 600px;
@@ -11,6 +25,7 @@
   max-height: 300px;
   min-height: 100px;
   min-width: 300px;
+  margin: 0 auto;
   /* /* margin: 0 auto; */
 }
 
