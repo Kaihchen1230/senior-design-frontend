@@ -1,61 +1,60 @@
 <div>
-  <app-search-bar></app-search-bar>
-  <div class="row search-body"  *ngIf="!isFetching && !error">
-     <div class="col-xs-12 col-sm-3" >
-      <app-repo-filter 
+   <app-search-bar></app-search-bar>
+   <div class="row search-body"  *ngIf="!isFetching && !error">
+      <div class="col-xs-12 col-sm-3" >
+         <app-repo-filter 
          (selectKeyword)="selectLanguage($event)" 
          [keywordSelected] = languageSelected
-          filterClass= "language"
-      >
-      </app-repo-filter>
-      <app-repo-filter 
-         (selectKeyword)="selectPlatform($event)" 
-         [keywordSelected] = platformSelected
-          filterClass= "platform"
-      >
-      </app-repo-filter>
+         filterClass= "language"
+         >
+         </app-repo-filter>
+         <div class = "platform-filter">
+            <app-repo-filter   
+            (selectKeyword)="selectPlatform($event)" 
+            [keywordSelected] = platformSelected
+            filterClass= "platform"
+            >
+            </app-repo-filter>
+         </div>
+      </div>
+      <div class="col-xs-12 col-sm-9" *ngIf="!isFetching && searchResults.length > 1">
+         <div class="list-group">
+            <div
+               class="list-group-item search-result"
+               *ngFor="let searchResult of searchResults | LanguageFilterPipe:languageSelected | PlatformFilterPipe:platformSelected">
+               <span>
+               <a [routerLink]="['/detail-page', searchResult.platform, searchResult.repoName]">{{searchResult.repoName}}</a>
+               </span>
+               <p>{{searchResult.description | RepoDesciptionPipe:200}}</p>
+               <div class="row">
+                  <div class="col-sm-3">
+                     <span>
+                        <fa-icon [icon]="starIcon" class = "search-result__star-icon"></fa-icon>
+                        : {{searchResult.starCount}}
+                     </span>
+                  </div>
+                  <div class="col-sm-3">
+                     <span>Last Update: {{searchResult.lastUpdated}}</span>
+                  </div>
+                  <div class="col-sm-3">
+                     <span>Language: {{searchResult.language}}</span>
+                  </div>
+                  <div class="col-sm-3">
+                     <span>Platform: {{searchResult.platform}}</span>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
    </div>
-
-     <div class="col-xs-12 col-sm-9" *ngIf="!isFetching && searchResults.length > 1">
-        <div class="list-group">
-           <div
-              class="list-group-item search-result"
-              *ngFor="let searchResult of searchResults | LanguageFilterPipe:languageSelected | PlatformFilterPipe:platformSelected">
-              <span>
-                 <a [routerLink]="['/detail-page', searchResult.platform, searchResult.repoName]">{{searchResult.repoName}}</a>
-              </span>
-              <p>{{searchResult.description | RepoDesciptionPipe:200}}</p>
-              <div class="row">
-                 <div class="col-sm-3">
-                    <span>
-                       <fa-icon [icon]="starIcon" class = "search-result__star-icon"></fa-icon>
-                       : {{searchResult.starCount}}
-                    </span>
-                 </div>
-                 <div class="col-sm-3">
-                    <span>Last Update: {{searchResult.lastUpdated}}</span>
-                 </div>
-                 <div class="col-sm-3">
-                    <span>Language: {{searchResult.language}}</span>
-                 </div>
-                 <div class="col-sm-3">
-                    <span>Platform: {{searchResult.platform}}</span>
-                 </div>
-              </div>
-           </div>
-        </div>
-     </div>
-  </div>
-
-  <div class="d-flex justify-content-center" *ngIf="isFetching && !error" >
-     <div class="spinner-border spinner" role="status">
-        <span class="sr-only">Loading...</span>
-     </div>
-  </div>
-
-  <div class="alert alert-danger" *ngIf="errorMsg" class = "error-message">
-     <h1>An Error Occurred!</h1>
-     <p>{{ errorMsg }}</p>
-     <button class="btn btn-danger" (click)="onHandleError()">OKAY!</button>
-  </div>
+   <div class="d-flex justify-content-center" *ngIf="isFetching && !error" >
+      <div class="spinner-border spinner" role="status">
+         <span class="sr-only">Loading...</span>
+      </div>
+   </div>
+   <div class="alert alert-danger" *ngIf="errorMsg" class = "error-message">
+      <h1>An Error Occurred!</h1>
+      <p>{{ errorMsg }}</p>
+      <button class="btn btn-danger" (click)="onHandleError()">OKAY!</button>
+   </div>
 </div>
