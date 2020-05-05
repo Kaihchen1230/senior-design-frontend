@@ -25,7 +25,6 @@ export class RepoFilterComponent implements OnInit {
   }
 
   countKeyword() {
-    console.log(this.filterClass);
     this.searchResults.forEach((searchResult: Repo) => {
       const repo = searchResult[this.filterClass];
       if (this.keywordCounter.hasOwnProperty(repo)) {
