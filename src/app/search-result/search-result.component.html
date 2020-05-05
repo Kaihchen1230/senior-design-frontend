@@ -29,18 +29,35 @@
                <div class="row">
                   <div class="col-sm-3">
                      <span>
-                        <fa-icon [icon]="starIcon" class = "search-result__star-icon"></fa-icon>
-                        : {{searchResult.starCount}}
+                        Stars:
+                        <div>
+                           {{searchResult.starCount}}
+                        </div>
                      </span>
                   </div>
                   <div class="col-sm-3">
-                     <span>Last Update: {{searchResult.lastUpdated}}</span>
+                     <span>
+                        Last Update: 
+                        <div>
+                           {{searchResult.lastUpdated}}
+                        </div>
+                     </span>
                   </div>
                   <div class="col-sm-3">
-                     <span>Language: {{searchResult.language}}</span>
+                     <span>
+                        Language:
+                         <div>
+                            {{searchResult.language}}
+                           </div>
+                        </span>
                   </div>
                   <div class="col-sm-3">
-                     <span>Platform: {{searchResult.platform}}</span>
+                     <span>
+                        Platform:
+                         <div>
+                            <img class= "search-result__platform-icon" src={{searchResult.logoUrl}} alt="platform-icon">
+                         </div>
+                        </span>
                   </div>
                </div>
             </div>

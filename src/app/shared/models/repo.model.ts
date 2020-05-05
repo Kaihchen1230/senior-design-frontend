@@ -5,6 +5,7 @@ export class Repo {
   public lastUpdated: string;
   public language: string;
   public platform: string;
+  public logoUrl: string;
 
   constructor(repoName: string, description: string, starCount: number, lastUpdated: string, language: string, platform: string) {
     this.repoName = repoName;
@@ -13,5 +14,6 @@ export class Repo {
     this.lastUpdated = lastUpdated;
     this.language = language;
     this.platform = platform;
+    this.logoUrl = null;
   }
 }

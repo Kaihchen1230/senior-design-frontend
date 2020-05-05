@@ -10,6 +10,10 @@
   color: yellow;
 }
 
+.search-result__platform-icon{
+  width: 3vw;
+}
+
 .platform-filter{
   margin-top: 20px;
 }
