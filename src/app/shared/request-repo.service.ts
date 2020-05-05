@@ -93,13 +93,13 @@ export class RequestRepoService {
         return response = { ... response,
                             platform_icon_img: platformAvatarURL,
                             platform_icon_img_alt: imgAlt,
-                            repoName: repoName
+                            repoName
                           };
 
-      }),  
+      }),
       tap(repoInfo => {
         this.detailContentService.singleRepoContent = repoInfo;
-      }),      
+      }),
       catchError(errorRes => {
             return throwError(errorRes);
       }));
