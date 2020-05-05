@@ -9,12 +9,3 @@
 .search-result__star-icon{
   color: yellow;
 }
-
-.spinner{
-  width: 5rem; height: 5rem;
-}
-
-.error-message{
-  width: 83vw; 
-  margin:0 auto;
-}

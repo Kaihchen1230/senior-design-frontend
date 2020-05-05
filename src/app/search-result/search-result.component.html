@@ -41,9 +41,6 @@
 
   <app-loading-spinner *ngIf="isFetching && !errorMsg" ></app-loading-spinner>
 
-  <div class="alert alert-danger" *ngIf="errorMsg" class = "error-message">
-     <h1>An Error Occurred!</h1>
-     <p>{{ errorMsg }}</p>
-     <button class="btn btn-danger" (click)="onHandleError()">OKAY!</button>
-  </div>
+  <app-error-handling [errorMes]="errorMsg" *ngIf="errorMsg"></app-error-handling>
+  
 </div>

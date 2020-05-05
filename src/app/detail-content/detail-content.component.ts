@@ -4,7 +4,6 @@ import { OwnerInfo } from 'src/app/shared/models/owner-info.model';
 import { RequestRepoService } from 'src/app/shared/request-repo.service';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Location } from '@angular/common';
 import { DetailContentService } from './detail-content-service';
 import { RepoOverview } from '../shared/models/repo-overview.model';
 import { RepoInfo } from '../shared/models/repo-info.model';
@@ -27,7 +26,6 @@ export class DetailContentComponent implements OnInit {
 
   constructor(private requestRepoService: RequestRepoService,
               private route: ActivatedRoute,
-              private location: Location,
               private detailContentService: DetailContentService) { }
 
   ngOnInit() {
@@ -58,7 +56,4 @@ export class DetailContentComponent implements OnInit {
       );
   }
 
-  onHandleError() {
-    this.location.back();
-  }
 }

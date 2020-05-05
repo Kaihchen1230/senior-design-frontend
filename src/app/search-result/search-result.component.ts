@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { faSearch, faStar} from '@fortawesome/free-solid-svg-icons';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { RequestRepoService } from '../shared/request-repo.service';
 import { SearchResultService } from '../search-result/search-result.service';
 import { Repo } from '../shared/models/repo.model';
@@ -21,8 +21,7 @@ export class SearchResultComponent implements OnInit {
 
   constructor(private requestRepoService: RequestRepoService,
               private searchResultService: SearchResultService,
-              private route: ActivatedRoute,
-              private router: Router) { }
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.route.params
@@ -35,7 +34,7 @@ export class SearchResultComponent implements OnInit {
             this.isFetching = false;
             this.searchResults = this.searchResultService.getSearchResult();
             if (this.searchResults.length === 0) {
-              this.errorMsg = 'No Project Found: ';
+              this.errorMsg = 'No Project Related to ' + searchTerm + ' ......';
             }
           }, error => {
             this.errorMsg = error.error.message;
@@ -49,9 +48,5 @@ export class SearchResultComponent implements OnInit {
     } else {
       this.selectedLanguage = selectedLanguage;
     }
-  }
-
-  onHandleError() {
-    this.router.navigate(['/']);
   }
 }

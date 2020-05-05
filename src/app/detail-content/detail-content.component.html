@@ -2,12 +2,7 @@
   <app-search-bar></app-search-bar>
 
   <app-loading-spinner *ngIf="isFetching && !errorMes"></app-loading-spinner>
-  
-  <div class="alert alert-danger" *ngIf="errorMes" style="width: 83vw; margin:0 auto">
-    <h1>An Error Occurred!</h1>
-    <p>{{ errorMes }}</p>
-    <button class="btn btn-danger" (click)="onHandleError()">OKAY!</button>
-  </div>
+  <app-error-handling [errorMes]="errorMes" *ngIf="errorMes"></app-error-handling>
 
   <div class="row row--modify-margin" *ngIf="!isFetching && !errorMes">
 

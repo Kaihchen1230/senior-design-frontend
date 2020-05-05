@@ -1,4 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-error-handling',
@@ -8,13 +10,18 @@ import { Component, OnInit, Input } from '@angular/core';
 export class ErrorHandlingComponent implements OnInit {
 
   @Input() errorMes: string;
-  
-  constructor() { }
+
+  constructor(private location: Location,
+              private router: Router) { }
 
   ngOnInit() {
   }
 
-  onHandleError () {
+  onGoBack() {
+    this.location.back();
+  }
 
+  onGoHomePage() {
+    this.router.navigate(['/']);
   }
 }
