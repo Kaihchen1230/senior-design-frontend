@@ -3,9 +3,10 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { throwError } from 'rxjs';
 import { map, tap, catchError } from 'rxjs/operators';
 import { Repo } from './models/repo.model';
-import { SingleRepo } from './models/single-repo.model';
+import { SingleRepoContent } from './models/single-repo-content.model';
 import {SearchResultService} from '../search-result/search-result.service';
 import {environment} from '../../environments/environment';
+import { DetailContentService } from '../detail-content/detail-content-service';
 
 @Injectable()
 export class RequestRepoService {
@@ -13,7 +14,9 @@ export class RequestRepoService {
   BACKEND_API = environment.BACKEND_API;
 
 
-  constructor(private http: HttpClient, private searchResultService: SearchResultService ) {}
+  constructor(private http: HttpClient,
+              private searchResultService: SearchResultService,
+              private detailContentService: DetailContentService ) {}
 
   fetchRepos(searchTerm: string) {
     let searchParams = new HttpParams();
@@ -60,56 +63,51 @@ export class RequestRepoService {
     }
   }
 
-  fetchRepo(platform: string, repoName: string) {
+  fetchRepo(platform: string, ownerNameAndRepoName: string) {
     const detailURL = this.BACKEND_API + 'detail?';
     console.log('platform: ', platform);
     let searchParams = new HttpParams();
     searchParams = searchParams.append('platform', platform);
-    searchParams = searchParams.append('full_name', repoName);
+    searchParams = searchParams.append('full_name', ownerNameAndRepoName);
+
     return this.http
-      .get(detailURL, {
+      .get<SingleRepoContent>(detailURL, {
         params: searchParams
       })
       .pipe(map(response => {
-        let repoAvatarURL = '';
+        console.log('response: ', response);
+        let platformAvatarURL = '';
         let imgAlt = '';
-        if ( platform === 'github') {
-          repoAvatarURL = 'https://cdn1.iconfinder.com/data/icons/capsocial/500/github-512.png';
-          imgAlt = 'GitHub logo image';
-        } else if ( platform === 'gitlab') {
-          repoAvatarURL = 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/GitLab_Logo.svg/1200px-GitLab_Logo.svg.png';
+
+        if (platform === 'github') {
+          platformAvatarURL = 'https://cdn1.iconfinder.com/data/icons/capsocial/500/github-512.png',
+          imgAlt =  'GitLab logo image';
+        } else if (platform === 'gitlab') {
+          platformAvatarURL = 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/GitLab_Logo.svg/1200px-GitLab_Logo.svg.png';
           imgAlt = 'GitLab logo image';
         } else {
-          repoAvatarURL = 'https://poeditor.com/blog/wp-content/uploads/2014/06/bitbucket-logo.png';
+          platformAvatarURL = 'https://poeditor.com/blog/wp-content/uploads/2014/06/bitbucket-logo.png';
           imgAlt = 'Bitbucket logo image';
         }
-        const responseData = Object.values(response);
-        console.log('this is responseData: ', responseData);
-        /*
-          0. platform
-          1. web_url
-          2. full_name
-          3. language
-          4. size
-          5. star_count
-          6. fork_count
-          7. description
-          8. created_at
-          9. updated_at
-          10. owner_name
-          11. avatar_url
-          12. profile_url
-          13. commits
-        */
-        const repo = new SingleRepo(
-          repoAvatarURL, imgAlt, responseData[2], responseData[8], responseData[7],
-          responseData[1], responseData[11], responseData[10], responseData[12],
-          responseData[5], responseData[6], responseData[4], responseData[9],
-          responseData[3], responseData[13]);
-        return repo;
-      }),  catchError(errorRes => {
-            console.log('this is errorRes in fetchRepo service : ', errorRes);
+        const repoName = this.getRepoName(ownerNameAndRepoName);
+        return response = { ... response,
+                            platform_icon_img: platformAvatarURL,
+                            platform_icon_img_alt: imgAlt,
+                            repoName: repoName
+                          };
+
+      }),  
+      tap(repoInfo => {
+        this.detailContentService.singleRepoContent = repoInfo;
+      }),      
+      catchError(errorRes => {
             return throwError(errorRes);
       }));
+  }
+
+  getRepoName (ownerNameAndRepoName: string) {
+    const index = ownerNameAndRepoName.indexOf('/');
+    const repoName = ownerNameAndRepoName.slice(0,index);
+    return repoName;
   }
 }

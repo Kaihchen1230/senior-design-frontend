@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { SingleRepo } from 'src/app/shared/models/single-repo.model';
+import { Commit } from 'src/app/shared/models/commit-model';
 import { OwnerInfo } from 'src/app/shared/models/owner-info.model';
 import { RequestRepoService } from 'src/app/shared/request-repo.service';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import { ActivatedRoute, Router, Params, NavigationEnd, RoutesRecognized } from '@angular/router';
-import { filter, pairwise } from 'rxjs/operators';
+import { ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
+import { DetailContentService } from './detail-content-service';
+import { RepoOverview } from '../shared/models/repo-overview.model';
+import { RepoInfo } from '../shared/models/repo-info.model';
 @Component({
   selector: 'app-detail-content',
   templateUrl: './detail-content.component.html',
@@ -13,22 +15,22 @@ import { Location } from '@angular/common';
 })
 export class DetailContentComponent implements OnInit {
 
-  term = '';
   searchIcon = faSearch;
   firstEnter = true;
   errorMes = null;
   isFetching = false;
-  repoInfo: SingleRepo;
+  repoOverview: RepoOverview;
   ownerInfo: OwnerInfo;
-  commits: [];
+  repoInfo: RepoInfo;
+  commits: Commit[];
   repoName = '';
+
   constructor(private requestRepoService: RequestRepoService,
               private route: ActivatedRoute,
-              private location: Location) { }
+              private location: Location,
+              private detailContentService: DetailContentService) { }
 
   ngOnInit() {
-    // const id = this.route.snapshot.params['repo-name'];
-    console.log('this.route: ', this.route);
     this.route.params
       .subscribe(
         (params: Params) => {
@@ -36,22 +38,19 @@ export class DetailContentComponent implements OnInit {
           this.repoName = ownerNameAndRepoName;
           const platform = params.platform;
           this.isFetching = true;
-          this.requestRepoService.fetchRepo(platform, ownerNameAndRepoName).subscribe(response => {
-            this.repoInfo = {... response};
-    
-            const index = ownerNameAndRepoName.indexOf('/');
-            const repoName = ownerNameAndRepoName.slice(0,index);
-            this.repoInfo = {... this.repoInfo, repoName: repoName};
-            console.log('this is repoInfo: ', this.repoInfo);
-
-            this.ownerInfo = new OwnerInfo(response.ownerAvatarUrl, response.ownerName, response.ownerURL);
-            this.commits = response.commits;
+          this.requestRepoService.fetchRepo(platform, ownerNameAndRepoName).subscribe(_ => {
+            this.repoOverview = this.detailContentService.repoOverview;
+            this.ownerInfo = this.detailContentService.ownerInfo;
+            this.repoInfo = this.detailContentService.repoInfo;
+            this.commits = this.detailContentService.commits;
             this.isFetching = false;
+
           }, (errorResp) => {
-            if (errorResp.error.message) {
+            console.log('this is errorResp: ', errorResp);
+            if (errorResp.error) {
               this.errorMes = errorResp.error.message;
             } else {
-              this.errorMes = 'Unknown Error Occured....';
+              this.errorMes = 'Unknown Error Occured ....';
             }
             this.isFetching = false;
           });
@@ -62,5 +61,4 @@ export class DetailContentComponent implements OnInit {
   onHandleError() {
     this.location.back();
   }
-
 }

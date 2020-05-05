@@ -1,4 +1,4 @@
-<div class="predit-graph-container">
+<div class="predit-graph-container" [ngClass]="{'no-border': !commits}">
 
   <div class="no-predition-block" *ngIf="!commits">
     <div class="alert alert-danger alert--margin">

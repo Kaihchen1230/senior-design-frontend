@@ -5,13 +5,12 @@
 }
 
 .no-predition-block {
-  margin: 0 auto;
-  width: 50%;
+  /* margin: 0 auto; */
+  /* width: 50%; */
   text-align: center;
 }
-
-.alert--margin {
-  margin-bottom: 20vh
+.no-border {
+  border: none;
 }
 
 .predit-graph__title {

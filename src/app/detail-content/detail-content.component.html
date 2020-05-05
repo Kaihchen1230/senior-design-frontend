@@ -16,13 +16,13 @@
 
     <div class="col-sm-12 col-md-4 overview-container">
       <div class="card card--modified">
-        <img class="card-img-top card-img-top--set-width" [src]="repoInfo.repoAvatarURL" [alt]="repoInfo.imgAlt" >
+        <img class="card-img-top card-img-top--set-width" [src]="repoOverview.platformIconImg" [alt]="repoOverview.platformIconImgAlt" >
         <div class="card-body card-body--modified">
-          <h5 class="card-title">Repo Name: {{repoInfo.repoName}}</h5>
-          <p class="card-text"><span class="card-text--bold">Created Date: </span>{{ repoInfo.createdDate }}</p>
-          <p class="card-text" *ngIf="repoInfo.description"><span class="card-text--bold">Description:</span>  {{repoInfo.description}}</p>
+          <h5 class="card-title">Repo Name: {{repoOverview.repoName}}</h5>
+          <p class="card-text"><span class="card-text--bold">Created Date: </span>{{ repoOverview.createdAt }}</p>
+          <p class="card-text" *ngIf="repoOverview.description"><span class="card-text--bold">Description:</span>  {{repoOverview.description}}</p>
           <button class="btn btn-primary">
-            <a [href]="repoInfo.repoURL" target="_blank" class="card-button--white">Go To Repo Source</a>
+            <a [href]="repoOverview.webURL" target="_blank" class="card-button--white">Go To Repo Source</a>
           </button>
           
         </div>

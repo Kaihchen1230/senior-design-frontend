@@ -36,7 +36,6 @@ export class SearchResultComponent implements OnInit {
             this.searchResults = this.searchResultService.getSearchResult();
             if (this.searchResults.length === 0) {
               this.errorMsg = 'No Project Found: ';
-
             }
           }, error => {
             this.errorMsg = error.error.message;
