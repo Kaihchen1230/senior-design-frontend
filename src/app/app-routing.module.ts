@@ -7,14 +7,6 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 
 const appRoutes: Routes = [
     { path: '', component: HomeComponent },
-    // { path: '', redirectTo: '/home', pathMatch: 'full' },
-    // { path: 'search-result', component: SearchResultComponent, children: [
-    //   { path: 'search-result/:search-term', component: SearchResultContentComponent }
-    // ]},
-    // {
-    //   path: 'refresh',
-    //   component: RefreshComponent
-    // },
     { path:  'search-result/:search-term', component: SearchResultComponent },
     { path: 'detail-page/:platform/:repo-name', component: DetailContentComponent },
     { path: 'not-found', component: PageNotFoundComponent },

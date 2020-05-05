@@ -10,7 +10,7 @@ import { NgForm } from '@angular/forms';
 })
 export class HomeComponent implements OnInit {
 
-  logoImagePath: any = 'assets/logo.png';
+  logoImagePath = 'assets/logo.png';
   @ViewChild('f', {static: false}) searchForm: NgForm;
   searchIcon = faSearch;
   constructor(private router: Router) { }

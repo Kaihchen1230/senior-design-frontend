@@ -32,7 +32,7 @@ export class DetailContentService {
 
         this._repoOverview = repoOverview;
 
-        const unknowImg = 'https://4mng2jkocx-flywheel.netdna-ssl.com/wp-content/uploads/2013/08/unknown-avatar.jpg';
+        const unknowImg = 'assets/unknown-avatar.jpg';
         
         const ownerInfo: OwnerInfo = {
             avatarURL: singleRepoContent.avatar_url ? singleRepoContent.avatar_url : unknowImg,

@@ -1,11 +1,8 @@
 <div>
   <app-search-bar></app-search-bar>
 
-  <div class="d-flex justify-content-center" *ngIf="isFetching && !errorMes" >
-    <div class="spinner-border" role="status" style="width: 5rem; height: 5rem;">
-      <span class="sr-only">Loading...</span>
-    </div>
-  </div>
+  <app-loading-spinner *ngIf="isFetching && !errorMes"></app-loading-spinner>
+  
   <div class="alert alert-danger" *ngIf="errorMes" style="width: 83vw; margin:0 auto">
     <h1>An Error Occurred!</h1>
     <p>{{ errorMes }}</p>
@@ -44,5 +41,4 @@
   <div class="row row--modified" *ngIf="!isFetching && !errorMes">
     <app-similar-repos [repoName]="repoName"></app-similar-repos>
   </div>
-
 </div>

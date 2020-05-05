@@ -10,7 +10,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RepoInfoComponent } from './detail-content/repo-info/repo-info.component';
 import { OwnerInfoComponent } from './detail-content/owner-info/owner-info.component';
 import { TrendingInfoComponent } from './detail-content/trending-info/trending-info.component';
-import {  SimilarReposComponent } from './detail-content/similar-repos/similar-repos.component';
+import { SimilarReposComponent } from './detail-content/similar-repos/similar-repos.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RequestRepoService } from './shared/request-repo.service';
@@ -20,6 +20,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { LanguageFilterComponent } from './search-result/language-filter/language-filter.component';
 import { LanguageFilterPipe } from './shared/pipes/language-filter.pipe';
 import { RepoDesciptionPipe } from './shared/pipes/repo-description.pipe';
+import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
+import { ErrorHandlingComponent } from './shared/error-handling/error-handling.component';
 
 
 @NgModule({
@@ -37,7 +39,9 @@ import { RepoDesciptionPipe } from './shared/pipes/repo-description.pipe';
     PageNotFoundComponent,
     LanguageFilterComponent,
     RepoDesciptionPipe,
-    LanguageFilterPipe
+    LanguageFilterPipe,
+    LoadingSpinnerComponent,
+    ErrorHandlingComponent
   ],
   imports: [
     BrowserModule,
