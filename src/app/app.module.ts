@@ -19,9 +19,6 @@ import { DetailContentComponent } from './detail-page/detail-content/detail-cont
 import { RefreshComponent } from './refresh/refresh.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { RepoFilterComponent } from './search-result/repo-filter/repo-filter.component';
-// import { LanguageFilterPipe } from './shared/pipes/language-filter.pipe';
-// import { PlatformFilterPipe } from './shared/pipes/platform-filter.pipe';
-// import { RepoDesciptionPipe } from './shared/pipes/repo-description.pipe';
 import { RequestRepoService } from './shared/request-repo.service';
 import { PipeModule } from './shared/pipes/pipe.module';
 
@@ -41,9 +38,6 @@ import { PipeModule } from './shared/pipes/pipe.module';
     RefreshComponent,
     PageNotFoundComponent,
     RepoFilterComponent,
-    // RepoDesciptionPipe,
-    // LanguageFilterPipe,
-    // PlatformFilterPipe,
   ],
   imports: [
     BrowserModule,
