@@ -1,0 +1,39 @@
+<div>
+  <app-search-bar></app-search-bar>
+
+  <app-loading-spinner *ngIf="isFetching && !errorMes"></app-loading-spinner>
+  <app-error-handling [errorMes]="errorMes" *ngIf="errorMes"></app-error-handling>
+
+  <div class="row row--modify-margin" *ngIf="!isFetching && !errorMes">
+
+    <div class="col-sm-12 col-md-4 overview-container">
+      <div class="card card--modified">
+        <img class="card-img-top card-img-top--set-width" [src]="repoOverview.platformIconImg" [alt]="repoOverview.platformIconImgAlt" >
+        <div class="card-body card-body--modified">
+          <h5 class="card-title">Repo Name: {{repoOverview.repoName}}</h5>
+          <p class="card-text"><span class="card-text--bold">Created Date: </span>{{ repoOverview.createdAt }}</p>
+          <p class="card-text" *ngIf="repoOverview.description"><span class="card-text--bold">Description:</span>  {{repoOverview.description}}</p>
+          <button class="btn btn-primary">
+            <a [href]="repoOverview.webURL" target="_blank" class="card-button--white">Go To Repo Source</a>
+          </button>
+          
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-12 col-md-8">
+      <div class="row">
+          <app-owner-info class="col-sm-12 col-md-5" [ownerInfo]="ownerInfo"></app-owner-info>
+          <app-repo-info class="col-sm-12 col-md-5 col-md-5--modified" [repoInfo]="repoInfo"></app-repo-info>
+      </div>
+
+      <div class="row">
+          <app-trending-info class="col-sm-12 col-md-12" [commits]="commits"></app-trending-info>
+      </div>
+    </div>
+  </div>
+  <hr *ngIf="!isFetching && !errorMes">
+  <div class="row row--modified" *ngIf="!isFetching && !errorMes">
+    <app-similar-repos [repoName]="repoName"></app-similar-repos>
+  </div>
+</div>

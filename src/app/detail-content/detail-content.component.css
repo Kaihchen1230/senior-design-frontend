@@ -1,0 +1,41 @@
+.row--modify-margin {
+    margin: 0 8vw; 
+    margin-bottom: 40px;
+}
+
+.overview-container {
+    padding-left: 70px;
+}
+
+.card--modified {
+    max-width: 18rem;
+    padding-top: 20px;
+}
+
+.card-body--modified {
+    margin-left: 20px
+}
+
+.card-img-top--set-width {
+    max-width: 200px; 
+    margin: 0 auto
+}
+.card-text--bold {
+    font-weight: 550;
+}
+
+.card-button--white {
+    color: white;
+}
+
+.card-button--white:hover {
+    text-decoration: none;
+}
+
+.col-md-5--modified {
+    margin-left: 85px;
+}
+
+.row--modified {
+    margin: 0 8vw;
+}

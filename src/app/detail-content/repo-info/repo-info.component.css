@@ -1,0 +1,22 @@
+.repo-info-container {
+  border: 1px solid rgba(0,0,0,.125);
+}
+
+.repo-info__title {
+  text-align: center;
+  padding-top: 10px;
+}
+
+.repo-info__block {
+  margin: auto; 
+  width: 68%;
+}
+
+.repo-info__block__text{
+  margin: 45px 0;
+
+}
+
+.fa-icon {
+  color: rgb(88, 96, 105);
+}

@@ -1,0 +1,62 @@
+<div class="similar-repos">
+
+  <h3 class="similar-repos__title">Other Search Results</h3>
+
+  <div class="container similar-repos_slider">
+
+    <div class="similar-repos__left-controller">
+      <button class="btn similar-repos__controller" (click)="scrollLeft()"> < </button>
+    </div>
+
+    <div #widgetsContent class="similar-repos__list">
+        <div
+          class="similar-repos__item"
+          *ngFor="let similarRepo of similarRepos; let i = index;"
+        >
+       
+         <div
+            class="card card--modified"
+            (click)="ClickSimilarRepo(similarRepo.platform ,similarRepo.repoName)"
+          >
+            <div class="card-body">
+
+              <h5 class="card-title">
+              <a [routerLink]="['/detail-page', similarRepo.platform, similarRepo.repoName]">{{ similarRepo.repoName }}</a>
+              </h5>
+              <p *ngIf="similarRepo.description && similarRepo.description.length > 54 else showWholeDescription">
+                  {{ similarRepo.description.slice(0,54) }} ...
+              </p>
+              <ng-template #showWholeDescription>
+                <p>{{similarRepo.description}}</p>
+              </ng-template>
+
+              <p *ngIf="!similarRepo.description">
+                No Description been provided .....
+              </p>
+              
+              <div class="row">
+
+                <div class="col-sm-1">
+                  <fa-icon [icon]="github" *ngIf="similarRepo.platform === 'github'"></fa-icon>
+                  <fa-icon [icon]="gitlab" *ngIf="similarRepo.platform === 'gitlab'"></fa-icon>
+                  <fa-icon [icon]="bitbucket" *ngIf="similarRepo.platform === 'bitbucket'"></fa-icon>
+                </div>
+
+                <div class="col-sm-5">
+                  <span>
+                    <fa-icon [icon]="star" class="fa-icon"></fa-icon>: {{ similarRepo['starCount'] }}
+                  </span>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <div>
+      <button class="btn similar-repos__controller" (click)="scrollRight()">></button>
+    </div>
+
+  </div>
+</div>

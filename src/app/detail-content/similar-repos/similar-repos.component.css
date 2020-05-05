@@ -1,0 +1,48 @@
+:host {
+  margin-bottom: 10vh;
+}
+
+.similar-repos__title {
+  padding-left: 10px; 
+  padding-bottom: 20px;
+} 
+
+.similar-repos_slider {
+  margin-bottom: 20px;
+}
+
+.similar-repos__left-controller {
+  float: left;
+}
+
+.similar-repos__controller {
+  border: 1px solid black;
+  border-radius: 0;
+  height: 144px;
+}
+
+.similar-repos__list {
+  float: left;
+  width: 90%;
+  overflow: auto;
+  white-space: nowrap;
+}
+
+.similar-repos__item {
+  margin: 0 10px;
+  border: 1px solid black;
+  display: inline-block;
+
+}
+
+.card--modified {
+  cursor: pointer; 
+  height: 142px;
+}
+.card-title:hover {
+  text-decoration: underline;
+}
+
+.fa-icon {
+  color: rgb(88, 96, 105);
+}

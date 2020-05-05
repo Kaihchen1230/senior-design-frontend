@@ -1,0 +1,30 @@
+.owner-info__container {
+    border: 1px solid rgba(0,0,0,.125);
+}
+
+.owner-info__title {
+    text-align: center;
+    padding-top: 10px;
+}
+
+.card--modified {
+    max-width: 18rem; 
+    border: none; 
+    margin: 0 auto;
+    padding-top: 20px;
+}
+
+.card-img-top--modified {
+    border-radius: 20%; 
+    max-width: 200px; 
+    margin: 0 auto;
+}
+
+.card-body--center {
+    padding: 22px; 
+    margin: 0 auto;
+}
+
+.card-body__text {
+    text-align: center;
+}
