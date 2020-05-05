@@ -3,7 +3,13 @@
 }
 
 .search-result{
-  border-left: none; border-right: none;
+  border-left: none; 
+  border-right: none;
+  padding: 0.2em 0.5em;
+}
+
+.search-result__description{
+  margin-bottom: 0.5em;
 }
 
 .search-result__star-icon{

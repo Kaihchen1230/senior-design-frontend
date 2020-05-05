@@ -21,11 +21,9 @@
          <div class="list-group">
             <div
                class="list-group-item search-result"
-               *ngFor="let searchResult of searchResults | LanguageFilterPipe:languageSelected | PlatformFilterPipe:platformSelected">
-               <span>
-               <a [routerLink]="['/detail-page', searchResult.platform, searchResult.repoName]">{{searchResult.repoName}}</a>
-               </span>
-               <p>{{searchResult.description | RepoDesciptionPipe:200}}</p>
+               *ngFor="let searchResult of searchResults | LanguageFilterPipe:languageSelected | PlatformFilterPipe:platformSelected">              
+               <a [routerLink]="['/detail-page', searchResult.platform, searchResult.repoName]">{{searchResult.repoName}}</a>              
+               <p class = 'search-result__description'>{{searchResult.description | RepoDesciptionPipe:200}}</p>
                <div class="row">
                   <div class="col-sm-3">
                      <span>
