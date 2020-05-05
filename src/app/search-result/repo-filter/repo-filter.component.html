@@ -1,0 +1,21 @@
+<div class="repo-filter">
+    <h2 class= "repo-filter__title">      
+      {{filterClass | titlecase}}  
+    </h2>
+    <div class="list-group repo-filter--set-margin">
+       <a
+          class="list-group-item repo-filter__item"
+          *ngFor="let repo of keywordCounter | keyvalue"
+          (click) = "onrepoClick(repo.key)"
+          [ngClass]="{'repo-filter__selected' : keywordSelected === repo.key}"
+          >
+        {{repo.key}} : 
+        <span class = "repo-filter__item__count" *ngIf="keywordSelected !== repo.key">
+            {{repo.value}}
+        </span>     
+        <span class = "repo-filter--selected__Cancel" *ngIf="keywordSelected === repo.key">
+            X
+        </span>  
+       </a>
+    </div>
+ </div>

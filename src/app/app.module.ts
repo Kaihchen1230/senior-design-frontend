@@ -17,12 +17,10 @@ import { RequestRepoService } from './shared/request-repo.service';
 import { DetailContentComponent } from './detail-content/detail-content.component';
 import { RefreshComponent } from './refresh/refresh.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { LanguageFilterComponent } from './search-result/language-filter/language-filter.component';
-import { LanguageFilterPipe } from './shared/pipes/language-filter.pipe';
-import { RepoDesciptionPipe } from './shared/pipes/repo-description.pipe';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 import { ErrorHandlingComponent } from './shared/error-handling/error-handling.component';
-
+import { RepoFilterComponent } from './search-result/repo-filter/repo-filter.component';
+import { PipeModule } from './shared/pipes/pipe.module';
 
 @NgModule({
   declarations: [
@@ -37,11 +35,9 @@ import { ErrorHandlingComponent } from './shared/error-handling/error-handling.c
     DetailContentComponent,
     RefreshComponent,
     PageNotFoundComponent,
-    LanguageFilterComponent,
-    RepoDesciptionPipe,
-    LanguageFilterPipe,
     LoadingSpinnerComponent,
-    ErrorHandlingComponent
+    ErrorHandlingComponent,
+    RepoFilterComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,7 +45,8 @@ import { ErrorHandlingComponent } from './shared/error-handling/error-handling.c
     AppRoutingModule,
     FontAwesomeModule,
     NgbModule,
-    HttpClientModule
+    HttpClientModule,
+    PipeModule
   ],
   providers: [RequestRepoService],
   bootstrap: [AppComponent]

@@ -9,3 +9,11 @@
 .search-result__star-icon{
   color: yellow;
 }
+
+.platform-filter{
+  margin-top: 20px;
+}
+
+.spinner{
+  width: 5rem; height: 5rem;
+}
