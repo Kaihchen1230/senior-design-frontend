@@ -1,4 +1,4 @@
-<div class="predit-graph-container" [ngClass]="{'no-border': !commits}">
+<div class="predit-graph-container" [ngClass]="{'no-border': !this.trendingGraphInfo}">
 
   <div class="no-predition-block" *ngIf="!commits">
     <div class="alert alert-danger alert--margin">
@@ -6,7 +6,7 @@
     </div>
   </div>
   <div>
-    <h1 *ngIf="commits" class="predit-graph__title">Commit Prediction Graph</h1>
+    <h1 *ngIf="this.trendingGraphInfo" class="predit-graph__title">Commit Prediction Graph</h1>
     <canvas
       id="canvas"
       [ngClass]="{

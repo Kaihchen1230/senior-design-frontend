@@ -5,6 +5,13 @@ import { RepoOverview } from '../shared/models/repo-overview.model';
 import { RepoInfo } from '../shared/models/repo-info.model';
 import { Commit } from '../shared/models/commit-model';
 
+export interface TrendingGraphInfo {
+    endOfWeeks: string[];
+    historicalCommitCounts: number[];
+    gaps: number[];
+    predictCommitCounts: number[];
+}
+
 @Injectable({
     providedIn: 'root'
 })
@@ -15,7 +22,8 @@ export class DetailContentService {
     private _ownerInfo: OwnerInfo;
     private _repoInfo: RepoInfo;
     private _commits: Commit[];
-    
+    private _trendingGraphInfo: TrendingGraphInfo;
+
     constructor() {}
 
     set singleRepoContent(singleRepoContent: SingleRepoContent) {
@@ -53,6 +61,10 @@ export class DetailContentService {
         this._repoInfo = repoInfo;
 
         this._commits = singleRepoContent.commits;
+
+        const trendingGraphInfo = this.setTrendingGraphInfo(this._commits);
+
+        this._trendingGraphInfo = trendingGraphInfo;
     }
 
     get singleRepoContent(): SingleRepoContent {
@@ -88,4 +100,63 @@ export class DetailContentService {
     get commits() {
         return this._commits;
     }
+
+    set trendingGraphInfo(trendingGraphInfo: TrendingGraphInfo) {
+        this._trendingGraphInfo = trendingGraphInfo;
+    }
+
+    get trendingGraphInfo() {
+        return this._trendingGraphInfo;
+    }
+
+    setTrendingGraphInfo(commits: Commit[]) {
+        const today = new Date();
+        const endOfWeeks: string[] = [];
+        const historicalCommitCounts: number[] = [];
+        const predictCommitCounts: number[] = [];
+        const gaps: number[] = [];  
+        if (commits) {
+            
+            let prevEnfOfWeek: Date;
+            let prevIndex: number;
+            let prevCommitCount: number;
+            
+            commits.forEach((commit, index) => {
+                const endOfWeek = commit.endOfWeek;
+                const endOfWeekDate = new Date(`${ endOfWeek } 23:59`);
+                const commitCount = commit.numCommits;
+                
+                if (endOfWeekDate <= today) {
+
+                    if (prevEnfOfWeek >= today) {
+                        gaps[0] = prevCommitCount;
+                        gaps.unshift(commitCount);
+                    } else {
+                        gaps.unshift(NaN);
+                    }
+                    historicalCommitCounts.unshift(commitCount);
+                    predictCommitCounts.unshift(NaN);
+                    
+                } else {
+
+                    historicalCommitCounts.unshift(NaN);
+                    gaps.unshift(NaN);
+                    predictCommitCounts.unshift(commitCount);
+                }
+                  
+                prevEnfOfWeek = endOfWeekDate;
+                prevCommitCount = commitCount;
+                endOfWeeks.unshift(endOfWeek);
+            })
+        }
+
+
+        return { 
+            endOfWeeks: endOfWeeks,
+            historicalCommitCounts: historicalCommitCounts,
+            gaps: gaps,
+            predictCommitCounts: predictCommitCounts 
+        };
+    }
+
 }

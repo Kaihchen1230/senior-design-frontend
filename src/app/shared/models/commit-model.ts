@@ -1,4 +1,4 @@
 export interface Commit {
-    endOfWeek?: string;
-    numCommits?: number
+    endOfWeek: string;
+    numCommits: number
 }
