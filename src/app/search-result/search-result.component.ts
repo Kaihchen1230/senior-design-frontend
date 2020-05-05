@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { faSearch, faStar} from '@fortawesome/free-solid-svg-icons';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { RequestRepoService } from '../shared/request-repo.service';
-import {SearchResultService} from '../search-result/search-result.service';
+import { SearchResultService } from '../search-result/search-result.service';
 import { Repo } from '../shared/models/repo.model';
 
 @Component({
@@ -14,15 +14,15 @@ import { Repo } from '../shared/models/repo.model';
 export class SearchResultComponent implements OnInit {
   searchIcon = faSearch;
   starIcon = faStar;
-  languageCounter = {};
-  isFetching = false;
   searchResults: Repo[] = [];
+  languageSelected = null;
+  platformSelected = null;
   errorMsg = null;
+  isFetching = false;
 
   constructor(private requestRepoService: RequestRepoService,
               private searchResultService: SearchResultService,
-              private route: ActivatedRoute,
-              private router: Router) { }
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.route.params
@@ -35,28 +35,27 @@ export class SearchResultComponent implements OnInit {
             this.isFetching = false;
             this.searchResults = this.searchResultService.getSearchResult();
             if (this.searchResults.length === 0) {
-              this.errorMsg = 'No Project Found: ';
-            } else {
-              this.countLanguage();
+              this.errorMsg = 'No Project Related to ' + searchTerm + ' ......';
             }
           }, error => {
-            console.log('Error Occur:', error);
             this.errorMsg = error.error.message;
           });
-          console.log(this.searchResults);
       });
   }
-  countLanguage() {
-    this.searchResults.forEach((searchResult: Repo) => {
-      const language = searchResult.language;
-      if (this.languageCounter.hasOwnProperty(language)) {
-        this.languageCounter[language] += 1;
-      } else {
-        this.languageCounter[language] = 1;
-      }
-    });
+
+  selectPlatform(platformSelected: string) {
+    if (this.platformSelected === platformSelected) {
+      this.platformSelected = null;
+    } else {
+      this.platformSelected = platformSelected;
+    }
   }
-  onHandleError() {
-    this.router.navigate(['/']);
+
+  selectLanguage(languageSelected: string) {
+    if (this.languageSelected === languageSelected) {
+      this.languageSelected = null;
+    } else {
+      this.languageSelected = languageSelected;
+    }
   }
 }

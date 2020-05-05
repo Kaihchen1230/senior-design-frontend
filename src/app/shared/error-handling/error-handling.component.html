@@ -1,0 +1,8 @@
+<div class="alert alert-danger error-message" *ngIf="errorMes">
+  <h1>An Error Occurred!</h1>
+  <p>{{ errorMes }}</p>
+  <div class="uk-button-group">
+    <button class="btn btn-danger" (click)="onGoBack()">Go Back</button>
+    <button class="btn btn-danger btn--margin" (click)="onGoHomePage()">Go back to Home</button>
+  </div>
+</div>

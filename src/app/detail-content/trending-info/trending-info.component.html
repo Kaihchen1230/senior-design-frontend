@@ -1,0 +1,18 @@
+<div class="predit-graph-container" [ngClass]="{'no-border': !commits}">
+
+  <div class="no-predition-block" *ngIf="!commits">
+    <div class="alert alert-danger alert--margin">
+      There is no commit history to predict .....
+    </div>
+  </div>
+  <div>
+    <h1 *ngIf="commits" class="predit-graph__title">Commit Prediction Graph</h1>
+    <canvas
+      id="canvas"
+      [ngClass]="{
+        'canvas':commits,
+        'none': !commits
+      }"
+      ></canvas>
+  </div>
+</div>

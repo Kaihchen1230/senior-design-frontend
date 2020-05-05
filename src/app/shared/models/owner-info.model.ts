@@ -1,6 +1,5 @@
-export class OwnerInfo {
-
-  constructor(public ownerAvatarUrl: string,
-              public ownerName: string,
-              public ownerProfileURL: string) {}
+export interface OwnerInfo {
+  avatarURL: string;
+  ownerName: string;
+  profileURL: string;
 }

@@ -2,10 +2,6 @@
   margin: 0 10vw;
 }
 
-.language-filter{
-  width: 50%; text-align: left;
-}
-
 .search-result{
   border-left: none; border-right: none;
 }
@@ -14,11 +10,10 @@
   color: yellow;
 }
 
-.spinner{
-  width: 5rem; height: 5rem;
+.platform-filter{
+  margin-top: 20px;
 }
 
-.error-message{
-  width: 83vw; 
-  margin:0 auto;
+.spinner{
+  width: 5rem; height: 5rem;
 }

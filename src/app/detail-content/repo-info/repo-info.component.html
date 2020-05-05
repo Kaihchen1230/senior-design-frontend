@@ -1,0 +1,18 @@
+<div class="repo-info-container">
+  
+  <h2 class="repo-info__title">Repo Information</h2>
+  <div class="repo-info__block" >
+    <h6 class="repo-info__block__text">
+      Star Count: {{ repoInfo.starCount }} 
+      <fa-icon [icon]="starIcon" class="fa-icon"></fa-icon>
+     </h6>
+    <h6 class="repo-info__block__text">
+      Fork Count: {{ repoInfo.forkCount }}
+      <fa-icon [icon]="forkIcon"></fa-icon>
+    </h6>
+    <h6 class="repo-info__block__text">Size: {{ repoInfo.size }} KB</h6>
+    <h6 class="repo-info__block__text">Last Updated: {{ repoInfo.updatedAt }}</h6>
+    <h6 class="repo-info__block__text">Lanauge: {{ repoInfo.language }}</h6>
+  </div>
+
+</div>
