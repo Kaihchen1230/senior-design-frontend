@@ -21,7 +21,6 @@ import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinne
 import { ErrorHandlingComponent } from './shared/error-handling/error-handling.component';
 import { RepoFilterComponent } from './search-result/repo-filter/repo-filter.component';
 import { PipeModule } from './shared/pipes/pipe.module';
-import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +38,6 @@ import { FooterComponent } from './footer/footer.component';
     LoadingSpinnerComponent,
     ErrorHandlingComponent,
     RepoFilterComponent,
-    FooterComponent,
   ],
   imports: [
     BrowserModule,
