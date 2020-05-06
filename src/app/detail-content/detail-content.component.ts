@@ -46,11 +46,20 @@ export class DetailContentComponent implements OnInit {
             this.isFetching = false;
 
           }, (errorResp) => {
-            console.log('this is errorResp: ', errorResp);
-            if (errorResp.error.error.message) {
+            console.log('this is errorResp before if: ', errorResp);
+
+            if (errorResp.message) {
+              this.errorMes = errorResp.message;
+              console.log('this is errorResp in else if: ', errorResp);
+
+            } else if (errorResp.error.error.message) {
               this.errorMes = errorResp.error.message;
+              console.log('this is errorResp in else if: ', errorResp);
+
             } else {
               this.errorMes = 'Unknown Error Occured ....';
+            console.log('this is errorResp in else : ', errorResp);
+
             }
             this.isFetching = false;
           });

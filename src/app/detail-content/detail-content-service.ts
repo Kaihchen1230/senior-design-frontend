@@ -110,7 +110,11 @@ export class DetailContentService {
     }
 
     setTrendingGraphInfo(commits: Commit[]) {
-        const today = new Date();
+        const todayAtUTC = new Date().getTime();
+        // const UTCyear = todayAtUTC.getUTCFullYear();
+        // const UTCMonth = todayAtUTC.getUTCMonth() + 1;
+        // const UTCDate = todayAtUTC.getUTCDate();
+        // console.log('this is UTCyear: ', UTCyear, ' this is UTCMonth: ', UTCMonth, ' this is UTCDate: ', UTCDate);
         const endOfWeeks: string[] = [];
         const historicalCommitCounts: number[] = [];
         const predictCommitCounts: number[] = [];
@@ -120,34 +124,59 @@ export class DetailContentService {
             let prevEnfOfWeek: Date;
             let prevIndex: number;
             let prevCommitCount: number;
-            
+            let predictCommitCountAmount = 5;
+            let startOfHistoricalCommits = 1;
             commits.forEach((commit, index) => {
                 const endOfWeek = commit.endOfWeek;
-                const endOfWeekDate = new Date(`${ endOfWeek } 23:59`);
+                const yyyymmdd = endOfWeek.split('-');
+                const year = parseInt(yyyymmdd[0]);
+                const month = parseInt(yyyymmdd[1]);
+                const date = parseInt(yyyymmdd[2]);
+                const currentEndOfWeekDate = + new Date(`${month}/${date}/${year}`);
                 const commitCount = commit.numCommits;
-                
-                if (endOfWeekDate <= today) {
 
-                    if (prevEnfOfWeek >= today) {
-                        gaps[0] = prevCommitCount;
-                        gaps.unshift(commitCount);
-                    } else {
-                        gaps.unshift(NaN);
-                    }
+                if (currentEndOfWeekDate > todayAtUTC) {
+                    historicalCommitCounts.unshift(NaN);
+                    predictCommitCounts.unshift(commitCount);
+                    predictCommitCountAmount -= 1;
+                } else {
                     historicalCommitCounts.unshift(commitCount);
                     predictCommitCounts.unshift(NaN);
-                    
-                } else {
-
-                    historicalCommitCounts.unshift(NaN);
-                    gaps.unshift(NaN);
-                    predictCommitCounts.unshift(commitCount);
+                    startOfHistoricalCommits -= 1;
                 }
+                
+                if (predictCommitCountAmount === 0 || startOfHistoricalCommits === 0) {
+                    gaps.unshift(commitCount);
+                    predictCommitCountAmount = 5;
+                } else {
+                    gaps.unshift(NaN);
+                }
+                // if (endOfWeekDate <= todayAtUTC) {
+
+                //     if (prevEnfOfWeek >= todayAtUTC) {
+                //         gaps[0] = prevCommitCount;
+                //         gaps.unshift(commitCount);
+                //     } else {
+                //         gaps.unshift(NaN);
+                //     }
+                //     historicalCommitCounts.unshift(commitCount);
+                //     predictCommitCounts.unshift(NaN);
+                    
+                // } else {
+
+                //     historicalCommitCounts.unshift(NaN);
+                //     gaps.unshift(NaN);
+                //     predictCommitCounts.unshift(commitCount);
+                // }
                   
-                prevEnfOfWeek = endOfWeekDate;
-                prevCommitCount = commitCount;
+                // prevEnfOfWeek = endOfWeekDate;
+                // prevCommitCount = commitCount;
                 endOfWeeks.unshift(endOfWeek);
             })
+
+            console.log('this is historical: ', historicalCommitCounts);
+            console.log('this is gaps: ', gaps);
+            console.log('this is predict: ', predictCommitCounts);
         }
 
 

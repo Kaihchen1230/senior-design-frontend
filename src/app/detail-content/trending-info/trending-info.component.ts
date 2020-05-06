@@ -24,9 +24,9 @@ export class TrendingInfoComponent implements OnInit {
     const gaps = this.trendingGraphInfo.gaps;
     
     const predictCommitCounts = this.trendingGraphInfo.predictCommitCounts;
-
+    
     if (this.trendingGraphInfo.endOfWeeks.length > 0) {
-    this.chart = this.createGraph(endOfWeeks, historicalCommitCounts, gaps, predictCommitCounts);
+      this.chart = this.createGraph(endOfWeeks, historicalCommitCounts, gaps, predictCommitCounts);
     } else {
       this.trendingGraphInfo = null;
     }
@@ -92,10 +92,10 @@ export class TrendingInfoComponent implements OnInit {
             cubicInterpolationMode: 'monotone',
           },
           {
-            label: 'Predicted Future 5 weeks Commit Counts',
+            label: this.containPredictCounts(predictCommitCounts) ? 'Predicted Future 5 weeks Commit Counts' : "There is not Enough Data to Perform Prediction",
             data: predictCommitCounts,
             backgroundColor: 'rgba(0, 0, 0, 0)',
-            borderColor: 'blue',
+            borderColor: this.containPredictCounts(predictCommitCounts)? 'blue' : 'none',
             fill: false,
             cubicInterpolationMode: 'monotone'
           }
@@ -140,5 +140,12 @@ export class TrendingInfoComponent implements OnInit {
           }
         }
       });
+    }
+
+    containPredictCounts (predictCommitCounts) {
+      const latestCommit = predictCommitCounts.slice(-1)[0];
+
+      return !isNaN(latestCommit);
+
     }
   }
