@@ -33,14 +33,29 @@ export class SearchResultComponent implements OnInit {
 
           this.requestRepoService.fetchRepos(searchTerm).subscribe(_ => {
             this.isFetching = false;
-            this.searchResults = this.searchResultService.getSearchResult();
+            this.searchResults = this.searchResultService.getSearchResult().slice();
             if (this.searchResults.length === 0) {
               this.errorMsg = 'No Project Related to ' + searchTerm + ' ......';
+            } else {
+              this.addPlatformUrl();
             }
           }, error => {
             this.errorMsg = error.error.message;
           });
       });
+  }
+
+  addPlatformUrl() {
+    this.searchResults = this.searchResults.map((repo) => {
+      if (repo.platform === 'github') {
+        repo.logoUrl = '../../assets/github-icon.jpg';
+      } else if (repo.platform === 'gitlab') {
+        repo.logoUrl = '../../assets/gitlab-icon.jpg';
+      } else {
+        repo.logoUrl = '../../assets/bitbucket-icon.jpg';
+      }
+      return repo;
+    });
   }
 
   selectPlatform(platformSelected: string) {
