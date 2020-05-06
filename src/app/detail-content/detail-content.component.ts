@@ -47,7 +47,7 @@ export class DetailContentComponent implements OnInit {
 
           }, (errorResp) => {
             console.log('this is errorResp: ', errorResp);
-            if (errorResp.error) {
+            if (errorResp.error.error.message) {
               this.errorMes = errorResp.error.message;
             } else {
               this.errorMes = 'Unknown Error Occured ....';

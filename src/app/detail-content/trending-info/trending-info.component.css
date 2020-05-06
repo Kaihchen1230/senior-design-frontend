@@ -11,6 +11,7 @@
 }
 .no-border {
   border: none;
+  margin-top: 10px;
 }
 
 .predit-graph__title {
