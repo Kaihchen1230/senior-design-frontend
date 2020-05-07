@@ -18,6 +18,7 @@
 
 .similar-repos__controller {
   border: 1px solid black;
+  background: white;
   border-radius: 0;
   height: 144px;
 }

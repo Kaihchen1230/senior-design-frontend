@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
-import { faGithub, faGitlab, faBitbucket } from '@fortawesome/free-brands-svg-icons';
 import { Repo } from 'src/app/shared/models/repo.model';
 
 @Component({
@@ -15,6 +14,7 @@ import { Repo } from 'src/app/shared/models/repo.model';
 export class SimilarReposComponent implements OnInit {
 
   similarRepos: Repo[];
+  starIcon = faStar;
   @Input() repoName: '';
   @ViewChild('widgetsContent', { static: false })  widgetsContent: ElementRef<any>;
 

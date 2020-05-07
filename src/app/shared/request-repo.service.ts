@@ -7,8 +7,7 @@ import { SingleRepoContent } from './models/single-repo-content.model';
 import {SearchResultService} from '../search-result/search-result.service';
 import {environment} from '../../environments/environment';
 import { DetailContentService } from '../detail-content/detail-content-service';
-import { faStar } from '@fortawesome/free-solid-svg-icons';
-import { faGithub, faGitlab, faBitbucket } from '@fortawesome/free-brands-svg-icons';
+import { faGithub, faGitlab, faBitbucket, IconDefinition } from '@fortawesome/free-brands-svg-icons';
 @Injectable()
 export class RequestRepoService {
   // BACKEND_API = environment.LOCAL_API;
@@ -36,7 +35,6 @@ export class RequestRepoService {
           const newDate = repo.updated_at.replace(new RegExp('-', 'g'), '/');
           const newLanguage = this.converLanguage(repo.language);
           const platformIcon = this.checkPlatform(repo.platform);
-          const starIcon = faStar;
           return new Repo(
             repo.full_name,
             repo.description,
@@ -45,8 +43,7 @@ export class RequestRepoService {
             newLanguage,
             repo.platform,
             null,
-            platformIcon,
-            starIcon
+            platformIcon
           ); }
         );
       }),
@@ -122,6 +119,15 @@ export class RequestRepoService {
 
   checkPlatform(platform: string) {
 
-    return platform === 'github' ? faGithub : platform === 'gitlab' ? faGitlab : faBitbucket;
+    let platformIcon: IconDefinition;
+    if (platform === 'github') {
+      platformIcon = faGithub;
+    } else if (platform === 'gitlab') {
+      platformIcon = faGitlab;
+    } else {
+      platformIcon = faBitbucket;
+    }
+
+    return platformIcon;
   }
 }
