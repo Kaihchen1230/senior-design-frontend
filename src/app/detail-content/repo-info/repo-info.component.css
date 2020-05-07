@@ -1,5 +1,6 @@
 .repo-info-container {
   border: 1px solid rgba(0,0,0,.125);
+  background: white;
 }
 
 .repo-info__title {
@@ -13,7 +14,7 @@
 }
 
 .repo-info__block__text{
-  margin: 45px 0;
+  margin: 23.5px 0;
 
 }
 
