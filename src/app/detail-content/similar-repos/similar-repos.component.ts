@@ -2,6 +2,7 @@ import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { faGithub, faGitlab, faBitbucket } from '@fortawesome/free-brands-svg-icons';
+import { Repo } from 'src/app/shared/models/repo.model';
 
 @Component({
   selector: 'app-similar-repos',
@@ -13,13 +14,9 @@ import { faGithub, faGitlab, faBitbucket } from '@fortawesome/free-brands-svg-ic
 
 export class SimilarReposComponent implements OnInit {
 
-  similarRepos: [];
+  similarRepos: Repo[];
   @Input() repoName: '';
   @ViewChild('widgetsContent', { static: false })  widgetsContent: ElementRef<any>;
-  star = faStar;
-  github = faGithub;
-  gitlab = faGitlab;
-  bitbucket = faBitbucket;
 
   constructor(private router: Router) { }
 

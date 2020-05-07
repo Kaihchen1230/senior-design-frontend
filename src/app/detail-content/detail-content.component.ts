@@ -4,7 +4,7 @@ import { OwnerInfo } from 'src/app/shared/models/owner-info.model';
 import { RequestRepoService } from 'src/app/shared/request-repo.service';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { ActivatedRoute, Params } from '@angular/router';
-import { DetailContentService } from './detail-content-service';
+import { DetailContentService, TrendingGraphInfo } from './detail-content-service';
 import { RepoOverview } from '../shared/models/repo-overview.model';
 import { RepoInfo } from '../shared/models/repo-info.model';
 @Component({
@@ -23,6 +23,7 @@ export class DetailContentComponent implements OnInit {
   repoInfo: RepoInfo;
   commits: Commit[];
   repoName = '';
+  trendingGraphInfo: TrendingGraphInfo;
 
   constructor(private requestRepoService: RequestRepoService,
               private route: ActivatedRoute,
@@ -41,14 +42,24 @@ export class DetailContentComponent implements OnInit {
             this.ownerInfo = this.detailContentService.ownerInfo;
             this.repoInfo = this.detailContentService.repoInfo;
             this.commits = this.detailContentService.commits;
+            this.trendingGraphInfo = this.detailContentService.trendingGraphInfo;
             this.isFetching = false;
 
           }, (errorResp) => {
-            console.log('this is errorResp: ', errorResp);
-            if (errorResp.error) {
+            console.log('this is errorResp before if: ', errorResp);
+
+            if (errorResp.message) {
+              this.errorMes = errorResp.message;
+              console.log('this is errorResp in else if: ', errorResp);
+
+            } else if (errorResp.error.error.message) {
               this.errorMes = errorResp.error.message;
+              console.log('this is errorResp in else if: ', errorResp);
+
             } else {
               this.errorMes = 'Unknown Error Occured ....';
+            console.log('this is errorResp in else : ', errorResp);
+
             }
             this.isFetching = false;
           });

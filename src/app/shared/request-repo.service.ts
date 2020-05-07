@@ -7,7 +7,8 @@ import { SingleRepoContent } from './models/single-repo-content.model';
 import {SearchResultService} from '../search-result/search-result.service';
 import {environment} from '../../environments/environment';
 import { DetailContentService } from '../detail-content/detail-content-service';
-
+import { faStar } from '@fortawesome/free-solid-svg-icons';
+import { faGithub, faGitlab, faBitbucket } from '@fortawesome/free-brands-svg-icons';
 @Injectable()
 export class RequestRepoService {
   // BACKEND_API = environment.LOCAL_API;
@@ -34,13 +35,18 @@ export class RequestRepoService {
         return repos.map(repo => {
           const newDate = repo.updated_at.replace(new RegExp('-', 'g'), '/');
           const newLanguage = this.converLanguage(repo.language);
+          const platformIcon = this.checkPlatform(repo.platform);
+          const starIcon = faStar;
           return new Repo(
             repo.full_name,
             repo.description,
             repo.star_count,
             newDate,
             newLanguage,
-            repo.platform
+            repo.platform,
+            null,
+            platformIcon,
+            starIcon
           ); }
         );
       }),
@@ -79,6 +85,9 @@ export class RequestRepoService {
         let platformAvatarURL = '';
         let imgAlt = '';
 
+        if (response.language === null) {
+          response.language = 'Unkown';
+        }
         if (platform === 'github') {
           platformAvatarURL = 'https://cdn1.iconfinder.com/data/icons/capsocial/500/github-512.png',
           imgAlt =  'GitLab logo image';
@@ -109,5 +118,10 @@ export class RequestRepoService {
     const index = ownerNameAndRepoName.indexOf('/');
     const repoName = ownerNameAndRepoName.slice(0,index);
     return repoName;
+  }
+
+  checkPlatform(platform: string) {
+
+    return platform === 'github' ? faGithub : platform === 'gitlab' ? faGitlab : faBitbucket;
   }
 }

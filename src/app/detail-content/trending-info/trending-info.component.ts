@@ -1,10 +1,8 @@
 import { Component, OnInit, Input, ViewChild, AfterViewInit } from '@angular/core';
 import { Chart } from 'chart.js';
+import { Commit } from 'src/app/shared/models/commit-model';
+import { TrendingGraphInfo } from '../detail-content-service';
 
-interface Commit {
-  endOfWeek: string;
-  numCommits: number;
-}
 
 @Component({
   selector: 'app-trending-info',
@@ -13,50 +11,29 @@ interface Commit {
 })
 export class TrendingInfoComponent implements OnInit {
 
-  @Input() commits: [];
-  commitCount: {[ date: string ]: number };
+  @Input() commits: Commit[];
+  @Input() trendingGraphInfo: TrendingGraphInfo;
   chart = [];
 
   constructor() { }
 
   ngOnInit() {
 
-    console.log('this is commitCount: ', this.commits);
-    if (this.commits) {
-      let endOfWeeks = [];
-      let historicalCommitCounts = [];
-      let predictCommitCounts = [];
-      let gaps = [];
-      this.commits.forEach((commit: Commit, index) => {
-        const endOfWeek = commit.endOfWeek;
-        const commitCount = commit.numCommits;
+    const endOfWeeks = this.trendingGraphInfo.endOfWeeks;
+    const historicalCommitCounts = this.trendingGraphInfo.historicalCommitCounts;
+    const gaps = this.trendingGraphInfo.gaps;
+    
+    const predictCommitCounts = this.trendingGraphInfo.predictCommitCounts;
+    
+    if (this.trendingGraphInfo.endOfWeeks.length > 0) {
+      this.chart = this.createGraph(endOfWeeks, historicalCommitCounts, gaps, predictCommitCounts);
+    } else {
+      this.trendingGraphInfo = null;
+    }
+  }
 
-        if (index === 4) {
-          gaps.push(commitCount);
-          historicalCommitCounts.push(NaN);
-          predictCommitCounts.push(commitCount);
-        } else if (index === 5) {
-          gaps.push(commitCount);
-          historicalCommitCounts.push(commitCount);
-          predictCommitCounts.push(NaN);
-        } else if (index < 5) {
-          historicalCommitCounts.push(NaN);
-          predictCommitCounts.push(commitCount);
-          gaps.push(NaN);
-        } else {
-          historicalCommitCounts.push(commitCount);
-          predictCommitCounts.push(NaN);
-          gaps.push(NaN);
-        }
-        endOfWeeks.push(endOfWeek);
-
-      });
-
-      endOfWeeks = endOfWeeks.reverse();
-      historicalCommitCounts = historicalCommitCounts.reverse();
-      predictCommitCounts = predictCommitCounts.reverse();
-      gaps = gaps.reverse();
-      this.chart = new Chart('canvas', {
+    createGraph(endOfWeeks, historicalCommitCounts, gaps, predictCommitCounts) {
+      return new Chart('canvas', {
         type: 'line',
         data: {
           labels: endOfWeeks,
@@ -115,10 +92,10 @@ export class TrendingInfoComponent implements OnInit {
             cubicInterpolationMode: 'monotone',
           },
           {
-            label: 'Predicted Future 5 weeks Commit Counts',
+            label: this.containPredictCounts(predictCommitCounts) ? 'Predicted Future 5 weeks Commit Counts' : "There is not Enough Data to Perform Prediction",
             data: predictCommitCounts,
             backgroundColor: 'rgba(0, 0, 0, 0)',
-            borderColor: 'blue',
+            borderColor: this.containPredictCounts(predictCommitCounts)? 'blue' : 'none',
             fill: false,
             cubicInterpolationMode: 'monotone'
           }
@@ -164,46 +141,11 @@ export class TrendingInfoComponent implements OnInit {
         }
       });
     }
+
+    containPredictCounts (predictCommitCounts) {
+      const latestCommit = predictCommitCounts.slice(-1)[0];
+
+      return !isNaN(latestCommit);
+
+    }
   }
-
-  countCommits() {
-
-    const result = {};
-    this.commits.forEach(commit => {
-
-      const mmddyyyy = new Date(commit);
-      let month = (mmddyyyy.getMonth() + 1).toString();
-      let date = mmddyyyy.getDate().toString();
-      const year = mmddyyyy.getFullYear().toString();
-
-      // tslint:disable-next-line: radix
-      if (parseInt(month) < 10) {
-        month = '0' + month;
-      }
-
-      // tslint:disable-next-line: radix
-      if (parseInt(date) < 10) {
-        date = '0' + date;
-      }
-      const commitDate = year + '-' + month + '-' + date;
-
-      if (result.hasOwnProperty(commitDate)) {
-        result[commitDate] += 1;
-      } else {
-        result[commitDate] = 0;
-      }
-    });
-
-    // console.log('result: ', result);
-
-    const sortedResult = {};
-
-    Object.keys(result).sort().forEach(key => {
-      sortedResult[key] = result[key];
-    });
-
-    console.log('this is sorted result: ', sortedResult);
-    this.commitCount = sortedResult;
-    console.log('commitCOunt: ', this.commitCount['2019-10-14']);
-  }
-}

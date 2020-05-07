@@ -1,10 +1,11 @@
 :host {
   margin-bottom: 10vh;
+  margin-left: 55px;
 }
 
 .similar-repos__title {
-  padding-left: 10px; 
   padding-bottom: 20px;
+  padding-left: 15px;
 } 
 
 .similar-repos_slider {
