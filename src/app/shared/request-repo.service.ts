@@ -36,7 +36,6 @@ export class RequestRepoService {
           const newDate = repo.updated_at.replace(new RegExp('-', 'g'), '/');
           const newLanguage = this.converLanguage(repo.language);
           const platformIcon = this.checkPlatform(repo.platform);
-          const starIcon = faStar;
           return new Repo(
             repo.full_name,
             repo.description,
@@ -45,8 +44,7 @@ export class RequestRepoService {
             newLanguage,
             repo.platform,
             null,
-            platformIcon,
-            starIcon
+            platformIcon
           ); }
         );
       }),

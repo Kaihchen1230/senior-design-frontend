@@ -10,7 +10,6 @@ export class Repo {
               public language: string,
               public platform: string,
               public logoUrl?: string,
-              public platformIcon?: IconDefinition,
-              public starIcon?: IconDefinition
+              public platformIcon?: IconDefinition
               ) {}
 }
