@@ -1,4 +1,15 @@
-.col-sm-10{
+.home__container {
+  padding-bottom: 35vh;
+}
+
+.home__logo-block {
+  margin-top: 10%;
+}
+
+.home__logo {
+  margin: 0 auto
+}
+.home__search-block {
   margin: 0 auto;
 }
 .search-bar{

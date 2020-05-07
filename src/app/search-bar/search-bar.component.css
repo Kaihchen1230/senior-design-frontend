@@ -3,21 +3,42 @@ img {
   height: 80px;
 }
 
-input {
-  border-radius: 150px;
-  border: none;
-  box-shadow: none;
-  /* height: 10vh; */
-  /* font-size: 1.4em; */
+.header {
+  margin-bottom: 40px;
+  background: #283e4a;
 }
 
-.col-sm-1 {
+.header__logo-block {
+  position: relative;
+  display: inline-block;
+  margin-left: 10vw;
   margin-top: 7px;
   padding-left: 30px;
 }
-div.input-group{
-  border-radius: 150px;
-  border: 1px solid black;
+
+.header__search-block {
+  margin-top:2%;
+  display: inline-block;
 }
 
+.input-grou--modified{
+  border-radius: 150px;
+  border: 1px solid black;
+  max-height: 12vh;
+}
 
+.header__input {
+  border-radius: 150px;
+  border: none;
+  box-shadow: none;
+}
+
+.header__search-button {
+  background: white;
+  border-top-right-radius: 47%;
+  border-bottom-right-radius: 47%;
+  border: 0.1px solid;
+  border-left: none;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+}

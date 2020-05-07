@@ -1,6 +1,7 @@
 .repo-filter{
   font-size: 18px;
-  border: 1px solid #e1e4e8
+  border: 1px solid #e1e4e8;
+  background: #fff;
 }
 .repo-filter__title{
   font-size: 20px;
