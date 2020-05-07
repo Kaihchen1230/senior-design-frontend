@@ -1,0 +1,118 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,500,300,700);
+
+a {
+    color: #212529;
+}
+
+.footer{
+  background: #666;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
+  box-sizing: border-box;
+  width: 100%;
+  text-align: left;
+  font: bold 16px sans-serif;
+  padding: 30px 35px;
+  margin-top: 50px;
+  vertical-align: top;
+}
+
+
+.footer__product-name {
+  color: lightseagreen;
+  font: normal 27px 'Open Sans', cursive;
+  font-weight: 800;
+	margin: 0;
+}
+
+.footer__description {
+  /* max-width: 70%; */
+  margin: 20px 0 12px;
+  padding: 0;
+  line-height: 1.3;
+  font-weight:400;
+  text-decoration: none;
+}
+
+.row--modifed {
+	margin-bottom: 20px;
+}
+
+.footer__center {
+	padding-left: 6%;
+}
+
+.footer__icon {
+  background-color:  #33383b;
+	color: #ffffff;
+	font-size: 25px;
+	width: 38px;
+	height: 38px;
+	border-radius: 50%;
+	text-align: center;
+	line-height: 42px;
+	vertical-align: middle; 
+}
+
+.footer__icon-info {
+	display: inline-block;
+	color: #ffffff;
+  	font-weight:400;
+	vertical-align: middle;
+	margin:0;
+	line-height: 1.5;
+}
+
+.footer__address {
+	min-width: 200px;
+	display: block;
+}
+
+.footer__icon--line-height {
+	line-height: 2;
+}
+
+.footer__team-name {
+	text-align: center;
+}
+
+.footer__team-info {
+	display: inline-block;
+	text-align: center;
+}
+
+.footer__member-name {
+	padding: 0 20px 0 10px;
+}
+
+.footer__member-name--padding {
+	padding: 0 20px 0 0;
+
+}
+
+.footer__icon-block {
+	display: flex;
+    justify-content: center;
+}
+.footer__icon--modified {
+	margin: 20px;
+}
+
+.footer__contact-block {
+	font-size: 38px;
+	margin-right: 20px;
+}
+
+.footer__contact-block--padding-68 {
+	padding-left: 68px;
+}
+
+.footer__contact-block--padding-20 {
+	padding-left: 20px;
+}
+
+.footer-_reserved-section {
+	text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+}
+
