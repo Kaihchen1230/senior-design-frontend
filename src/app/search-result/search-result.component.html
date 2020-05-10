@@ -29,9 +29,12 @@
                      <span>
                         <fa-icon [icon]="starIcon" class="search-result__fa-icon"></fa-icon>
                         Stars:
-                        <div>
-                           {{searchResult.starCount}}
-                        </div>
+                        <ng-template [ngIf]="searchResult.platform!=='bitbucket'" [ngIfElse]="Unknown_msg">                                          
+                           {{searchResult.starCount}}                                      
+                        </ng-template>
+                        <ng-template #Unknown_msg>
+                           Unknown
+                        </ng-template>
                      </span>
                   </div>
                   <div class="col-sm-3">
