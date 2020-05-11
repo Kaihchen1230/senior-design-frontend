@@ -10,8 +10,8 @@ import { DetailContentService } from '../detail-content/detail-content-service';
 import { faGithub, faGitlab, faBitbucket, IconDefinition } from '@fortawesome/free-brands-svg-icons';
 @Injectable()
 export class RequestRepoService {
-  // BACKEND_API = environment.LOCAL_API;
-  BACKEND_API = environment.BACKEND_API;
+   BACKEND_API = environment.LOCAL_API;
+  // BACKEND_API = environment.BACKEND_API;
 
 
   constructor(private http: HttpClient,
@@ -30,7 +30,6 @@ export class RequestRepoService {
           params: searchParams
         })
       .pipe(map(repos => {
-        console.log('this is result: ', repos);
         return repos.map(repo => {
           const newDate = repo.updated_at.replace(new RegExp('-', 'g'), '/');
           const newLanguage = this.converLanguage(repo.language);
@@ -48,6 +47,8 @@ export class RequestRepoService {
         );
       }),
       tap(repos => {
+        repos.sort(this.compareStars);
+        console.log(repos);
         this.searchResultService.setSearchResult(repos);
       }),
       catchError(errorRes => {
@@ -64,6 +65,13 @@ export class RequestRepoService {
       newLanguage = newLanguage.charAt(0).toUpperCase() + newLanguage.slice(1);
       return newLanguage;
     }
+  }
+
+  compareStars(repoA: Repo, repoB: Repo) {
+    if (repoA.starCount < repoB.starCount) {
+      return 1;
+    }
+    return -1;
   }
 
   fetchRepo(platform: string, ownerNameAndRepoName: string) {
@@ -111,9 +119,9 @@ export class RequestRepoService {
       }));
   }
 
-  getRepoName (ownerNameAndRepoName: string) {
+  getRepoName(ownerNameAndRepoName: string) {
     const index = ownerNameAndRepoName.indexOf('/');
-    const repoName = ownerNameAndRepoName.slice(0,index);
+    const repoName = ownerNameAndRepoName.slice(0, index);
     return repoName;
   }
 
