@@ -4,14 +4,16 @@
       <div class="col-xs-12 col-sm-3" >
          <app-repo-filter 
          (selectKeyword)="selectLanguage($event)" 
-         [keywordSelected] = languageSelected
+         [platformSelected] = "platformSelected"
+         [languageSelected] = "languageSelected"
          filterClass= "language"
          >
          </app-repo-filter>
          <div class = "platform-filter">
             <app-repo-filter   
             (selectKeyword)="selectPlatform($event)" 
-            [keywordSelected] = platformSelected
+            [platformSelected] = "platformSelected"
+            [languageSelected] = "languageSelected"
             filterClass= "platform"
             >
             </app-repo-filter>
@@ -29,9 +31,14 @@
                      <span>
                         <fa-icon [icon]="starIcon" class="search-result__fa-icon"></fa-icon>
                         Stars:
-                        <div>
-                           {{searchResult.starCount}}
-                        </div>
+                        <ng-template [ngIf]="searchResult.platform!=='bitbucket'" [ngIfElse]="Unknown_msg">                                          
+                           <div>
+                              {{searchResult.starCount}}                                      
+                           </div>
+                        </ng-template>
+                        <ng-template #Unknown_msg>
+                           Unknown
+                        </ng-template>
                      </span>
                   </div>
                   <div class="col-sm-3">

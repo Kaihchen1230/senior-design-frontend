@@ -8,11 +8,11 @@ import {SearchResultService} from '../search-result/search-result.service';
 import {environment} from '../../environments/environment';
 import { DetailContentService } from '../detail-content/detail-content-service';
 import { faGithub, faGitlab, faBitbucket, IconDefinition } from '@fortawesome/free-brands-svg-icons';
+
 @Injectable()
 export class RequestRepoService {
   // BACKEND_API = environment.LOCAL_API;
   BACKEND_API = environment.BACKEND_API;
-
 
   constructor(private http: HttpClient,
               private searchResultService: SearchResultService,
@@ -30,7 +30,6 @@ export class RequestRepoService {
           params: searchParams
         })
       .pipe(map(repos => {
-        console.log('this is result: ', repos);
         return repos.map(repo => {
           const newDate = repo.updated_at.replace(new RegExp('-', 'g'), '/');
           const newLanguage = this.converLanguage(repo.language);
@@ -48,6 +47,7 @@ export class RequestRepoService {
         );
       }),
       tap(repos => {
+        repos.sort(this.compareRepo);
         this.searchResultService.setSearchResult(repos);
       }),
       catchError(errorRes => {
@@ -66,9 +66,21 @@ export class RequestRepoService {
     }
   }
 
+  compareRepo(repoA: Repo, repoB: Repo) {
+    if (repoA.starCount < repoB.starCount) {
+      return 1;
+    } else if (repoA.starCount > repoB.starCount) {
+      return -1;
+    } else if (repoB.platform === 'github') {
+      return 1;
+    } else if (repoB.platform === 'gitlab' && repoA.platform !== 'github') {
+      return 1;
+    }
+    return -1;
+  }
+
   fetchRepo(platform: string, ownerNameAndRepoName: string) {
     const detailURL = this.BACKEND_API + 'detail?';
-    console.log('platform: ', platform);
     let searchParams = new HttpParams();
     searchParams = searchParams.append('platform', platform);
     searchParams = searchParams.append('full_name', ownerNameAndRepoName);
@@ -78,7 +90,6 @@ export class RequestRepoService {
         params: searchParams
       })
       .pipe(map(response => {
-        console.log('response: ', response);
         let platformAvatarURL = '';
         let imgAlt = '';
 
@@ -111,9 +122,9 @@ export class RequestRepoService {
       }));
   }
 
-  getRepoName (ownerNameAndRepoName: string) {
+  getRepoName(ownerNameAndRepoName: string) {
     const index = ownerNameAndRepoName.indexOf('/');
-    const repoName = ownerNameAndRepoName.slice(0,index);
+    const repoName = ownerNameAndRepoName.slice(0, index);
     return repoName;
   }
 
