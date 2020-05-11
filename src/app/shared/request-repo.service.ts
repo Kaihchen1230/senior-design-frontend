@@ -8,6 +8,7 @@ import {SearchResultService} from '../search-result/search-result.service';
 import {environment} from '../../environments/environment';
 import { DetailContentService } from '../detail-content/detail-content-service';
 import { faGithub, faGitlab, faBitbucket, IconDefinition } from '@fortawesome/free-brands-svg-icons';
+
 @Injectable()
 export class RequestRepoService {
    BACKEND_API = environment.LOCAL_API;
@@ -48,7 +49,6 @@ export class RequestRepoService {
       }),
       tap(repos => {
         repos.sort(this.compareStars);
-        console.log(repos);
         this.searchResultService.setSearchResult(repos);
       }),
       catchError(errorRes => {
@@ -76,7 +76,6 @@ export class RequestRepoService {
 
   fetchRepo(platform: string, ownerNameAndRepoName: string) {
     const detailURL = this.BACKEND_API + 'detail?';
-    console.log('platform: ', platform);
     let searchParams = new HttpParams();
     searchParams = searchParams.append('platform', platform);
     searchParams = searchParams.append('full_name', ownerNameAndRepoName);
@@ -86,7 +85,6 @@ export class RequestRepoService {
         params: searchParams
       })
       .pipe(map(response => {
-        console.log('response: ', response);
         let platformAvatarURL = '';
         let imgAlt = '';
 
