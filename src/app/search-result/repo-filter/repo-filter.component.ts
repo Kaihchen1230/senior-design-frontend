@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, Input, EventEmitter, SimpleChanges, OnChanges } from '@angular/core';
 import {SearchResultService} from '../search-result.service';
 import { Repo } from '../../shared/models/repo.model';
 @Component({
@@ -6,11 +6,13 @@ import { Repo } from '../../shared/models/repo.model';
   templateUrl: './repo-filter.component.html',
   styleUrls: ['./repo-filter.component.css']
 })
-export class RepoFilterComponent implements OnInit {
+export class RepoFilterComponent implements OnInit, OnChanges {
   searchResults: Repo[] = [];
   keywordCounter = {};
+  keywordSelected: string;
   @Output() selectKeyword: EventEmitter<string> = new EventEmitter();
-  @Input() keywordSelected: string;
+  @Input() platformSelected: string;
+  @Input() languageSelected: string;
   @Input() filterClass: string;
 
   constructor(private searchResultService: SearchResultService) { }
@@ -20,18 +22,33 @@ export class RepoFilterComponent implements OnInit {
     this.countKeyword();
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+    if (this.filterClass === 'platform') {
+      this.keywordSelected = this.platformSelected;
+    } else {
+      this.keywordSelected = this.languageSelected;
+    }
+    this.countKeyword();
+  }
+
   onrepoClick(selectedrepo: string) {
     this.selectKeyword.emit(selectedrepo);
   }
 
   countKeyword() {
+    this.keywordCounter = {};
     this.searchResults.forEach((searchResult: Repo) => {
       const repo = searchResult[this.filterClass];
-      if (this.keywordCounter.hasOwnProperty(repo)) {
-        this.keywordCounter[repo] += 1;
-      } else {
-        this.keywordCounter[repo] = 1;
+      if (!this.keywordCounter.hasOwnProperty(repo)) {
+        this.keywordCounter[repo] = 0;
       }
+      if (this.platformSelected && searchResult.platform !== this.platformSelected ) {
+        return;
+      }
+      if (this.languageSelected && searchResult.language !== this.languageSelected ) {
+        return;
+      }
+      this.keywordCounter[repo] += 1;
     });
   }
 }
