@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, Input, EventEmitter, SimpleChanges, OnChanges } from '@angular/core';
 import {SearchResultService} from '../search-result.service';
 import { Repo } from '../../shared/models/repo.model';
 @Component({
@@ -6,11 +6,13 @@ import { Repo } from '../../shared/models/repo.model';
   templateUrl: './repo-filter.component.html',
   styleUrls: ['./repo-filter.component.css']
 })
-export class RepoFilterComponent implements OnInit {
+export class RepoFilterComponent implements OnInit, OnChanges {
   searchResults: Repo[] = [];
   keywordCounter = {};
+  keywordSelected: string;
   @Output() selectKeyword: EventEmitter<string> = new EventEmitter();
-  @Input() keywordSelected: string;
+  @Input() platformSelected: string;
+  @Input() languageSelected: string;
   @Input() filterClass: string;
 
   constructor(private searchResultService: SearchResultService) { }
@@ -18,6 +20,14 @@ export class RepoFilterComponent implements OnInit {
   ngOnInit() {
     this.searchResults = this.searchResultService.getSearchResult();
     this.countKeyword();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (this.filterClass === 'platform') {
+      this.keywordSelected = this.platformSelected;
+    } else {
+      this.keywordSelected = this.languageSelected;
+    }
   }
 
   onrepoClick(selectedrepo: string) {

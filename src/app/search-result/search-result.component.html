@@ -4,14 +4,16 @@
       <div class="col-xs-12 col-sm-3" >
          <app-repo-filter 
          (selectKeyword)="selectLanguage($event)" 
-         [keywordSelected] = languageSelected
+         [platformSelected] = "platformSelected"
+         [languageSelected] = "languageSelected"
          filterClass= "language"
          >
          </app-repo-filter>
          <div class = "platform-filter">
             <app-repo-filter   
             (selectKeyword)="selectPlatform($event)" 
-            [keywordSelected] = platformSelected
+            [platformSelected] = "platformSelected"
+            [languageSelected] = "languageSelected"
             filterClass= "platform"
             >
             </app-repo-filter>
