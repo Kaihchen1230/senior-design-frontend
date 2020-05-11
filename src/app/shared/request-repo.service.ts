@@ -11,8 +11,8 @@ import { faGithub, faGitlab, faBitbucket, IconDefinition } from '@fortawesome/fr
 
 @Injectable()
 export class RequestRepoService {
-   BACKEND_API = environment.LOCAL_API;
-  // BACKEND_API = environment.BACKEND_API;
+  // BACKEND_API = environment.LOCAL_API;
+  BACKEND_API = environment.BACKEND_API;
 
   constructor(private http: HttpClient,
               private searchResultService: SearchResultService,

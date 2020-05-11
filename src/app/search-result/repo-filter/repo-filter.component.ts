@@ -28,6 +28,7 @@ export class RepoFilterComponent implements OnInit, OnChanges {
     } else {
       this.keywordSelected = this.languageSelected;
     }
+    this.countKeyword();
   }
 
   onrepoClick(selectedrepo: string) {
@@ -35,13 +36,19 @@ export class RepoFilterComponent implements OnInit, OnChanges {
   }
 
   countKeyword() {
+    this.keywordCounter = {};
     this.searchResults.forEach((searchResult: Repo) => {
       const repo = searchResult[this.filterClass];
-      if (this.keywordCounter.hasOwnProperty(repo)) {
-        this.keywordCounter[repo] += 1;
-      } else {
-        this.keywordCounter[repo] = 1;
+      if (!this.keywordCounter.hasOwnProperty(repo)) {
+        this.keywordCounter[repo] = 0;
       }
+      if (this.platformSelected && searchResult.platform !== this.platformSelected ) {
+        return;
+      }
+      if (this.languageSelected && searchResult.language !== this.languageSelected ) {
+        return;
+      }
+      this.keywordCounter[repo] += 1;
     });
   }
 }
