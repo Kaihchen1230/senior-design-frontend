@@ -14,7 +14,6 @@ export class RequestRepoService {
    BACKEND_API = environment.LOCAL_API;
   // BACKEND_API = environment.BACKEND_API;
 
-
   constructor(private http: HttpClient,
               private searchResultService: SearchResultService,
               private detailContentService: DetailContentService ) {}
@@ -48,7 +47,7 @@ export class RequestRepoService {
         );
       }),
       tap(repos => {
-        repos.sort(this.compareStars);
+        repos.sort(this.compareRepo);
         this.searchResultService.setSearchResult(repos);
       }),
       catchError(errorRes => {
@@ -67,8 +66,14 @@ export class RequestRepoService {
     }
   }
 
-  compareStars(repoA: Repo, repoB: Repo) {
+  compareRepo(repoA: Repo, repoB: Repo) {
     if (repoA.starCount < repoB.starCount) {
+      return 1;
+    } else if (repoA.starCount > repoB.starCount) {
+      return -1;
+    } else if (repoB.platform === 'github') {
+      return 1;
+    } else if (repoB.platform === 'gitlab' && repoA.platform !== 'github') {
       return 1;
     }
     return -1;

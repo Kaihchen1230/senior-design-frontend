@@ -30,7 +30,9 @@
                         <fa-icon [icon]="starIcon" class="search-result__fa-icon"></fa-icon>
                         Stars:
                         <ng-template [ngIf]="searchResult.platform!=='bitbucket'" [ngIfElse]="Unknown_msg">                                          
-                           {{searchResult.starCount}}                                      
+                           <div>
+                              {{searchResult.starCount}}                                      
+                           </div>
                         </ng-template>
                         <ng-template #Unknown_msg>
                            Unknown
