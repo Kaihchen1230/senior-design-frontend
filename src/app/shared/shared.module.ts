@@ -2,22 +2,21 @@ import { NgModule } from '@angular/core';
 import { ErrorHandlingComponent } from './error-handling/error-handling.component';
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 import { PipeModule } from './pipes/pipe.module';
-import { CommonModule } from '@angular/common';
-
+import { SearchBarModule } from '../search-bar/search-bar.module';
 @NgModule({
     declarations: [
       ErrorHandlingComponent,
       LoadingSpinnerComponent
     ],
     imports: [
-      CommonModule,
-      PipeModule
+      PipeModule,
+      SearchBarModule
     ],
     exports: [
       ErrorHandlingComponent,
       LoadingSpinnerComponent,
-      CommonModule,
-      PipeModule
+      PipeModule,
+      SearchBarModule
     ]
 })
 export class ShareModule {}
