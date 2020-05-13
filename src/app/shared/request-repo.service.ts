@@ -93,8 +93,8 @@ export class RequestRepoService {
         let platformAvatarURL = '';
         let imgAlt = '';
 
-        if (response.language === null) {
-          response.language = 'Unkown';
+        if (!response.language) {
+          response.language = 'Unknown';
         }
         if (platform === 'github') {
           platformAvatarURL = 'https://cdn1.iconfinder.com/data/icons/capsocial/500/github-512.png',

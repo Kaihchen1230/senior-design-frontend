@@ -33,7 +33,7 @@ export class DetailContentService {
             platformIconImg: singleRepoContent.platform_icon_img,
             platformIconImgAlt: singleRepoContent.platform_icon_img_alt,
             repoName: singleRepoContent.repoName,
-            createdAt: singleRepoContent.created_at, 
+            createdAt: singleRepoContent.created_at,
             description: singleRepoContent.description,
             webURL: singleRepoContent.web_url
         };
@@ -41,22 +41,23 @@ export class DetailContentService {
         this._repoOverview = repoOverview;
 
         const unknowImg = 'assets/unknown-avatar.jpg';
-        
         const ownerInfo: OwnerInfo = {
-            avatarURL: singleRepoContent.avatar_url ? singleRepoContent.avatar_url : unknowImg,
+            avatarURL: !singleRepoContent.avatar_url || singleRepoContent.avatar_url.includes('null') ? unknowImg : singleRepoContent.avatar_url,
             ownerName: singleRepoContent.owner_name,
             profileURL: singleRepoContent.profile_url
         };
-        
+
         this._ownerInfo = ownerInfo;
-        
+
         const repoInfo: RepoInfo = {
-            starCount: singleRepoContent.star_count,
-            forkCount: singleRepoContent.fork_count,
-            size: singleRepoContent.size,
+            starCount: singleRepoContent.platform !== 'bitbucket' ? singleRepoContent.star_count : 'Unknown',
+            forkCount: singleRepoContent.platform !== 'bitbucket' ? singleRepoContent.fork_count : 'Unknown',
+            size: singleRepoContent.platform !== 'gitlab' ? singleRepoContent.size : 'Unknown',
             updatedAt: singleRepoContent.updated_at,
             language: singleRepoContent.language
         };
+
+
 
         this._repoInfo = repoInfo;
 
@@ -92,7 +93,7 @@ export class DetailContentService {
     get repoInfo() {
         return { ... this._repoInfo };
     }
-    
+
     set commits(commits: Commit[]) {
         this._commits = commits;
     }
@@ -118,9 +119,9 @@ export class DetailContentService {
         const endOfWeeks: string[] = [];
         const historicalCommitCounts: number[] = [];
         const predictCommitCounts: number[] = [];
-        const gaps: number[] = [];  
+        const gaps: number[] = [];
         if (commits) {
-            
+
             let prevEnfOfWeek: Date;
             let prevIndex: number;
             let prevCommitCount: number;
@@ -144,7 +145,7 @@ export class DetailContentService {
                     predictCommitCounts.unshift(NaN);
                     startOfHistoricalCommits -= 1;
                 }
-                
+
                 if (predictCommitCountAmount === 0 || startOfHistoricalCommits === 0) {
                     gaps.unshift(commitCount);
                     predictCommitCountAmount = 5;
@@ -161,14 +162,14 @@ export class DetailContentService {
                 //     }
                 //     historicalCommitCounts.unshift(commitCount);
                 //     predictCommitCounts.unshift(NaN);
-                    
+
                 // } else {
 
                 //     historicalCommitCounts.unshift(NaN);
                 //     gaps.unshift(NaN);
                 //     predictCommitCounts.unshift(commitCount);
                 // }
-                  
+
                 // prevEnfOfWeek = endOfWeekDate;
                 // prevCommitCount = commitCount;
                 endOfWeeks.unshift(endOfWeek);
@@ -180,11 +181,11 @@ export class DetailContentService {
         }
 
 
-        return { 
+        return {
             endOfWeeks: endOfWeeks,
             historicalCommitCounts: historicalCommitCounts,
             gaps: gaps,
-            predictCommitCounts: predictCommitCounts 
+            predictCommitCounts: predictCommitCounts
         };
     }
 
