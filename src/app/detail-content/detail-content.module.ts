@@ -6,6 +6,7 @@ import { OwnerInfoComponent } from './owner-info/owner-info.component';
 import { SimilarReposComponent } from './similar-repos/similar-repos.component';
 import { RepoInfoComponent } from './repo-info/repo-info.component';
 import { TrendingInfoComponent } from './trending-info/trending-info.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -18,7 +19,10 @@ import { TrendingInfoComponent } from './trending-info/trending-info.component';
     SimilarReposComponent
   ],
   imports: [
-    ShareModule
+    ShareModule,
+    RouterModule.forChild([
+      { path: 'detail-page/:platform/:repo-name', component: DetailContentComponent }
+    ])
   ]
 })
 export class DetailContentModule {}
