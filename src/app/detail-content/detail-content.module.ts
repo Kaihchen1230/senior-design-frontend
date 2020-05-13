@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { ShareModule } from '../shared/shared.module';
-import { RouterModule } from '@angular/router';
 
 import { DetailContentComponent } from './detail-content.component';
 import { OwnerInfoComponent } from './owner-info/owner-info.component';
@@ -19,14 +18,7 @@ import { TrendingInfoComponent } from './trending-info/trending-info.component';
     SimilarReposComponent
   ],
   imports: [
-    ShareModule,
-  ],
-  exports: [
-    DetailContentComponent,
-    OwnerInfoComponent,
-    RepoInfoComponent,
-    TrendingInfoComponent,
-    SimilarReposComponent
+    ShareModule
   ]
 })
 export class DetailContentModule {}
