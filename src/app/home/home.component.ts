@@ -13,16 +13,25 @@ export class HomeComponent implements OnInit {
   logoImagePath = 'assets/logo.png';
   @ViewChild('f', {static: false}) searchForm: NgForm;
   searchIcon = faSearch;
-  constructor(private router: Router) { }
+  notValid = false;
 
+  constructor(private router: Router) { }
   ngOnInit() {}
 
   submitSearchTerm() {
+    this.notValid = false;
     const searchTerm = this.searchForm.value.searchTerm;
-    if (searchTerm) {
+    this.checkBlankInput(searchTerm);
+    if (!this.notValid) {
       this.router.navigate(['/search-result', searchTerm]);
     } else {
-      alert('search term cannot be empty!');
+      // alert('search term cannot be empty!');
+    }
+  }
+
+  checkBlankInput(searchTerm: string) {
+    if (searchTerm.trim().length === 0) {
+      this.notValid = true;
     }
   }
 }

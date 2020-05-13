@@ -41,3 +41,12 @@ img {
   border-top-left-radius: 0;
   border-left: 1px solid white;
 }
+
+.help-block {
+  padding-left: 20px;
+  color: #ff0047;
+}
+
+.emplty-term {
+  border: 2px red solid;
+}

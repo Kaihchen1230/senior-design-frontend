@@ -13,15 +13,12 @@ import { TrendingInfoComponent } from './detail-content/trending-info/trending-i
 import { SimilarReposComponent } from './detail-content/similar-repos/similar-repos.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { HttpClientModule } from '@angular/common/http';
-import { RequestRepoService } from './shared/request-repo.service';
 import { DetailContentComponent } from './detail-content/detail-content.component';
-import { RefreshComponent } from './refresh/refresh.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
-import { ErrorHandlingComponent } from './shared/error-handling/error-handling.component';
 import { RepoFilterComponent } from './search-result/repo-filter/repo-filter.component';
 import { PipeModule } from './shared/pipes/pipe.module';
 import { FooterComponent } from './footer/footer.component';
+import { ShareModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -34,10 +31,7 @@ import { FooterComponent } from './footer/footer.component';
     SimilarReposComponent,
     SearchBarComponent,
     DetailContentComponent,
-    RefreshComponent,
     PageNotFoundComponent,
-    LoadingSpinnerComponent,
-    ErrorHandlingComponent,
     RepoFilterComponent,
     FooterComponent,
   ],
@@ -48,9 +42,8 @@ import { FooterComponent } from './footer/footer.component';
     FontAwesomeModule,
     NgbModule,
     HttpClientModule,
-    PipeModule
+    ShareModule
   ],
-  providers: [RequestRepoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
