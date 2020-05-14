@@ -10,13 +10,46 @@
 .home__logo {
   margin: 0 auto
 }
+
 .home__search-block {
   margin: 0 auto;
 }
+
+.home__search-container {
+  border-radius: 150px;
+  border: 1px solid black;
+  background-color: white;
+}
+
+.home__search-icon {
+  margin: 5px 0px 0px 10px;
+  font-size: 1.2rem;
+}
+
+.home__search-field {
+  border-radius: 150px;
+  border: none;
+  box-shadow: none;
+}
+
 .search-bar{
   border-radius: 50px;
 }
 
+.home__search-button-container {
+  margin: 0 auto;
+  padding-right: 7vw;
+}
+
 .search-button{
   margin-left: 50%;
+}
+
+.help-block {
+  padding-left: 20px;
+  color: #ff0047;
+}
+
+.emplty-term {
+  border: 2px red solid;
 }

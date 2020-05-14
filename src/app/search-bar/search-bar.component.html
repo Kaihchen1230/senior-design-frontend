@@ -7,7 +7,9 @@
   <div class="col-sm-8 col-md-5 col-lg-5 header__search-block">
     <form (ngSubmit)="submitSearchTerm()" #f="ngForm" >
       
-      <div class="input-group input-grou--modified">
+      <div 
+      class="input-group input-grou--modified" 
+      [ngClass]="{'emplty-term': notValid}">
         <input
             type="text"
             class="form-control header__input"
@@ -21,6 +23,7 @@
             </div>
           </button>
       </div>
+      <span class="help-block" *ngIf="notValid">cannot search on empty term</span>
     </form>
   </div>
 </div>

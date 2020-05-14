@@ -1,9 +1,9 @@
 .predit-graph-container {
   border: 1px solid rgba(0,0,0,.125); 
   margin-top: 21px; 
-  max-width: 50.5vw;
   padding: 22px 0;
   background: white;
+  width: 100%;
 }
 
 .no-predition-block {
