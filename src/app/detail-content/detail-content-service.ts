@@ -114,12 +114,12 @@ export class DetailContentService {
         let UTCdate = new Date().toISOString().split('T')[0];
         UTCdate = UTCdate.split('-').join('/');
         const todayAtUTC = new Date(UTCdate);
-        console.log('this is todayAtUTC: ', todayAtUTC);
+        // console.log('this is todayAtUTC: ', todayAtUTC);
         const endOfWeeks: string[] = [];
         const historicalCommitCounts: number[] = [];
         const predictCommitCounts: number[] = [];
         const gaps: number[] = [];
-        console.log('this is commits: ', commits);
+        // console.log('this is commits: ', commits);
         if (commits) {
             let predictCommitCountAmount = 5;
             let startOfHistoricalCommits = 1;
@@ -128,7 +128,7 @@ export class DetailContentService {
                 const yyyymmdd = endOfWeek.split('-').join('/');
                 const currentEndOfWeekDate = new Date(yyyymmdd);
                 const commitCount = commit.numCommits;
-                console.log('this is  currentEndOfWeekDate: ', currentEndOfWeekDate);
+                // console.log('this is  currentEndOfWeekDate: ', currentEndOfWeekDate);
                 if (currentEndOfWeekDate > todayAtUTC) {
                     historicalCommitCounts.unshift(NaN);
                     predictCommitCounts.unshift(commitCount);
@@ -145,26 +145,6 @@ export class DetailContentService {
                 } else {
                     gaps.unshift(NaN);
                 }
-                // if (endOfWeekDate <= todayAtUTC) {
-
-                //     if (prevEnfOfWeek >= todayAtUTC) {
-                //         gaps[0] = prevCommitCount;
-                //         gaps.unshift(commitCount);
-                //     } else {
-                //         gaps.unshift(NaN);
-                //     }
-                //     historicalCommitCounts.unshift(commitCount);
-                //     predictCommitCounts.unshift(NaN);
-
-                // } else {
-
-                //     historicalCommitCounts.unshift(NaN);
-                //     gaps.unshift(NaN);
-                //     predictCommitCounts.unshift(commitCount);
-                // }
-
-                // prevEnfOfWeek = endOfWeekDate;
-                // prevCommitCount = commitCount;
                 endOfWeeks.unshift(endOfWeek);
             })
             console.log('this is endOfWeeks: ', endOfWeeks);
