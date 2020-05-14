@@ -13,13 +13,15 @@ export class PageNotFoundComponent implements OnInit, AfterViewInit {
   constructor() { }
 
   ngOnInit() {
+    document.querySelector('body').style.background = 'white';
     const selector1 = document.querySelector('.firstDigit');
-    const selector3 = document.querySelector('.thirdDigit');
     const selector2 = document.querySelector('.secondDigit');
+    const selector3 = document.querySelector('.thirdDigit');
 
   }
 
   ngAfterViewInit() {
+
     console.log('this is firstDigit: ', this.firstDigit);
     const selector1 = this.firstDigit.nativeElement;
     const selector3 = this.secondDigit.nativeElement;

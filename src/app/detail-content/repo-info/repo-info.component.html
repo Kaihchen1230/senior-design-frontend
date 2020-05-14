@@ -1,18 +1,25 @@
 <div class="repo-info-container">
-  
+
   <h5 class="repo-info__title">Repo Information</h5>
   <div class="repo-info__block" >
     <p class="repo-info__block__text">
-      Star Count: {{ repoInfo.starCount }} 
-      <fa-icon [icon]="starIcon" class="fa-icon"></fa-icon>
+      Star Count: {{ repoInfo.starCount }}
+      <fa-icon
+      [icon]="starIcon"
+      class="fa-icon"
+      *ngIf="repoInfo.starCount !== 'Unknown'"
+      ></fa-icon>
      </p>
     <p class="repo-info__block__text">
       Fork Count: {{ repoInfo.forkCount }}
-      <fa-icon [icon]="forkIcon"></fa-icon>
+      <fa-icon
+      [icon]="forkIcon"
+      *ngIf="repoInfo.forkCount !== 'Unknown'"
+      ></fa-icon>
     </p>
-    <p class="repo-info__block__text">Size: {{ repoInfo.size }} KB</p>
+    <p class="repo-info__block__text">Size: {{ repoInfo.size === 'Unknown' ? repoInfo.size : repoInfo.size.toString() + ' KB' }} </p>
     <p class="repo-info__block__text">Last Updated: {{ repoInfo.updatedAt }}</p>
-    <p class="repo-info__block__text">Lanauge: {{ repoInfo.language }}</p>
+    <p class="repo-info__block__text">Language: {{ repoInfo.language }}</p>
   </div>
 
 </div>

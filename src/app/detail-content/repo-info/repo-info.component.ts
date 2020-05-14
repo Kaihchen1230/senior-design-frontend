@@ -15,7 +15,6 @@ export class RepoInfoComponent implements OnInit {
   forkIcon = faCodeBranch;
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
 }

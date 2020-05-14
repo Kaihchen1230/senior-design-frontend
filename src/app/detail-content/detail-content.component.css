@@ -3,6 +3,10 @@
     margin-bottom: 40px;
 }
 
+.row--space-between {
+    justify-content: space-between;
+}
+
 .overview-container {
     padding-left: 50px;
 }
@@ -30,10 +34,6 @@
 
 .card-button--white:hover {
     text-decoration: none;
-}
-
-.col-md-5--modified {
-    margin-left: 85px;
 }
 
 .row--modified {

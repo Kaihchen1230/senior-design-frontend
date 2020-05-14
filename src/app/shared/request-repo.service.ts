@@ -9,7 +9,7 @@ import {environment} from '../../environments/environment';
 import { DetailContentService } from '../detail-content/detail-content-service';
 import { faGithub, faGitlab, faBitbucket, IconDefinition } from '@fortawesome/free-brands-svg-icons';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class RequestRepoService {
   // BACKEND_API = environment.LOCAL_API;
   BACKEND_API = environment.BACKEND_API;
@@ -93,8 +93,8 @@ export class RequestRepoService {
         let platformAvatarURL = '';
         let imgAlt = '';
 
-        if (response.language === null) {
-          response.language = 'Unkown';
+        if (!response.language) {
+          response.language = 'Unknown';
         }
         if (platform === 'github') {
           platformAvatarURL = 'https://cdn1.iconfinder.com/data/icons/capsocial/500/github-512.png',

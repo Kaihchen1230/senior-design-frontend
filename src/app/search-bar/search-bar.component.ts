@@ -13,6 +13,7 @@ export class SearchBarComponent implements OnInit {
   logoImagePath: any = 'assets/logo.png';
   searchIcon = faSearch;
   searchTerm = '';
+  notValid = false;
   @ViewChild('f', {static: false}) searchForm: NgForm;
 
   constructor(private router: Router,
@@ -34,9 +35,11 @@ export class SearchBarComponent implements OnInit {
   }
 
   submitSearchTerm() {
+    this.notValid = false;
     const currentSearchTerm = this.searchForm.value.searchTerm;
+    this.checkBlankInput(currentSearchTerm);
     console.log('this.searchForm: ', this.searchForm);
-    if (currentSearchTerm) {
+    if (!this.notValid) {
       // console.log('this is searchForm: ', this.searchForm);
       localStorage.setItem('searchTerm', currentSearchTerm);
       // console.log('searchTerm: ', searchTerm);
@@ -48,8 +51,13 @@ export class SearchBarComponent implements OnInit {
       this.searchForm.form.patchValue({
         searchTerm: currentSearchTerm
       });
-      alert('search term cannot be empty!');
+      // alert('search term cannot be empty!');
     }
   }
 
+  checkBlankInput(searchTerm: string) {
+    if (searchTerm.trim().length === 0) {
+      this.notValid = true;
+    }
+  }
 }

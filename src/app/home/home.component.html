@@ -11,23 +11,23 @@
     <div class="form-group row">
 
       <div class="col-sm-10 home__search-block">
-        <div class="input-group mb-2" style="border-radius: 150px; border: 1px solid black;">
-          <div class="input-group-prepend" style="margin: 5px 0px 0px 10px;font-size: 20px;">
+        <div class="input-group mb-2 home__search-container" [ngClass]="{'emplty-term': notValid}">
+          <div class="input-group-prepend home__search-icon">
             <fa-icon [icon]="searchIcon"></fa-icon>
           </div>
-          <input
+            <input
               type="text"
               name="searchTerm"
-              class="form-control"
+              class="form-control home__search-field"
               placeholder="Search For Open Source Projects"
               ngModel
-              style="border-radius: 150px; border: none; box-shadow: none;"
             >
         </div>
+        <span class="help-block" *ngIf="notValid">cannot search on empty term</span>
       </div>
     </div>
     <div class="row">
-      <div class="col-auto" style="margin: 0 auto; padding-right: 7vw;">
+      <div class="col-auto" class="home__search-button-container">
         <button type="submit" class="btn btn-primary search-button">Search</button>
       </div>
 
