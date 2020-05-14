@@ -111,31 +111,24 @@ export class DetailContentService {
     }
 
     setTrendingGraphInfo(commits: Commit[]) {
-        const todayAtUTC = new Date().getTime();
-        // const UTCyear = todayAtUTC.getUTCFullYear();
-        // const UTCMonth = todayAtUTC.getUTCMonth() + 1;
-        // const UTCDate = todayAtUTC.getUTCDate();
-        // console.log('this is UTCyear: ', UTCyear, ' this is UTCMonth: ', UTCMonth, ' this is UTCDate: ', UTCDate);
+        let UTCdate = new Date().toISOString().split('T')[0];
+        UTCdate = UTCdate.split('-').join('/');
+        const todayAtUTC = new Date(UTCdate);
+        console.log('this is todayAtUTC: ', todayAtUTC);
         const endOfWeeks: string[] = [];
         const historicalCommitCounts: number[] = [];
         const predictCommitCounts: number[] = [];
         const gaps: number[] = [];
+        console.log('this is commits: ', commits);
         if (commits) {
-
-            let prevEnfOfWeek: Date;
-            let prevIndex: number;
-            let prevCommitCount: number;
             let predictCommitCountAmount = 5;
             let startOfHistoricalCommits = 1;
             commits.forEach((commit, index) => {
                 const endOfWeek = commit.endOfWeek;
-                const yyyymmdd = endOfWeek.split('-');
-                const year = parseInt(yyyymmdd[0]);
-                const month = parseInt(yyyymmdd[1]);
-                const date = parseInt(yyyymmdd[2]);
-                const currentEndOfWeekDate = + new Date(`${month}/${date}/${year}`);
+                const yyyymmdd = endOfWeek.split('-').join('/');
+                const currentEndOfWeekDate = new Date(yyyymmdd);
                 const commitCount = commit.numCommits;
-
+                console.log('this is  currentEndOfWeekDate: ', currentEndOfWeekDate);
                 if (currentEndOfWeekDate > todayAtUTC) {
                     historicalCommitCounts.unshift(NaN);
                     predictCommitCounts.unshift(commitCount);
@@ -174,7 +167,7 @@ export class DetailContentService {
                 // prevCommitCount = commitCount;
                 endOfWeeks.unshift(endOfWeek);
             })
-
+            console.log('this is endOfWeeks: ', endOfWeeks);
             console.log('this is historical: ', historicalCommitCounts);
             console.log('this is gaps: ', gaps);
             console.log('this is predict: ', predictCommitCounts);
