@@ -124,7 +124,7 @@ export class RequestRepoService {
 
   getRepoName(ownerNameAndRepoName: string) {
     const index = ownerNameAndRepoName.indexOf('/');
-    const repoName = ownerNameAndRepoName.slice(0, index);
+    const repoName = ownerNameAndRepoName.slice(index + 1);
     return repoName;
   }
 
